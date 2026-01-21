@@ -1,8 +1,8 @@
-# 🌱 Plant Care Assistant - Frontend-Only Web Application
+#  Plant Care Assistant - Frontend-Only Web Application
 
 A comprehensive, frontend-only web application that helps users discover plants suitable for their climate and provides expert plant care advice based on their geographical location.
 
-## 📋 Project Overview
+##  Project Overview
 
 **Plant Care Assistant** is an educational project demonstrating modern frontend web development using vanilla HTML, CSS, and JavaScript. The application automatically detects the user's country using IP-based geolocation, fetches real-time weather data, and provides personalized plant care recommendations.
 
@@ -17,7 +17,7 @@ A comprehensive, frontend-only web application that helps users discover plants 
 - ✅ **No Database** - All data stored in JavaScript
 - ✅ **No npm Packages** - Vanilla technologies only
 
-## 🛠️ Technology Stack
+## Technology Stack
 
 ### Frontend Technologies
 - **HTML5** - Semantic markup
@@ -35,7 +35,7 @@ A comprehensive, frontend-only web application that helps users discover plants 
   - 60 calls/minute, 1,000,000 calls/month
   - Website: https://openweathermap.org/api
 
-## 📁 Folder Structure
+##  Folder Structure
 
 ```
 plant-care-assistant/
@@ -59,7 +59,7 @@ plant-care-assistant/
 └── README.md               # This file
 ```
 
-## 🚀 Quick Start Guide
+##  Quick Start Guide
 
 ### Prerequisites
 - Any modern web browser (Chrome, Firefox, Safari, Edge)
@@ -100,7 +100,7 @@ plant-care-assistant/
 - **Plants Page** - Browse plants specific to your country and region
 - **About Page** - Learn about the project and technology stack
 
-## 🌍 Supported Countries
+##  Supported Countries
 
 The application includes comprehensive plant data for:
 1. **United States** - Temperate to Subtropical climate
@@ -115,7 +115,7 @@ Each country includes:
 - 5+ common plant problems and solutions
 - 8+ comprehensive care guide points
 
-## 📖 How to Use
+##  How to Use
 
 ### Home Page (`index.html`)
 - **Automatic Location Detection** - Your country is detected when you visit
@@ -143,7 +143,7 @@ Each country includes:
 - API information and setup instructions
 - Credits and usage information
 
-## 🔧 Code Explanation
+##  Code Explanation
 
 ### JavaScript Organization
 
@@ -207,7 +207,7 @@ The `css/style.css` file includes:
 - **Component Styles** - Cards, buttons, forms, alerts
 - **Animations** - Subtle transitions and hover effects
 
-## 🎨 Customization Guide
+##  Customization Guide
 
 ### Change Color Scheme
 In `css/style.css`, modify CSS variables (lines 9-18):
@@ -253,7 +253,7 @@ PLANTS_DATABASE['CountryName'] = {
 ### Modify Plant Data
 All plant information is in `js/data.js`. Simply edit the `PLANTS_DATABASE` object with accurate information for your region.
 
-## 🐛 Troubleshooting
+##  Troubleshooting
 
 ### Issue: "Location not detected"
 - **Cause:** IP-API might be blocked or unavailable
@@ -281,7 +281,7 @@ All plant information is in `js/data.js`. Simply edit the `PLANTS_DATABASE` obje
   2. App defaults to USA if country not recognized
   3. Add new countries to `js/data.js`
 
-## 📚 Learning Resources
+##  Learning Resources
 
 ### For Understanding the Code
 - **HTML5 Semantic Elements** - MDN Web Docs
@@ -294,7 +294,7 @@ All plant information is in `js/data.js`. Simply edit the `PLANTS_DATABASE` obje
 - **OpenWeather API Docs** - https://openweathermap.org/api
 - **Fetch API Guide** - https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API
 
-## 🔒 Data Privacy & Security
+##  Data Privacy & Security
 
 ### What Data is Collected?
 - Your approximate location (country, city, coordinates) from your IP
@@ -307,7 +307,7 @@ All plant information is in `js/data.js`. Simply edit the `PLANTS_DATABASE` obje
 - **HTML Sanitization** - User input is sanitized to prevent XSS
 - **HTTPS Recommended** - Use HTTPS for production deployment
 
-## 📄 License & Usage
+##  License & Usage
 
 This is an **Academic Project** designed for educational purposes. You are free to:
 - ✅ Use as a learning resource
@@ -315,7 +315,7 @@ This is an **Academic Project** designed for educational purposes. You are free 
 - ✅ Share with other students
 - ✅ Use as a portfolio project
 
-## 👨‍💻 Technical Details
+##  Technical Details
 
 ### Browser Compatibility
 - Chrome 60+ ✓
@@ -334,7 +334,7 @@ This is an **Academic Project** designed for educational purposes. You are free 
 - Screen reader friendly
 - Reduced motion support
 
-## 🤝 Contributing Improvements
+##  Contributing Improvements
 
 To improve the project:
 1. Add more countries to the database
@@ -354,7 +354,7 @@ To improve the project:
 - **VS Code** - https://code.visualstudio.com
 - **Live Server** - https://github.com/ritwickdey/vscode-live-server
 
-## ❓ FAQ
+##  FAQ
 
 **Q: Can I use this in production?**
 A: It's designed for learning. For production, add a backend database and proper API management.
@@ -371,7 +371,7 @@ A: Yes! Modify `js/weather.js` to use any weather API (Weather.com, Weatherbit, 
 **Q: Is this mobile friendly?**
 A: Yes! Fully responsive design supports all device sizes.
 
-## 📞 Support
+##  Support
 
 For issues or questions:
 1. Check the Troubleshooting section above
@@ -379,7 +379,7 @@ For issues or questions:
 3. Ensure all files are present and in correct folders
 4. Verify API keys are correctly configured
 
-## 📝 Change Log
+##  Change Log
 
 ### Version 1.0 (Initial Release)
 - ✅ Complete frontend application
@@ -394,4 +394,4 @@ For issues or questions:
 **Last Updated:** January 2026  
 **Status:** Complete and Ready for Use
 
-🌱 **Happy Plant Caring!** 🌱
+ **Happy Plant Caring!** 
