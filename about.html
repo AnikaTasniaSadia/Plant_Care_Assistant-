@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Plant Care Assistant</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <h1>🌱 Plant Care Assistant</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="plants.html" class="nav-link">Plants</a></li>
+                <li><a href="weather.html" class="nav-link">Weather</a></li>
+                <li><a href="about.html" class="nav-link active">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container">
+        <section class="hero">
+            <h2>About Plant Care Assistant</h2>
+            <p>Learn more about this educational project</p>
+        </section>
+
+        <!-- Project Overview -->
+        <section class="card">
+            <h3>📚 Project Overview</h3>
+            <p>Plant Care Assistant is a comprehensive frontend-only web application designed as an academic project. It helps users discover suitable plants for their climate and provides expert plant care advice based on their geographical location.</p>
+            <p>The project demonstrates modern web development practices using vanilla HTML, CSS, and JavaScript without any backend dependencies.</p>
+        </section>
+
+        <!-- Tech Stack -->
+        <section class="card">
+            <h3>🛠️ Technology Stack</h3>
+            <div class="tech-stack">
+                <div class="tech-item">
+                    <strong>Frontend</strong>
+                    <ul>
+                        <li>HTML5</li>
+                        <li>CSS3 (Flexbox, Grid)</li>
+                        <li>Vanilla JavaScript (ES6+)</li>
+                    </ul>
+                </div>
+                <div class="tech-item">
+                    <strong>External APIs</strong>
+                    <ul>
+                        <li><a href="https://ipapi.co" target="_blank">IP-API</a> - Location detection</li>
+                        <li><a href="https://openweathermap.org" target="_blank">OpenWeather API</a> - Weather data</li>
+                    </ul>
+                </div>
+                <div class="tech-item">
+                    <strong>Features</strong>
+                    <ul>
+                        <li>No backend server</li>
+                        <li>No database</li>
+                        <li>No npm packages</li>
+                        <li>Works with VS Code Live Server</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Key Features -->
+        <section class="card">
+            <h3>✨ Key Features</h3>
+            <ul class="features-list">
+                <li>🌍 Automatic country detection using IP-based geolocation</li>
+                <li>🌤️ Real-time weather information for your location</li>
+                <li>🌿 Database of plants specific to different countries</li>
+                <li>⚠️ Common plant problems and solutions</li>
+                <li>📖 Comprehensive plant care guides</li>
+                <li>📱 Fully responsive design for all devices</li>
+                <li>⚡ Fast loading with optimized frontend code</li>
+                <li>🎨 Clean, user-friendly plant-themed UI</li>
+            </ul>
+        </section>
+
+        <!-- How It Works -->
+        <section class="card">
+            <h3>⚙️ How It Works</h3>
+            <div class="how-it-works">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Detect Location</h4>
+                        <p>The app uses IP-API to automatically detect your country and location based on your IP address.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Fetch Weather</h4>
+                        <p>Real-time weather data is retrieved from OpenWeather API using your location coordinates.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Display Plant Data</h4>
+                        <p>Based on your country, the app displays suitable plants, common problems, and care solutions.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h4>Provide Recommendations</h4>
+                        <p>Personalized care recommendations are generated based on your weather conditions.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- API Information -->
+        <section class="card">
+            <h3>🔗 API Information</h3>
+            <div class="api-info">
+                <div class="api-item">
+                    <h4>IP-API (ipapi.co)</h4>
+                    <p><strong>Purpose:</strong> Geolocation detection</p>
+                    <p><strong>Endpoint:</strong> <code>https://ipapi.co/json/</code></p>
+                    <p><strong>Rate Limit:</strong> 30,000 requests/month (free tier)</p>
+                    <p><strong>No API Key Required:</strong> ✓</p>
+                </div>
+                <div class="api-item">
+                    <h4>OpenWeather API</h4>
+                    <p><strong>Purpose:</strong> Weather data retrieval</p>
+                    <p><strong>Free Tier:</strong> Yes, requires API key</p>
+                    <p><strong>Rate Limit:</strong> 60 calls/minute, 1,000,000 calls/month</p>
+                    <p><strong>Documentation:</strong> <a href="https://openweathermap.org/api" target="_blank">openweathermap.org/api</a></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Setup Instructions -->
+        <section class="card">
+            <h3>🚀 Setup Instructions</h3>
+            <ol class="instructions-list">
+                <li>Extract the project folder to your desired location</li>
+                <li>Open the project folder in VS Code</li>
+                <li>Install the "Live Server" extension if not already installed</li>
+                <li>Right-click on <code>index.html</code> and select "Open with Live Server"</li>
+                <li>The application will open in your default browser</li>
+                <li>For full weather functionality, get a free API key from <a href="https://openweathermap.org" target="_blank">OpenWeather</a> and update <code>js/weather.js</code></li>
+            </ol>
+        </section>
+
+        <!-- Credits -->
+        <section class="card">
+            <h3>📝 Credits</h3>
+            <p><strong>Created as:</strong> Academic Project</p>
+            <p><strong>Purpose:</strong> Educational demonstration of frontend web development</p>
+            <p><strong>APIs Used:</strong> ipapi.co, OpenWeatherMap</p>
+            <p><strong>License:</strong> Open source for educational use</p>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="card cta">
+            <h3>Have Questions?</h3>
+            <p>This project is designed for learning purposes. Feel free to explore the code and modify it as needed for your educational goals.</p>
+            <a href="index.html" class="btn btn-primary">Back to Home →</a>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2024 Plant Care Assistant. An academic project for educational purposes.</p>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

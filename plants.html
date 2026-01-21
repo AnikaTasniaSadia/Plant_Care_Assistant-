@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plants - Plant Care Assistant</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <h1>🌱 Plant Care Assistant</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="plants.html" class="nav-link active">Plants</a></li>
+                <li><a href="weather.html" class="nav-link">Weather</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container">
+        <section class="hero">
+            <h2>Country-Wise Plants & Care Guide</h2>
+            <p>Discover plants suitable for your climate and learn how to care for them</p>
+        </section>
+
+        <!-- Country Selector -->
+        <section class="card">
+            <h3>🌍 Select Your Country</h3>
+            <div class="country-selector">
+                <select id="country-select">
+                    <option value="">Loading countries...</option>
+                </select>
+                <p id="detected-country" class="detected-info"></p>
+            </div>
+        </section>
+
+        <!-- Climate Info -->
+        <section class="card">
+            <h3>🌡️ Climate Information</h3>
+            <div id="climate-info" class="climate-grid">
+                <p class="loading">Select a country to view climate info...</p>
+            </div>
+        </section>
+
+        <!-- Common Plants -->
+        <section class="card">
+            <h3>🌿 Common Plants in Your Region</h3>
+            <div id="plants-list" class="plants-grid">
+                <p class="loading">Select a country to view plants...</p>
+            </div>
+        </section>
+
+        <!-- Plant Problems & Solutions -->
+        <section class="card">
+            <h3>⚠️ Common Plant Problems & Solutions</h3>
+            <div id="problems-list" class="problems-grid">
+                <p class="loading">Select a country to view common problems...</p>
+            </div>
+        </section>
+
+        <!-- Care Guide -->
+        <section class="card care-guide">
+            <h3>📖 Complete Care Guide</h3>
+            <div id="care-guide-content">
+                <p class="loading">Select a country to view care guide...</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2024 Plant Care Assistant. An academic project for educational purposes.</p>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/plants.js"></script>
+</body>
+</html>
