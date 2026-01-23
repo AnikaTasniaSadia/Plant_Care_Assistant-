@@ -161,7 +161,146 @@ function getCurrentPage() {
 // Update navigation on page load
 document.addEventListener('DOMContentLoaded', function() {
     updateActiveNav(getCurrentPage());
+    initAuthModal();
 });
+
+/* ========================================
+   Auth Modal Logic
+   ======================================== */
+
+const AUTH_STATUS_KEY = 'pcaAuthStatus';
+const USER_STORAGE_KEY = 'pcaUserAccount';
+const DEFAULT_USER = {
+    fullName: 'Anika',
+    email: 'anika@gmail.com',
+    password: 'anika@123'
+};
+
+function getStoredUser() {
+    const stored = localStorage.getItem(USER_STORAGE_KEY);
+    return stored ? JSON.parse(stored) : null;
+}
+
+function storeUser(user) {
+    localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(user));
+}
+
+function seedDefaultUser() {
+    const storedUser = getStoredUser();
+    if (!storedUser) {
+        storeUser(DEFAULT_USER);
+        return;
+    }
+    if (storedUser.email === DEFAULT_USER.email && storedUser.password === 'amika@123') {
+        storeUser({
+            ...storedUser,
+            password: DEFAULT_USER.password
+        });
+    }
+}
+
+function setAuthMessage(messageEl, message, type) {
+    if (!messageEl) return;
+    messageEl.textContent = message;
+    messageEl.classList.remove('error', 'success');
+    if (type) {
+        messageEl.classList.add(type);
+    }
+}
+
+function showAuthOverlay(overlay) {
+    overlay.classList.add('show');
+    overlay.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('auth-locked');
+}
+
+function hideAuthOverlay(overlay) {
+    overlay.classList.remove('show');
+    overlay.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('auth-locked');
+}
+
+function initAuthModal() {
+    const overlay = document.getElementById('auth-overlay');
+    if (!overlay) return;
+
+    seedDefaultUser();
+
+    const tabs = overlay.querySelectorAll('.auth-tab');
+    const loginForm = overlay.querySelector('#login-form');
+    const registerForm = overlay.querySelector('#register-form');
+    const messageEl = overlay.querySelector('#auth-message');
+
+    const activateTab = (tabName) => {
+        tabs.forEach(tab => {
+            const isActive = tab.dataset.authTab === tabName;
+            tab.classList.toggle('active', isActive);
+            tab.setAttribute('aria-selected', String(isActive));
+        });
+        if (loginForm && registerForm) {
+            loginForm.classList.toggle('active', tabName === 'login');
+            registerForm.classList.toggle('active', tabName === 'register');
+        }
+        setAuthMessage(messageEl, '', null);
+    };
+
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => activateTab(tab.dataset.authTab));
+    });
+
+    const isAuthenticated = sessionStorage.getItem(AUTH_STATUS_KEY) === 'true';
+    if (!isAuthenticated) {
+        showAuthOverlay(overlay);
+    }
+
+    if (loginForm) {
+        loginForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const email = loginForm.querySelector('input[name="email"]').value.trim();
+            const password = loginForm.querySelector('input[name="password"]').value;
+            const storedUser = getStoredUser();
+
+            if (!storedUser) {
+                setAuthMessage(messageEl, 'No account found. Please register first.', 'error');
+                activateTab('register');
+                return;
+            }
+
+            if (storedUser.email !== email || storedUser.password !== password) {
+                setAuthMessage(messageEl, 'Invalid email or password. Try again.', 'error');
+                return;
+            }
+
+            sessionStorage.setItem(AUTH_STATUS_KEY, 'true');
+            setAuthMessage(messageEl, 'Login successful. Welcome back!', 'success');
+            setTimeout(() => hideAuthOverlay(overlay), 400);
+        });
+    }
+
+    if (registerForm) {
+        registerForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const fullName = registerForm.querySelector('input[name="fullName"]').value.trim();
+            const email = registerForm.querySelector('input[name="email"]').value.trim();
+            const password = registerForm.querySelector('input[name="password"]').value;
+
+            if (!fullName || !email || !password) {
+                setAuthMessage(messageEl, 'Please fill out all fields to register.', 'error');
+                return;
+            }
+
+            storeUser({
+                fullName,
+                email,
+                password
+            });
+
+            sessionStorage.setItem(AUTH_STATUS_KEY, 'true');
+            setAuthMessage(messageEl, 'Account created! You are now logged in.', 'success');
+            setTimeout(() => hideAuthOverlay(overlay), 400);
+        });
+    }
+}
 
 /**
  * Make API call with error handling
