@@ -7,51 +7,6 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <!-- Auth Modal -->
-    <div id="auth-overlay" class="auth-overlay" aria-hidden="true">
-        <div class="auth-modal" role="dialog" aria-modal="true" aria-labelledby="auth-title">
-            <div class="auth-header">
-                <h2 id="auth-title">Welcome Back</h2>
-                <p>Login or create an account to continue.</p>
-            </div>
-            <div class="auth-tabs" role="tablist">
-                <button class="auth-tab active" type="button" data-auth-tab="login" role="tab" aria-selected="true">Login</button>
-                <button class="auth-tab" type="button" data-auth-tab="register" role="tab" aria-selected="false">Register</button>
-            </div>
-            <form id="login-form" class="auth-form active" autocomplete="on">
-                <div class="auth-field">
-                    <label for="login-email">Email Address</label>
-                    <input id="login-email" type="email" name="email" placeholder="you@example.com" required>
-                </div>
-                <div class="auth-field">
-                    <label for="login-password">Password</label>
-                    <input id="login-password" type="password" name="password" placeholder="Enter your password" required>
-                </div>
-                <div class="auth-actions">
-                    <button class="btn btn-primary" type="submit">Login</button>
-                </div>
-            </form>
-            <form id="register-form" class="auth-form" autocomplete="on">
-                <div class="auth-field">
-                    <label for="register-name">Full Name</label>
-                    <input id="register-name" type="text" name="fullName" placeholder="Your full name" required>
-                </div>
-                <div class="auth-field">
-                    <label for="register-email">Email Address</label>
-                    <input id="register-email" type="email" name="email" placeholder="you@example.com" required>
-                </div>
-                <div class="auth-field">
-                    <label for="register-password">Create Password</label>
-                    <input id="register-password" type="password" name="password" placeholder="Create a password" required>
-                </div>
-                <div class="auth-actions">
-                    <button class="btn btn-primary" type="submit">Create Account</button>
-                </div>
-            </form>
-            <p id="auth-message" class="auth-message" role="status" aria-live="polite"></p>
-        </div>
-    </div>
-
     <!-- Navigation Bar -->
     <nav class="navbar">
         <div class="nav-container">
@@ -81,14 +36,14 @@
                 <select id="country-select">
                     <option value="">Loading countries...</option>
                 </select>
-                <p id="detected-country" class="detected-info"></p>
+                <p id="detected country" class="detected info"></p>
             </div>
         </section>
 
         <!-- Climate Info -->
         <section class="card">
             <h3>Climate Information</h3>
-            <div id="climate-info" class="climate-grid">
+            <div id="climate info" class="climate grid">
                 <p class="loading">Select a country to view climate info...</p>
             </div>
         </section>
@@ -96,7 +51,7 @@
         <!-- Common Plants -->
         <section class="card">
             <h3>Common Plants in Your Region</h3>
-            <div id="plants-list" class="plants-grid">
+            <div id="plants list" class="plants grid">
                 <p class="loading">Select a country to view plants...</p>
             </div>
         </section>
@@ -104,7 +59,7 @@
         <!-- Plant Problems & Solutions -->
         <section class="card">
             <h3>Common Plant Problems & Solutions</h3>
-            <div id="problems-list" class="problems-grid">
+            <div id="problems list" class="problems grid">
                 <p class="loading">Select a country to view common problems...</p>
             </div>
         </section>
@@ -112,7 +67,7 @@
         <!-- Care Guide -->
         <section class="card care-guide">
             <h3>Complete Care Guide</h3>
-            <div id="care-guide-content">
+            <div id="care guide content">
                 <p class="loading">Select a country to view care guide...</p>
             </div>
         </section>
