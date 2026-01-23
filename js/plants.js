@@ -99,7 +99,7 @@ function loadPlantData(country) {
     displayClimateInfo(data.climate, country);
     
     // Display common plants
-    displayCommonPlants(data.commonPlants);
+    displayCommonPlants(data.commonPlants, country);
     
     // Display common problems
     displayCommonProblems(data.commonProblems);
@@ -188,20 +188,19 @@ function displayClimateInfo(climate, country) {
  * Display common plants for selected country
  * @param {Array} plants - Array of plant objects
  */
-function displayCommonPlants(plants) {
+function displayCommonPlants(plants, country) {
     const container = document.getElementById('plants-list');
-    
-    if (!plants || plants.length === 0) {
+    const displayPlants = (plants || []).slice(0, 10);
+
+    if (!displayPlants.length) {
         container.innerHTML = '<p class="loading">No plants found for this country.</p>';
         return;
     }
-    
-    container.innerHTML = plants.map((plant, index) => {
-        const fallbackQuery = encodeURIComponent(`${plant.name} plant`);
-        const fallbackUrl = `https://source.unsplash.com/600x400/?${fallbackQuery}`;
+
+    container.innerHTML = displayPlants.map((plant, index) => {
         return `
         <div class="plant-card" data-plant-index="${index}" aria-expanded="false">
-            ${plant.image ? `<img class="plant-image" src="${sanitizeHTML(plant.image)}" alt="${sanitizeHTML(plant.name)}" loading="lazy" data-fallback="${fallbackUrl}">` : ''}
+            ${plant.image ? `<img class="plant-image" src="${sanitizeHTML(plant.image)}" alt="${sanitizeHTML(plant.name)}" loading="lazy">` : ''}
             <h4 class="plant-title">🌿 ${sanitizeHTML(plant.name)}</h4>
             <div class="plant-details">
                 <p class="plant-type"><strong>Type:</strong> ${sanitizeHTML(plant.type)}</p>
@@ -220,14 +219,6 @@ function displayCommonPlants(plants) {
         });
     });
 
-    container.querySelectorAll('.plant-image').forEach(img => {
-        img.addEventListener('error', () => {
-            const fallback = img.getAttribute('data-fallback');
-            if (fallback && img.src !== fallback) {
-                img.src = fallback;
-            }
-        }, { once: true });
-    });
 }
 
 /**

@@ -8,7 +8,7 @@ const PLANTS_DATABASE = {
         climate: 'Temperate to Subtropical',
         commonPlants: [
             {
-                name: 'Pothos (Devil\'s Ivy)',
+                name: 'Sunflower',
                 type: 'Climbing vine',
                 care: 'Low light tolerant, water when soil dries. Perfect for beginners.',
                 waterFreq: 'Every 2-3 weeks',
@@ -16,7 +16,7 @@ const PLANTS_DATABASE = {
                 image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Epipremnum_aureum_plant.jpg?width=600'
             },
             {
-                name: 'Snake Plant',
+                name: 'Corn (Maize)',
                 type: 'Succulent',
                 care: 'Extremely hardy. Prefers dry conditions. Nearly impossible to kill.',
                 waterFreq: 'Every 4-6 weeks',
@@ -24,7 +24,7 @@ const PLANTS_DATABASE = {
                 image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Sansevieria_trifasciata_%28Snake_Plant%29.jpg?width=600'
             },
             {
-                name: 'Fiddle Leaf Fig',
+                name: 'Redwood Tree',
                 type: 'Tree',
                 care: 'Loves bright light. Water when top inch of soil is dry. Needs humidity.',
                 waterFreq: 'Every 1-2 weeks',
@@ -32,7 +32,7 @@ const PLANTS_DATABASE = {
                 image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Ficus_lyrata.jpg?width=600'
             },
             {
-                name: 'Spider Plant',
+                name: 'Oak Tree',
                 type: 'Grass-like',
                 care: 'Very forgiving. Tolerates various conditions. Produces baby plants.',
                 waterFreq: 'Every 1-2 weeks',
@@ -40,7 +40,7 @@ const PLANTS_DATABASE = {
                 image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Chlorophytum_comosum_plant.jpg?width=600'
             },
             {
-                name: 'Monstera Deliciosa',
+                name: 'Cotton',
                 type: 'Climbing vine',
                 care: 'Large, dramatic leaves. Needs sturdy support. Monthly feeding in growing season.',
                 waterFreq: 'Every 1-2 weeks',
@@ -48,7 +48,7 @@ const PLANTS_DATABASE = {
                 image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Monstera_deliciosa2.jpg?width=600'
             },
             {
-                name: 'ZZ Plant',
+                name: 'Sugar Maple',
                 type: 'Tropical perennial',
                 care: 'Thrives on neglect. Drought tolerant and low-light friendly.',
                 waterFreq: 'Every 3-4 weeks',
@@ -56,7 +56,7 @@ const PLANTS_DATABASE = {
                 image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Zamioculcas_zamiifolia_02.jpg?width=600'
             },
             {
-                name: 'Peace Lily',
+                name: 'Cactus',
                 type: 'Flowering',
                 care: 'Tolerates low light. Keep soil lightly moist. Dramatic blooms.',
                 waterFreq: 'Every 1-2 weeks',
@@ -64,7 +64,7 @@ const PLANTS_DATABASE = {
                 image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Spathiphyllum_cochlearispathum_RTBG.jpg?width=600'
             },
             {
-                name: 'Aloe Vera',
+                name: 'Apple Tree',
                 type: 'Succulent',
                 care: 'Let soil dry out completely. Prefers bright light.',
                 waterFreq: 'Every 3-4 weeks',
@@ -72,7 +72,7 @@ const PLANTS_DATABASE = {
                 image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Aloe_vera_flower.jpg?width=600'
             },
             {
-                name: 'Rubber Plant',
+                name: 'Pine Tree',
                 type: 'Tree',
                 care: 'Glossy leaves. Water when top soil dries. Wipe leaves regularly.',
                 waterFreq: 'Every 2-3 weeks',
@@ -80,7 +80,7 @@ const PLANTS_DATABASE = {
                 image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Ficus_elastica_02.jpg?width=600'
             },
             {
-                name: 'Heartleaf Philodendron',
+                name: 'Prairie Grass',
                 type: 'Climbing vine',
                 care: 'Fast-growing, low-light tolerant. Let soil dry slightly.',
                 waterFreq: 'Every 1-2 weeks',
@@ -130,7 +130,7 @@ const PLANTS_DATABASE = {
         climate: 'Temperate Maritime',
         commonPlants: [
             {
-                name: 'Philodendron',
+                name: 'Oak Tree',
                 type: 'Climbing vine',
                 care: 'Tolerant of lower light. Heart-shaped leaves. Grows quickly.',
                 waterFreq: 'Every 1-2 weeks',
@@ -138,7 +138,7 @@ const PLANTS_DATABASE = {
                 image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Philodendron_hederaceum_04.jpg?width=600'
             },
             {
-                name: 'Rubber Plant',
+                name: 'English Rose',
                 type: 'Tree',
                 care: 'Large glossy leaves. Prefers bright light. Wipe leaves regularly.',
                 waterFreq: 'Every 2-3 weeks',
@@ -146,7 +146,7 @@ const PLANTS_DATABASE = {
                 image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Ficus_elastica_02.jpg?width=600'
             },
             {
-                name: 'Ivy',
+                name: 'Bluebell',
                 type: 'Climbing',
                 care: 'Classic British choice. Prefers cool conditions and humidity.',
                 waterFreq: 'Every 2-3 weeks',
@@ -154,7 +154,7 @@ const PLANTS_DATABASE = {
                 image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Hedera_helix_leaves.jpg?width=600'
             },
             {
-                name: 'Peace Lily',
+                name: 'Ivy',
                 type: 'Flowering',
                 care: 'Beautiful white flowers. Tolerates low light. Wilts when thirsty.',
                 waterFreq: 'Every 1-2 weeks',
@@ -162,7 +162,7 @@ const PLANTS_DATABASE = {
                 image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Spathiphyllum_cochlearispathum_RTBG.jpg?width=600'
             },
             {
-                name: 'Boston Fern',
+                name: 'Daffodil',
                 type: 'Fern',
                 care: 'Loves humidity. Prefers cool conditions. Needs consistent moisture.',
                 waterFreq: 'Frequently (daily misting)',
@@ -170,7 +170,7 @@ const PLANTS_DATABASE = {
                 image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Nephrolepis_exaltata.jpg?width=600'
             },
             {
-                name: 'Lavender',
+                name: 'Hawthorn',
                 type: 'Herb',
                 care: 'Fragrant and hardy. Likes sun and well-drained soil.',
                 waterFreq: 'Every 1-2 weeks',
@@ -178,7 +178,7 @@ const PLANTS_DATABASE = {
                 image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Lavandula_angustifolia_flower.jpg?width=600'
             },
             {
-                name: 'Hydrangea',
+                name: 'Beech Tree',
                 type: 'Shrub',
                 care: 'Moist soil, partial shade. Blooms in summer.',
                 waterFreq: 'Every 2-3 days',
@@ -186,7 +186,7 @@ const PLANTS_DATABASE = {
                 image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Hydrangea_macrophylla_002.jpg?width=600'
             },
             {
-                name: 'English Rose',
+                name: 'Lavender',
                 type: 'Shrub',
                 care: 'Classic garden plant. Needs regular feeding and pruning.',
                 waterFreq: 'Every 2-3 days',
@@ -202,7 +202,7 @@ const PLANTS_DATABASE = {
                 image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Digitalis_purpurea_02.jpg?width=600'
             },
             {
-                name: 'Daffodil',
+                name: 'Heather',
                 type: 'Bulb',
                 care: 'Spring bloomers. Plant in autumn for best results.',
                 waterFreq: 'Weekly during growth',
@@ -247,7 +247,7 @@ const PLANTS_DATABASE = {
         climate: 'Arid to Subtropical',
         commonPlants: [
             {
-                name: 'Native Waratah',
+                name: 'Eucalyptus',
                 type: 'Shrub',
                 care: 'Iconic Australian plant. Prefers well-drained soil. Drought tolerant.',
                 waterFreq: 'Every 2-3 weeks',
@@ -255,7 +255,7 @@ const PLANTS_DATABASE = {
                 image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Telopea_speciosissima.jpg?width=600'
             },
             {
-                name: 'Eucalyptus',
+                name: 'Acacia (Wattle)',
                 type: 'Tree',
                 care: 'Fast-growing, drought tolerant. Various sizes available.',
                 waterFreq: 'Every 3-4 weeks',
@@ -271,7 +271,7 @@ const PLANTS_DATABASE = {
                 image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Banksia_integrifolia.jpg?width=600'
             },
             {
-                name: 'Macadamia Nut',
+                name: 'Bottlebrush',
                 type: 'Tree',
                 care: 'Tropical to subtropical. Edible nuts. Requires protection in cool areas.',
                 waterFreq: 'Every 1-2 weeks',
@@ -279,7 +279,7 @@ const PLANTS_DATABASE = {
                 image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Macadamia_integrifolia_01.jpg?width=600'
             },
             {
-                name: 'Bougainvillea',
+                name: 'Kangaroo Paw',
                 type: 'Climbing vine',
                 care: 'Colorful bracts. Loves heat and sun. Drought tolerant.',
                 waterFreq: 'Every 2-3 weeks',
@@ -287,7 +287,7 @@ const PLANTS_DATABASE = {
                 image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Bougainvillea_glabra.jpg?width=600'
             },
             {
-                name: 'Kangaroo Paw',
+                name: 'Tea Tree',
                 type: 'Perennial',
                 care: 'Vibrant flowers. Prefers well-drained soil and sun.',
                 waterFreq: 'Every 1-2 weeks',
@@ -295,7 +295,7 @@ const PLANTS_DATABASE = {
                 image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Anigozanthos_manglesii.jpg?width=600'
             },
             {
-                name: 'Bottlebrush',
+                name: 'Waratah',
                 type: 'Shrub',
                 care: 'Red brush-like flowers. Drought tolerant once established.',
                 waterFreq: 'Every 2-3 weeks',
@@ -311,7 +311,7 @@ const PLANTS_DATABASE = {
                 image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Grevillea_robusta_flowers.jpg?width=600'
             },
             {
-                name: 'Golden Wattle',
+                name: 'Spinifex Grass',
                 type: 'Tree',
                 care: 'National floral emblem. Tolerates poor soils.',
                 waterFreq: 'Every 2-3 weeks',
@@ -319,7 +319,7 @@ const PLANTS_DATABASE = {
                 image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Acacia_pycnantha.jpg?width=600'
             },
             {
-                name: 'Frangipani',
+                name: 'Lemon Myrtle',
                 type: 'Tree',
                 care: 'Fragrant flowers. Likes warm climates and sun.',
                 waterFreq: 'Every 1-2 weeks',
@@ -369,7 +369,7 @@ const PLANTS_DATABASE = {
         climate: 'Tropical Monsoon',
         commonPlants: [
             {
-                name: 'Money Plant (Epipremnum)',
+                name: 'Banyan Tree',
                 type: 'Climbing vine',
                 care: 'Most popular. Thrives in hot, humid climate. Brings good luck.',
                 waterFreq: 'Every 3-4 days',
@@ -377,7 +377,7 @@ const PLANTS_DATABASE = {
                 image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Epipremnum_aureum_plant.jpg?width=600'
             },
             {
-                name: 'Tulsi (Holy Basil)',
+                name: 'Neem',
                 type: 'Herb',
                 care: 'Sacred plant. Medicinal uses. Loves sunlight and warmth.',
                 waterFreq: 'Every 1-2 days',
@@ -385,7 +385,7 @@ const PLANTS_DATABASE = {
                 image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Ocimum_tenuiflorum2.jpg?width=600'
             },
             {
-                name: 'Neem Tree',
+                name: 'Tulsi (Holy Basil)',
                 type: 'Tree',
                 care: 'Medicinal properties. Heat tolerant. Uses for pest control.',
                 waterFreq: 'Every 3-4 days',
@@ -393,7 +393,7 @@ const PLANTS_DATABASE = {
                 image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Azadirachta_indica_2014.jpg?width=600'
             },
             {
-                name: 'Jasmine',
+                name: 'Mango',
                 type: 'Flowering vine',
                 care: 'Fragrant flowers. Heat loving. Attracts butterflies.',
                 waterFreq: 'Every 2-3 days',
@@ -401,7 +401,7 @@ const PLANTS_DATABASE = {
                 image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Jasminum_officinale.jpg?width=600'
             },
             {
-                name: 'Hibiscus',
+                name: 'Peepal Tree',
                 type: 'Flowering shrub',
                 care: 'Colorful blooms year-round. Thrives in heat. Regular pruning needed.',
                 waterFreq: 'Every 1-2 days',
@@ -409,7 +409,7 @@ const PLANTS_DATABASE = {
                 image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Hibiscus_rosa-sinensis_flower.jpg?width=600'
             },
             {
-                name: 'Aloe Vera',
+                name: 'Banana',
                 type: 'Succulent',
                 care: 'Drought tolerant. Allow soil to dry between watering.',
                 waterFreq: 'Every 2-3 weeks',
@@ -417,7 +417,7 @@ const PLANTS_DATABASE = {
                 image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Aloe_vera_flower.jpg?width=600'
             },
             {
-                name: 'Snake Plant',
+                name: 'Coconut',
                 type: 'Succulent',
                 care: 'Tolerates heat and low light. Minimal watering.',
                 waterFreq: 'Every 3-4 weeks',
@@ -425,7 +425,7 @@ const PLANTS_DATABASE = {
                 image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Sansevieria_trifasciata_%28Snake_Plant%29.jpg?width=600'
             },
             {
-                name: 'Areca Palm',
+                name: 'Sandalwood',
                 type: 'Palm',
                 care: 'Air-purifying. Likes humidity and bright, indirect light.',
                 waterFreq: 'Every 5-7 days',
@@ -433,7 +433,7 @@ const PLANTS_DATABASE = {
                 image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Dypsis_lutescens_02.jpg?width=600'
             },
             {
-                name: 'Curry Leaf Plant',
+                name: 'Tea Plant',
                 type: 'Shrub',
                 care: 'Aromatic leaves. Keep in sun and well-drained soil.',
                 waterFreq: 'Every 3-4 days',
@@ -441,7 +441,7 @@ const PLANTS_DATABASE = {
                 image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Murraya_koenigii.jpg?width=600'
             },
             {
-                name: 'Marigold',
+                name: 'Rice',
                 type: 'Flowering',
                 care: 'Easy annual. Thrives in warm climates and full sun.',
                 waterFreq: 'Every 2-3 days',
@@ -491,7 +491,7 @@ const PLANTS_DATABASE = {
         climate: 'Tropical Monsoon',
         commonPlants: [
             {
-                name: 'Mango (Aam)',
+                name: 'Rice (Dhan)',
                 type: 'Tree',
                 care: 'National fruit tree. Needs full sun and well-drained soil.',
                 waterFreq: 'Every 3-4 days',
@@ -499,7 +499,7 @@ const PLANTS_DATABASE = {
                 image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Mango_tree.jpg?width=600'
             },
             {
-                name: 'Jackfruit (Kathal)',
+                name: 'Jute',
                 type: 'Tree',
                 care: 'Large tropical tree. Thrives in warm, humid climate.',
                 waterFreq: 'Every 3-4 days',
@@ -507,7 +507,7 @@ const PLANTS_DATABASE = {
                 image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Jackfruit_tree.jpg?width=600'
             },
             {
-                name: 'Neem Tree',
+                name: 'Mango',
                 type: 'Tree',
                 care: 'Medicinal and pest-resistant. Tolerates heat well.',
                 waterFreq: 'Every 4-5 days',
@@ -515,7 +515,7 @@ const PLANTS_DATABASE = {
                 image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Azadirachta_indica_2014.jpg?width=600'
             },
             {
-                name: 'Betel Leaf (Paan)',
+                name: 'Jackfruit',
                 type: 'Climbing vine',
                 care: 'Needs humidity and filtered light. Keep soil evenly moist.',
                 waterFreq: 'Every 2-3 days',
@@ -523,7 +523,7 @@ const PLANTS_DATABASE = {
                 image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Piper_betle_leaves.jpg?width=600'
             },
             {
-                name: 'Hibiscus',
+                name: 'Banana',
                 type: 'Flowering shrub',
                 care: 'Blooms abundantly in warm weather. Regular pruning helps.',
                 waterFreq: 'Every 1-2 days',
@@ -531,7 +531,7 @@ const PLANTS_DATABASE = {
                 image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Hibiscus_rosa-sinensis_flower.jpg?width=600'
             },
             {
-                name: 'Jasmine',
+                name: 'Coconut',
                 type: 'Flowering vine',
                 care: 'Fragrant flowers. Likes sun with some afternoon shade.',
                 waterFreq: 'Every 2-3 days',
@@ -539,7 +539,7 @@ const PLANTS_DATABASE = {
                 image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Jasminum_officinale.jpg?width=600'
             },
             {
-                name: 'Bamboo',
+                name: 'Neem',
                 type: 'Grass',
                 care: 'Fast-growing. Prefers moist soil and full sun.',
                 waterFreq: 'Every 2-3 days',
@@ -547,7 +547,7 @@ const PLANTS_DATABASE = {
                 image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Bamboo_in_Japan.jpg?width=600'
             },
             {
-                name: 'Areca Palm',
+                name: 'Bamboo',
                 type: 'Palm',
                 care: 'Air-purifying. Likes humidity and bright, indirect light.',
                 waterFreq: 'Every 5-7 days',
@@ -555,7 +555,7 @@ const PLANTS_DATABASE = {
                 image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Dypsis_lutescens_02.jpg?width=600'
             },
             {
-                name: 'Tulsi (Holy Basil)',
+                name: 'Tea Plant',
                 type: 'Herb',
                 care: 'Sacred plant. Needs sun and regular watering.',
                 waterFreq: 'Every 1-2 days',
@@ -563,7 +563,7 @@ const PLANTS_DATABASE = {
                 image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Ocimum_tenuiflorum2.jpg?width=600'
             },
             {
-                name: 'Money Plant (Epipremnum)',
+                name: 'Water Hyacinth',
                 type: 'Climbing vine',
                 care: 'Very hardy. Thrives indoors with moderate light.',
                 waterFreq: 'Every 4-5 days',
@@ -613,7 +613,7 @@ const PLANTS_DATABASE = {
         climate: 'Temperate with Four Seasons',
         commonPlants: [
             {
-                name: 'Bamboo',
+                name: 'Cherry Blossom (Sakura)',
                 type: 'Grass',
                 care: 'Iconic plant. Various species. Excellent for privacy and decoration.',
                 waterFreq: 'Every 2-3 days',
@@ -621,7 +621,7 @@ const PLANTS_DATABASE = {
                 image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Bamboo_in_Japan.jpg?width=600'
             },
             {
-                name: 'Cherry Blossom (Sakura)',
+                name: 'Japanese Maple',
                 type: 'Tree',
                 care: 'Iconic Japanese flower. Blooms spring. Needs winter chill.',
                 waterFreq: 'Every 2-3 days',
@@ -629,7 +629,7 @@ const PLANTS_DATABASE = {
                 image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Cherry_blossoms_in_Japan.jpg?width=600'
             },
             {
-                name: 'Japanese Maple',
+                name: 'Bamboo',
                 type: 'Tree',
                 care: 'Delicate leaves, fall colors. Prefers partial shade and protected spot.',
                 waterFreq: 'Every 1-2 days',
@@ -637,7 +637,7 @@ const PLANTS_DATABASE = {
                 image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Acer_palmatum_001.jpg?width=600'
             },
             {
-                name: 'Bonsai (various)',
+                name: 'Camellia',
                 type: 'Miniature trees',
                 care: 'Require skill and patience. Popular hobby in Japan.',
                 waterFreq: 'Every 1-2 days',
@@ -645,7 +645,7 @@ const PLANTS_DATABASE = {
                 image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Bonsai_IMG_6426.jpg?width=600'
             },
             {
-                name: 'Moss',
+                name: 'Pine Tree',
                 type: 'Ground cover',
                 care: 'Essential in Japanese gardens. Loves moisture and shade.',
                 waterFreq: 'Keep consistently moist',
@@ -653,7 +653,7 @@ const PLANTS_DATABASE = {
                 image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Moss_garden.jpg?width=600'
             },
             {
-                name: 'Camellia',
+                name: 'Plum Blossom (Ume)',
                 type: 'Shrub',
                 care: 'Glossy leaves and winter blooms. Likes acidic soil.',
                 waterFreq: 'Every 2-3 days',
@@ -661,7 +661,7 @@ const PLANTS_DATABASE = {
                 image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Camellia_japonica_2.jpg?width=600'
             },
             {
-                name: 'Azalea',
+                name: 'Chrysanthemum',
                 type: 'Shrub',
                 care: 'Spring blooms. Keep soil moist and well-drained.',
                 waterFreq: 'Every 2-3 days',
@@ -669,7 +669,7 @@ const PLANTS_DATABASE = {
                 image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Rhododendron_indicum.jpg?width=600'
             },
             {
-                name: 'Japanese Iris',
+                name: 'Ginkgo',
                 type: 'Flowering',
                 care: 'Enjoys moist soil and full sun. Summer blooms.',
                 waterFreq: 'Every 2-3 days',
@@ -677,7 +677,7 @@ const PLANTS_DATABASE = {
                 image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Iris_ensata_02.jpg?width=600'
             },
             {
-                name: 'Wisteria',
+                name: 'Azalea',
                 type: 'Climbing vine',
                 care: 'Spectacular spring blooms. Needs strong support.',
                 waterFreq: 'Every 2-3 days',
@@ -685,7 +685,7 @@ const PLANTS_DATABASE = {
                 image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Wisteria_floribunda_3.jpg?width=600'
             },
             {
-                name: 'Chrysanthemum',
+                name: 'Lotus',
                 type: 'Flowering',
                 care: 'Autumn blooms. Pinch back for bushy growth.',
                 waterFreq: 'Every 2-3 days',
@@ -730,7 +730,7 @@ const PLANTS_DATABASE = {
         climate: 'Tropical to Subtropical',
         commonPlants: [
             {
-                name: 'Orchids',
+                name: 'Rubber Tree',
                 type: 'Epiphytic plant',
                 care: 'National flower. Thousands of species. Require humidity and airflow.',
                 waterFreq: 'Every 2-3 days',
@@ -738,7 +738,7 @@ const PLANTS_DATABASE = {
                 image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Phalaenopsis_amabilis_orchid.jpg?width=600'
             },
             {
-                name: 'Passion Flower',
+                name: 'Brazil Nut Tree',
                 type: 'Climbing vine',
                 care: 'Beautiful intricate flowers. Heat loving. Attracts butterflies.',
                 waterFreq: 'Every 1-2 days',
@@ -746,7 +746,7 @@ const PLANTS_DATABASE = {
                 image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Passiflora_caerulea_1.jpg?width=600'
             },
             {
-                name: 'Bromeliads',
+                name: 'Coffee Plant',
                 type: 'Epiphytic plant',
                 care: 'Colorful leaves. Tank-type holds water. Easy care.',
                 waterFreq: 'Keep tank filled',
@@ -754,7 +754,7 @@ const PLANTS_DATABASE = {
                 image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Bromeliad_plant.jpg?width=600'
             },
             {
-                name: 'Heliconia',
+                name: 'Cacao',
                 type: 'Tropical flower',
                 care: 'Exotic red/orange flowers. Large plant. Needs space.',
                 waterFreq: 'Every 1-2 days',
@@ -762,7 +762,7 @@ const PLANTS_DATABASE = {
                 image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Heliconia_rostrata.jpg?width=600'
             },
             {
-                name: 'Avocado Tree',
+                name: 'Sugarcane',
                 type: 'Fruit tree',
                 care: 'Can be grown from seed. Tropical climate essential. Takes years to fruit.',
                 waterFreq: 'Every 2-3 days',
@@ -770,7 +770,7 @@ const PLANTS_DATABASE = {
                 image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Persea_americana_fruit.jpg?width=600'
             },
             {
-                name: 'Brazil Nut Tree',
+                name: 'Pineapple',
                 type: 'Tree',
                 care: 'Large canopy tree. Thrives in humid tropical climate.',
                 waterFreq: 'Every 2-3 days',
@@ -778,7 +778,7 @@ const PLANTS_DATABASE = {
                 image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Bertholletia_excelsa_fruits.jpg?width=600'
             },
             {
-                name: 'Anthurium',
+                name: 'Açaí Palm',
                 type: 'Flowering',
                 care: 'Glossy leaves and bright spathes. Likes humidity.',
                 waterFreq: 'Every 3-4 days',
@@ -786,7 +786,7 @@ const PLANTS_DATABASE = {
                 image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Anthurium_andraeanum_02.jpg?width=600'
             },
             {
-                name: 'Philodendron',
+                name: 'Orchid',
                 type: 'Climbing vine',
                 care: 'Lush tropical foliage. Easy indoor plant.',
                 waterFreq: 'Every 1-2 weeks',
@@ -794,7 +794,7 @@ const PLANTS_DATABASE = {
                 image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Philodendron_hederaceum_04.jpg?width=600'
             },
             {
-                name: 'Papaya',
+                name: 'Pau-Brasil (Brazilwood)',
                 type: 'Fruit plant',
                 care: 'Fast-growing tropical fruit. Needs warmth and sun.',
                 waterFreq: 'Every 2-3 days',
@@ -802,7 +802,7 @@ const PLANTS_DATABASE = {
                 image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Carica_papaya_fruits.jpg?width=600'
             },
             {
-                name: 'Banana Plant',
+                name: 'Cassava',
                 type: 'Herbaceous',
                 care: 'Large leaves, tropical look. Needs regular watering.',
                 waterFreq: 'Every 2-3 days',
