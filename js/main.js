@@ -69,7 +69,7 @@ function createLoader() {
 function showError(container, message) {
     container.innerHTML = `
         <div class="error">
-            <p>⚠️ Error: ${message}</p>
+            <p><strong>Error:</strong> ${message}</p>
         </div>
     `;
 }
@@ -82,7 +82,7 @@ function showError(container, message) {
 function showSuccess(container, message) {
     container.innerHTML = `
         <div class="success">
-            <p>✓ ${message}</p>
+            <p><strong>Success:</strong> ${message}</p>
         </div>
     `;
 }
