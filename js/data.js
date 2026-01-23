@@ -12,35 +12,80 @@ const PLANTS_DATABASE = {
                 type: 'Climbing vine',
                 care: 'Low light tolerant, water when soil dries. Perfect for beginners.',
                 waterFreq: 'Every 2-3 weeks',
-                light: 'Low to moderate'
+                light: 'Low to moderate',
+                image: 'https://upload.wikimedia.org/wikipedia/commons/3/3f/Epipremnum_aureum_plant.jpg'
             },
             {
                 name: 'Snake Plant',
                 type: 'Succulent',
                 care: 'Extremely hardy. Prefers dry conditions. Nearly impossible to kill.',
                 waterFreq: 'Every 4-6 weeks',
-                light: 'Low to bright'
+                light: 'Low to bright',
+                image: 'https://upload.wikimedia.org/wikipedia/commons/9/9a/Sansevieria_trifasciata_%28Snake_Plant%29.jpg'
             },
             {
                 name: 'Fiddle Leaf Fig',
                 type: 'Tree',
                 care: 'Loves bright light. Water when top inch of soil is dry. Needs humidity.',
                 waterFreq: 'Every 1-2 weeks',
-                light: 'Bright indirect light'
+                light: 'Bright indirect light',
+                image: 'https://upload.wikimedia.org/wikipedia/commons/8/8d/Ficus_lyrata.jpg'
             },
             {
                 name: 'Spider Plant',
                 type: 'Grass-like',
                 care: 'Very forgiving. Tolerates various conditions. Produces baby plants.',
                 waterFreq: 'Every 1-2 weeks',
-                light: 'Bright, indirect light'
+                light: 'Bright, indirect light',
+                image: 'https://upload.wikimedia.org/wikipedia/commons/5/5b/Chlorophytum_comosum_plant.jpg'
             },
             {
                 name: 'Monstera Deliciosa',
                 type: 'Climbing vine',
                 care: 'Large, dramatic leaves. Needs sturdy support. Monthly feeding in growing season.',
                 waterFreq: 'Every 1-2 weeks',
-                light: 'Bright, indirect light'
+                light: 'Bright, indirect light',
+                image: 'https://upload.wikimedia.org/wikipedia/commons/4/4f/Monstera_deliciosa2.jpg'
+            },
+            {
+                name: 'ZZ Plant',
+                type: 'Tropical perennial',
+                care: 'Thrives on neglect. Drought tolerant and low-light friendly.',
+                waterFreq: 'Every 3-4 weeks',
+                light: 'Low to bright indirect',
+                image: 'https://upload.wikimedia.org/wikipedia/commons/9/9e/Zamioculcas_zamiifolia_02.jpg'
+            },
+            {
+                name: 'Peace Lily',
+                type: 'Flowering',
+                care: 'Tolerates low light. Keep soil lightly moist. Dramatic blooms.',
+                waterFreq: 'Every 1-2 weeks',
+                light: 'Low to moderate',
+                image: 'https://upload.wikimedia.org/wikipedia/commons/0/0f/Spathiphyllum_cochlearispathum_RTBG.jpg'
+            },
+            {
+                name: 'Aloe Vera',
+                type: 'Succulent',
+                care: 'Let soil dry out completely. Prefers bright light.',
+                waterFreq: 'Every 3-4 weeks',
+                light: 'Bright light',
+                image: 'https://upload.wikimedia.org/wikipedia/commons/4/4b/Aloe_vera_flower.jpg'
+            },
+            {
+                name: 'Rubber Plant',
+                type: 'Tree',
+                care: 'Glossy leaves. Water when top soil dries. Wipe leaves regularly.',
+                waterFreq: 'Every 2-3 weeks',
+                light: 'Bright, indirect light',
+                image: 'https://upload.wikimedia.org/wikipedia/commons/4/4c/Ficus_elastica_02.jpg'
+            },
+            {
+                name: 'Heartleaf Philodendron',
+                type: 'Climbing vine',
+                care: 'Fast-growing, low-light tolerant. Let soil dry slightly.',
+                waterFreq: 'Every 1-2 weeks',
+                light: 'Low to moderate',
+                image: 'https://upload.wikimedia.org/wikipedia/commons/7/7b/Philodendron_hederaceum_04.jpg'
             }
         ],
         commonProblems: [
@@ -89,35 +134,80 @@ const PLANTS_DATABASE = {
                 type: 'Climbing vine',
                 care: 'Tolerant of lower light. Heart-shaped leaves. Grows quickly.',
                 waterFreq: 'Every 1-2 weeks',
-                light: 'Low to moderate'
+                light: 'Low to moderate',
+                image: 'https://upload.wikimedia.org/wikipedia/commons/7/7b/Philodendron_hederaceum_04.jpg'
             },
             {
                 name: 'Rubber Plant',
                 type: 'Tree',
                 care: 'Large glossy leaves. Prefers bright light. Wipe leaves regularly.',
                 waterFreq: 'Every 2-3 weeks',
-                light: 'Bright, indirect light'
+                light: 'Bright, indirect light',
+                image: 'https://upload.wikimedia.org/wikipedia/commons/4/4c/Ficus_elastica_02.jpg'
             },
             {
                 name: 'Ivy',
                 type: 'Climbing',
                 care: 'Classic British choice. Prefers cool conditions and humidity.',
                 waterFreq: 'Every 2-3 weeks',
-                light: 'Low to moderate'
+                light: 'Low to moderate',
+                image: 'https://upload.wikimedia.org/wikipedia/commons/5/5f/Hedera_helix_leaves.jpg'
             },
             {
                 name: 'Peace Lily',
                 type: 'Flowering',
                 care: 'Beautiful white flowers. Tolerates low light. Wilts when thirsty.',
                 waterFreq: 'Every 1-2 weeks',
-                light: 'Low to moderate'
+                light: 'Low to moderate',
+                image: 'https://upload.wikimedia.org/wikipedia/commons/0/0f/Spathiphyllum_cochlearispathum_RTBG.jpg'
             },
             {
                 name: 'Boston Fern',
                 type: 'Fern',
                 care: 'Loves humidity. Prefers cool conditions. Needs consistent moisture.',
                 waterFreq: 'Frequently (daily misting)',
-                light: 'Bright, indirect light'
+                light: 'Bright, indirect light',
+                image: 'https://upload.wikimedia.org/wikipedia/commons/0/0c/Nephrolepis_exaltata.jpg'
+            },
+            {
+                name: 'Lavender',
+                type: 'Herb',
+                care: 'Fragrant and hardy. Likes sun and well-drained soil.',
+                waterFreq: 'Every 1-2 weeks',
+                light: 'Full sun',
+                image: 'https://upload.wikimedia.org/wikipedia/commons/9/9a/Lavandula_angustifolia_flower.jpg'
+            },
+            {
+                name: 'Hydrangea',
+                type: 'Shrub',
+                care: 'Moist soil, partial shade. Blooms in summer.',
+                waterFreq: 'Every 2-3 days',
+                light: 'Morning sun, afternoon shade',
+                image: 'https://upload.wikimedia.org/wikipedia/commons/5/5f/Hydrangea_macrophylla_002.jpg'
+            },
+            {
+                name: 'English Rose',
+                type: 'Shrub',
+                care: 'Classic garden plant. Needs regular feeding and pruning.',
+                waterFreq: 'Every 2-3 days',
+                light: 'Full sun',
+                image: 'https://upload.wikimedia.org/wikipedia/commons/1/12/Rose_Albany.jpg'
+            },
+            {
+                name: 'Foxglove',
+                type: 'Flowering',
+                care: 'Tall spikes of blooms. Likes cooler, moist soil.',
+                waterFreq: 'Every 2-3 days',
+                light: 'Partial shade',
+                image: 'https://upload.wikimedia.org/wikipedia/commons/3/3c/Digitalis_purpurea_02.jpg'
+            },
+            {
+                name: 'Daffodil',
+                type: 'Bulb',
+                care: 'Spring bloomers. Plant in autumn for best results.',
+                waterFreq: 'Weekly during growth',
+                light: 'Full sun to partial shade',
+                image: 'https://upload.wikimedia.org/wikipedia/commons/6/6a/Narcissus_pseudonarcissus_2.jpg'
             }
         ],
         commonProblems: [
@@ -161,35 +251,80 @@ const PLANTS_DATABASE = {
                 type: 'Shrub',
                 care: 'Iconic Australian plant. Prefers well-drained soil. Drought tolerant.',
                 waterFreq: 'Every 2-3 weeks',
-                light: 'Full sun to part shade'
+                light: 'Full sun to part shade',
+                image: 'https://upload.wikimedia.org/wikipedia/commons/5/5f/Telopea_speciosissima.jpg'
             },
             {
                 name: 'Eucalyptus',
                 type: 'Tree',
                 care: 'Fast-growing, drought tolerant. Various sizes available.',
                 waterFreq: 'Every 3-4 weeks',
-                light: 'Full sun'
+                light: 'Full sun',
+                image: 'https://upload.wikimedia.org/wikipedia/commons/8/8e/Eucalyptus_globulus_foliage.jpg'
             },
             {
-                name: 'Banksias',
+                name: 'Banksia',
                 type: 'Shrub',
                 care: 'Beautiful flower spikes. Drought tolerant once established.',
                 waterFreq: 'Every 2-3 weeks',
-                light: 'Full sun'
+                light: 'Full sun',
+                image: 'https://upload.wikimedia.org/wikipedia/commons/8/8e/Banksia_integrifolia.jpg'
             },
             {
                 name: 'Macadamia Nut',
                 type: 'Tree',
                 care: 'Tropical to subtropical. Edible nuts. Requires protection in cool areas.',
                 waterFreq: 'Every 1-2 weeks',
-                light: 'Full sun to part shade'
+                light: 'Full sun to part shade',
+                image: 'https://upload.wikimedia.org/wikipedia/commons/5/5f/Macadamia_integrifolia_01.jpg'
             },
             {
                 name: 'Bougainvillea',
                 type: 'Climbing vine',
                 care: 'Colorful bracts. Loves heat and sun. Drought tolerant.',
                 waterFreq: 'Every 2-3 weeks',
-                light: 'Full sun'
+                light: 'Full sun',
+                image: 'https://upload.wikimedia.org/wikipedia/commons/c/c5/Bougainvillea_glabra.jpg'
+            },
+            {
+                name: 'Kangaroo Paw',
+                type: 'Perennial',
+                care: 'Vibrant flowers. Prefers well-drained soil and sun.',
+                waterFreq: 'Every 1-2 weeks',
+                light: 'Full sun',
+                image: 'https://upload.wikimedia.org/wikipedia/commons/6/6d/Anigozanthos_manglesii.jpg'
+            },
+            {
+                name: 'Bottlebrush',
+                type: 'Shrub',
+                care: 'Red brush-like flowers. Drought tolerant once established.',
+                waterFreq: 'Every 2-3 weeks',
+                light: 'Full sun',
+                image: 'https://upload.wikimedia.org/wikipedia/commons/5/5f/Callistemon_viminalis.jpg'
+            },
+            {
+                name: 'Grevillea',
+                type: 'Shrub',
+                care: 'Attracts birds. Hardy and drought tolerant.',
+                waterFreq: 'Every 2-3 weeks',
+                light: 'Full sun',
+                image: 'https://upload.wikimedia.org/wikipedia/commons/8/8a/Grevillea_robusta_flowers.jpg'
+            },
+            {
+                name: 'Golden Wattle',
+                type: 'Tree',
+                care: 'National floral emblem. Tolerates poor soils.',
+                waterFreq: 'Every 2-3 weeks',
+                light: 'Full sun',
+                image: 'https://upload.wikimedia.org/wikipedia/commons/1/1d/Acacia_pycnantha.jpg'
+            },
+            {
+                name: 'Frangipani',
+                type: 'Tree',
+                care: 'Fragrant flowers. Likes warm climates and sun.',
+                waterFreq: 'Every 1-2 weeks',
+                light: 'Full sun',
+                image: 'https://upload.wikimedia.org/wikipedia/commons/5/5d/Plumeria_rubra_flower.jpg'
             }
         ],
         commonProblems: [
@@ -238,35 +373,80 @@ const PLANTS_DATABASE = {
                 type: 'Climbing vine',
                 care: 'Most popular. Thrives in hot, humid climate. Brings good luck.',
                 waterFreq: 'Every 3-4 days',
-                light: 'Low to moderate'
+                light: 'Low to moderate',
+                image: 'https://upload.wikimedia.org/wikipedia/commons/3/3f/Epipremnum_aureum_plant.jpg'
             },
             {
                 name: 'Tulsi (Holy Basil)',
                 type: 'Herb',
                 care: 'Sacred plant. Medicinal uses. Loves sunlight and warmth.',
                 waterFreq: 'Every 1-2 days',
-                light: 'Full sun'
+                light: 'Full sun',
+                image: 'https://upload.wikimedia.org/wikipedia/commons/9/9c/Ocimum_tenuiflorum2.jpg'
             },
             {
                 name: 'Neem Tree',
                 type: 'Tree',
                 care: 'Medicinal properties. Heat tolerant. Uses for pest control.',
                 waterFreq: 'Every 3-4 days',
-                light: 'Full sun'
+                light: 'Full sun',
+                image: 'https://upload.wikimedia.org/wikipedia/commons/3/30/Azadirachta_indica_2014.jpg'
             },
             {
                 name: 'Jasmine',
                 type: 'Flowering vine',
                 care: 'Fragrant flowers. Heat loving. Attracts butterflies.',
                 waterFreq: 'Every 2-3 days',
-                light: 'Full sun to part shade'
+                light: 'Full sun to part shade',
+                image: 'https://upload.wikimedia.org/wikipedia/commons/2/2b/Jasminum_officinale.jpg'
             },
             {
                 name: 'Hibiscus',
                 type: 'Flowering shrub',
                 care: 'Colorful blooms year-round. Thrives in heat. Regular pruning needed.',
                 waterFreq: 'Every 1-2 days',
-                light: 'Full sun'
+                light: 'Full sun',
+                image: 'https://upload.wikimedia.org/wikipedia/commons/4/4f/Hibiscus_rosa-sinensis_flower.jpg'
+            },
+            {
+                name: 'Aloe Vera',
+                type: 'Succulent',
+                care: 'Drought tolerant. Allow soil to dry between watering.',
+                waterFreq: 'Every 2-3 weeks',
+                light: 'Bright light',
+                image: 'https://upload.wikimedia.org/wikipedia/commons/4/4b/Aloe_vera_flower.jpg'
+            },
+            {
+                name: 'Snake Plant',
+                type: 'Succulent',
+                care: 'Tolerates heat and low light. Minimal watering.',
+                waterFreq: 'Every 3-4 weeks',
+                light: 'Low to bright',
+                image: 'https://upload.wikimedia.org/wikipedia/commons/9/9a/Sansevieria_trifasciata_%28Snake_Plant%29.jpg'
+            },
+            {
+                name: 'Areca Palm',
+                type: 'Palm',
+                care: 'Air-purifying. Likes humidity and bright, indirect light.',
+                waterFreq: 'Every 5-7 days',
+                light: 'Bright, indirect light',
+                image: 'https://upload.wikimedia.org/wikipedia/commons/4/4b/Dypsis_lutescens_02.jpg'
+            },
+            {
+                name: 'Curry Leaf Plant',
+                type: 'Shrub',
+                care: 'Aromatic leaves. Keep in sun and well-drained soil.',
+                waterFreq: 'Every 3-4 days',
+                light: 'Full sun',
+                image: 'https://upload.wikimedia.org/wikipedia/commons/6/67/Murraya_koenigii.jpg'
+            },
+            {
+                name: 'Marigold',
+                type: 'Flowering',
+                care: 'Easy annual. Thrives in warm climates and full sun.',
+                waterFreq: 'Every 2-3 days',
+                light: 'Full sun',
+                image: 'https://upload.wikimedia.org/wikipedia/commons/7/7b/Tagetes_erecta_2011.jpg'
             }
         ],
         commonProblems: [

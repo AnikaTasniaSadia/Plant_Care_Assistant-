@@ -198,6 +198,7 @@ function displayCommonPlants(plants) {
     
     container.innerHTML = plants.map(plant => `
         <div class="plant-card">
+            ${plant.image ? `<img class="plant-image" src="${sanitizeHTML(plant.image)}" alt="${sanitizeHTML(plant.name)}">` : ''}
             <h4>🌿 ${sanitizeHTML(plant.name)}</h4>
             <p class="plant-type"><strong>Type:</strong> ${sanitizeHTML(plant.type)}</p>
             <p><strong>Care:</strong> ${sanitizeHTML(plant.care)}</p>
