@@ -263,40 +263,34 @@ function getCurrentPage() {
 document.addEventListener('DOMContentLoaded', function() {
     updateActiveNav(getCurrentPage());
     initAuthModal();
+    initProfileMenu();
 });
 
 /* ========================================
    Auth Modal Logic
    ======================================== */
 
-const AUTH_STATUS_KEY = 'pcaAuthStatus';
-const USER_STORAGE_KEY = 'pcaUserAccount';
-const DEFAULT_USER = {
-    fullName: 'Anika',
-    email: 'anika@gmail.com',
-    password: 'anika@123'
-};
+const SUPABASE_URL = 'https://anmfapmftqxnbdhjefrt.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_8YmzFwOnHKcvOJlsgcGJ6A_lHLg1ZG9';
 
-function getStoredUser() {
-    const stored = localStorage.getItem(USER_STORAGE_KEY);
-    return stored ? JSON.parse(stored) : null;
-}
-
-function storeUser(user) {
-    localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(user));
-}
-
-function seedDefaultUser() {
-    const storedUser = getStoredUser();
-    if (!storedUser) {
-        storeUser(DEFAULT_USER);
-        return;
+function getSupabaseClient() {
+    if (!window.supabase || typeof window.supabase.createClient !== 'function') {
+        return null;
     }
-    if (storedUser.email === DEFAULT_USER.email && storedUser.password === 'amika@123') {
-        storeUser({
-            ...storedUser,
-            password: DEFAULT_USER.password
-        });
+    return window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+}
+
+async function upsertUserProfile(supabase, userId, profile) {
+    if (!userId) return;
+    const payload = {
+        id: userId,
+        ...profile
+    };
+    const { error } = await supabase
+        .from('profiles')
+        .upsert(payload, { onConflict: 'id' });
+    if (error) {
+        console.warn('Profile upsert failed:', error);
     }
 }
 
@@ -321,11 +315,16 @@ function hideAuthOverlay(overlay) {
     document.body.classList.remove('auth-locked');
 }
 
-function initAuthModal() {
+async function initAuthModal() {
     const overlay = document.getElementById('auth-overlay');
     if (!overlay) return;
-
-    seedDefaultUser();
+    const supabase = getSupabaseClient();
+    if (!supabase) {
+        const messageEl = overlay.querySelector('#auth-message');
+        setAuthMessage(messageEl, 'Auth service unavailable. Please reload the page.', 'error');
+        showAuthOverlay(overlay);
+        return;
+    }
 
     const tabs = overlay.querySelectorAll('.auth-tab');
     const loginForm = overlay.querySelector('#login-form');
@@ -345,41 +344,55 @@ function initAuthModal() {
         setAuthMessage(messageEl, '', null);
     };
 
+    window.openAuthOverlay = (tabName = 'login') => {
+        activateTab(tabName);
+        showAuthOverlay(overlay);
+    };
+
     tabs.forEach(tab => {
         tab.addEventListener('click', () => activateTab(tab.dataset.authTab));
     });
 
-    const isAuthenticated = sessionStorage.getItem(AUTH_STATUS_KEY) === 'true';
-    if (!isAuthenticated) {
+    try {
+        const { data, error } = await supabase.auth.getSession();
+        if (error || !data.session) {
+            showAuthOverlay(overlay);
+        } else {
+            hideAuthOverlay(overlay);
+        }
+    } catch (error) {
+        console.warn('Session check failed:', error);
         showAuthOverlay(overlay);
     }
 
     if (loginForm) {
-        loginForm.addEventListener('submit', (event) => {
+        loginForm.addEventListener('submit', async (event) => {
             event.preventDefault();
             const email = loginForm.querySelector('input[name="email"]').value.trim();
             const password = loginForm.querySelector('input[name="password"]').value;
-            const storedUser = getStoredUser();
 
-            if (!storedUser) {
-                setAuthMessage(messageEl, 'No account found. Please register first.', 'error');
-                activateTab('register');
+            if (!email || !password) {
+                setAuthMessage(messageEl, 'Please enter your email and password.', 'error');
                 return;
             }
 
-            if (storedUser.email !== email || storedUser.password !== password) {
-                setAuthMessage(messageEl, 'Invalid email or password. Try again.', 'error');
+            const { error } = await supabase.auth.signInWithPassword({
+                email,
+                password
+            });
+
+            if (error) {
+                setAuthMessage(messageEl, error.message || 'Login failed. Try again.', 'error');
                 return;
             }
 
-            sessionStorage.setItem(AUTH_STATUS_KEY, 'true');
             setAuthMessage(messageEl, 'Login successful. Welcome back!', 'success');
             setTimeout(() => hideAuthOverlay(overlay), 400);
         });
     }
 
     if (registerForm) {
-        registerForm.addEventListener('submit', (event) => {
+        registerForm.addEventListener('submit', async (event) => {
             event.preventDefault();
             const fullName = registerForm.querySelector('input[name="fullName"]').value.trim();
             const email = registerForm.querySelector('input[name="email"]').value.trim();
@@ -390,17 +403,182 @@ function initAuthModal() {
                 return;
             }
 
-            storeUser({
-                fullName,
+            const { data, error } = await supabase.auth.signUp({
                 email,
-                password
+                password,
+                options: {
+                    data: {
+                        full_name: fullName
+                    }
+                }
             });
 
-            sessionStorage.setItem(AUTH_STATUS_KEY, 'true');
-            setAuthMessage(messageEl, 'Account created! You are now logged in.', 'success');
-            setTimeout(() => hideAuthOverlay(overlay), 400);
+            if (error) {
+                setAuthMessage(messageEl, error.message || 'Registration failed. Try again.', 'error');
+                return;
+            }
+
+            if (data.user?.id) {
+                await upsertUserProfile(supabase, data.user.id, {
+                    full_name: fullName,
+                    email: data.user.email
+                });
+            }
+
+            if (data.session) {
+                setAuthMessage(messageEl, 'Account created! You are now logged in.', 'success');
+                setTimeout(() => hideAuthOverlay(overlay), 400);
+                return;
+            }
+
+            setAuthMessage(messageEl, 'Check your email to confirm your account, then log in.', 'success');
+            activateTab('login');
         });
     }
+
+    supabase.auth.onAuthStateChange((_event, session) => {
+        if (session) {
+            hideAuthOverlay(overlay);
+        } else {
+            showAuthOverlay(overlay);
+        }
+    });
+}
+
+function getInitials(name = '') {
+    const parts = name.trim().split(' ').filter(Boolean);
+    if (parts.length === 0) return 'P';
+    if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
+    return `${parts[0][0]}${parts[1][0]}`.toUpperCase();
+}
+
+async function getProfileName(supabase, user) {
+    if (!user) return 'Guest';
+    let name = user.user_metadata?.full_name || '';
+    try {
+        const { data, error } = await supabase
+            .from('profiles')
+            .select('full_name')
+            .eq('id', user.id)
+            .single();
+        if (!error && data?.full_name) {
+            name = data.full_name;
+        }
+    } catch (error) {
+        console.warn('Profile fetch failed:', error);
+    }
+    if (!name && user.email) {
+        name = user.email.split('@')[0];
+    }
+    return name || 'Plant Lover';
+}
+
+async function updateProfileUI(supabase) {
+    const profileText = document.getElementById('profile-text');
+    const profileBadge = document.getElementById('profile-badge');
+    const profileAvatar = document.getElementById('profile-avatar');
+    const profileName = document.getElementById('profile-name');
+    const profileEmail = document.getElementById('profile-email');
+    const loginBtn = document.getElementById('profile-login-btn');
+    const logoutBtn = document.getElementById('profile-logout-btn');
+
+    if (!profileText || !profileBadge || !profileAvatar || !profileName || !profileEmail) {
+        return;
+    }
+
+    const { data } = await supabase.auth.getSession();
+    const session = data?.session;
+
+    if (!session) {
+        profileText.textContent = 'Welcome, Guest';
+        profileName.textContent = 'Guest';
+        profileEmail.textContent = 'Sign in to personalize';
+        const initials = 'G';
+        profileBadge.textContent = initials;
+        profileAvatar.textContent = initials;
+        if (loginBtn) loginBtn.style.display = 'inline-flex';
+        if (logoutBtn) logoutBtn.style.display = 'none';
+        return;
+    }
+
+    const name = await getProfileName(supabase, session.user);
+    const initials = getInitials(name);
+    profileText.textContent = `Welcome, ${name}`;
+    profileName.textContent = name;
+    profileEmail.textContent = session.user.email || '';
+    profileBadge.textContent = initials;
+    profileAvatar.textContent = initials;
+    if (loginBtn) loginBtn.style.display = 'none';
+    if (logoutBtn) logoutBtn.style.display = 'inline-flex';
+}
+
+function initProfileMenu() {
+    const supabase = getSupabaseClient();
+    if (!supabase) return;
+
+    const toggleBtn = document.getElementById('profile-toggle');
+    const menu = document.getElementById('profile-menu');
+    const loginBtn = document.getElementById('profile-login-btn');
+    const logoutBtn = document.getElementById('profile-logout-btn');
+
+    if (!toggleBtn || !menu) return;
+
+    const closeMenu = () => {
+        menu.classList.remove('show');
+        menu.setAttribute('aria-hidden', 'true');
+        toggleBtn.setAttribute('aria-expanded', 'false');
+    };
+
+    const openMenu = () => {
+        menu.classList.add('show');
+        menu.setAttribute('aria-hidden', 'false');
+        toggleBtn.setAttribute('aria-expanded', 'true');
+    };
+
+    toggleBtn.addEventListener('click', (event) => {
+        event.stopPropagation();
+        if (menu.classList.contains('show')) {
+            closeMenu();
+        } else {
+            openMenu();
+        }
+    });
+
+    document.addEventListener('click', (event) => {
+        if (!menu.contains(event.target) && !toggleBtn.contains(event.target)) {
+            closeMenu();
+        }
+    });
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+            closeMenu();
+        }
+    });
+
+    if (loginBtn) {
+        loginBtn.addEventListener('click', () => {
+            closeMenu();
+            if (typeof window.openAuthOverlay === 'function') {
+                window.openAuthOverlay('login');
+            }
+        });
+    }
+
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', async () => {
+            closeMenu();
+            await supabase.auth.signOut();
+            if (typeof window.openAuthOverlay === 'function') {
+                window.openAuthOverlay('login');
+            }
+        });
+    }
+
+    updateProfileUI(supabase);
+    supabase.auth.onAuthStateChange(() => {
+        updateProfileUI(supabase);
+    });
 }
 
 /**

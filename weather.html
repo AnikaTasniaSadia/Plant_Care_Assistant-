@@ -7,6 +7,50 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <!-- Auth Modal -->
+    <div id="auth-overlay" class="auth-overlay" aria-hidden="true">
+        <div class="auth-modal" role="dialog" aria-modal="true" aria-labelledby="auth-title">
+            <div class="auth-header">
+                <h2 id="auth-title">Welcome Back</h2>
+                <p>Login or create an account to continue.</p>
+            </div>
+            <div class="auth-tabs" role="tablist">
+                <button class="auth-tab active" type="button" data-auth-tab="login" role="tab" aria-selected="true">Login</button>
+                <button class="auth-tab" type="button" data-auth-tab="register" role="tab" aria-selected="false">Register</button>
+            </div>
+            <form id="login-form" class="auth-form active" autocomplete="on">
+                <div class="auth-field">
+                    <label for="login-email">Email Address</label>
+                    <input id="login-email" type="email" name="email" placeholder="you@example.com" required>
+                </div>
+                <div class="auth-field">
+                    <label for="login-password">Password</label>
+                    <input id="login-password" type="password" name="password" placeholder="Enter your password" required>
+                </div>
+                <div class="auth-actions">
+                    <button class="btn btn-primary" type="submit">Login</button>
+                </div>
+            </form>
+            <form id="register-form" class="auth-form" autocomplete="on">
+                <div class="auth-field">
+                    <label for="register-name">Full Name</label>
+                    <input id="register-name" type="text" name="fullName" placeholder="Your full name" required>
+                </div>
+                <div class="auth-field">
+                    <label for="register-email">Email Address</label>
+                    <input id="register-email" type="email" name="email" placeholder="you@example.com" required>
+                </div>
+                <div class="auth-field">
+                    <label for="register-password">Create Password</label>
+                    <input id="register-password" type="password" name="password" placeholder="Create a password" required>
+                </div>
+                <div class="auth-actions">
+                    <button class="btn btn-primary" type="submit">Create Account</button>
+                </div>
+            </form>
+            <p id="auth-message" class="auth-message" role="status" aria-live="polite"></p>
+        </div>
+    </div>
     <!-- Navigation Bar -->
     <nav class="navbar">
         <div class="nav-container">
@@ -19,6 +63,24 @@
                 <li><a href="weather.html" class="nav-link active">Weather</a></li>
                 <li><a href="about.html" class="nav-link">About</a></li>
             </ul>
+            <div class="nav-actions">
+                <button class="profile-button" id="profile-toggle" type="button" aria-haspopup="true" aria-expanded="false">
+                    <span class="profile-badge" id="profile-badge">P</span>
+                    <span class="profile-text" id="profile-text">Welcome, Guest</span>
+                    <span class="profile-caret">▾</span>
+                </button>
+                <div class="profile-menu" id="profile-menu" aria-hidden="true">
+                    <div class="profile-header">
+                        <div class="profile-avatar" id="profile-avatar">P</div>
+                        <div class="profile-meta">
+                            <p class="profile-name" id="profile-name">Guest</p>
+                            <p class="profile-email" id="profile-email">Sign in to personalize</p>
+                        </div>
+                    </div>
+                    <button class="btn btn-secondary profile-login-btn" id="profile-login-btn" type="button">Sign in</button>
+                    <button class="btn btn-primary profile-logout-btn" id="profile-logout-btn" type="button">Logout</button>
+                </div>
+            </div>
         </div>
     </nav>
 
@@ -67,6 +129,7 @@
         <p>&copy; 2024 Plant Care Assistant. An academic project for educational purposes.</p>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="js/main.js"></script>
     <script src="js/weather.js"></script>
 </body>
