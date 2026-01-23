@@ -487,6 +487,128 @@ const PLANTS_DATABASE = {
             'LOCAL FAVORITES: Grow tulsi, neem, papaya - well-adapted to climate.'
         ]
     },
+    'Bangladesh': {
+        climate: 'Tropical Monsoon',
+        commonPlants: [
+            {
+                name: 'Mango (Aam)',
+                type: 'Tree',
+                care: 'National fruit tree. Needs full sun and well-drained soil.',
+                waterFreq: 'Every 3-4 days',
+                light: 'Full sun',
+                image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Mango_tree.jpg?width=600'
+            },
+            {
+                name: 'Jackfruit (Kathal)',
+                type: 'Tree',
+                care: 'Large tropical tree. Thrives in warm, humid climate.',
+                waterFreq: 'Every 3-4 days',
+                light: 'Full sun',
+                image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Jackfruit_tree.jpg?width=600'
+            },
+            {
+                name: 'Neem Tree',
+                type: 'Tree',
+                care: 'Medicinal and pest-resistant. Tolerates heat well.',
+                waterFreq: 'Every 4-5 days',
+                light: 'Full sun',
+                image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Azadirachta_indica_2014.jpg?width=600'
+            },
+            {
+                name: 'Betel Leaf (Paan)',
+                type: 'Climbing vine',
+                care: 'Needs humidity and filtered light. Keep soil evenly moist.',
+                waterFreq: 'Every 2-3 days',
+                light: 'Bright, indirect light',
+                image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Piper_betle_leaves.jpg?width=600'
+            },
+            {
+                name: 'Hibiscus',
+                type: 'Flowering shrub',
+                care: 'Blooms abundantly in warm weather. Regular pruning helps.',
+                waterFreq: 'Every 1-2 days',
+                light: 'Full sun',
+                image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Hibiscus_rosa-sinensis_flower.jpg?width=600'
+            },
+            {
+                name: 'Jasmine',
+                type: 'Flowering vine',
+                care: 'Fragrant flowers. Likes sun with some afternoon shade.',
+                waterFreq: 'Every 2-3 days',
+                light: 'Full sun to part shade',
+                image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Jasminum_officinale.jpg?width=600'
+            },
+            {
+                name: 'Bamboo',
+                type: 'Grass',
+                care: 'Fast-growing. Prefers moist soil and full sun.',
+                waterFreq: 'Every 2-3 days',
+                light: 'Full sun',
+                image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Bamboo_in_Japan.jpg?width=600'
+            },
+            {
+                name: 'Areca Palm',
+                type: 'Palm',
+                care: 'Air-purifying. Likes humidity and bright, indirect light.',
+                waterFreq: 'Every 5-7 days',
+                light: 'Bright, indirect light',
+                image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Dypsis_lutescens_02.jpg?width=600'
+            },
+            {
+                name: 'Tulsi (Holy Basil)',
+                type: 'Herb',
+                care: 'Sacred plant. Needs sun and regular watering.',
+                waterFreq: 'Every 1-2 days',
+                light: 'Full sun',
+                image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Ocimum_tenuiflorum2.jpg?width=600'
+            },
+            {
+                name: 'Money Plant (Epipremnum)',
+                type: 'Climbing vine',
+                care: 'Very hardy. Thrives indoors with moderate light.',
+                waterFreq: 'Every 4-5 days',
+                light: 'Low to moderate',
+                image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Epipremnum_aureum_plant.jpg?width=600'
+            }
+        ],
+        commonProblems: [
+            {
+                problem: 'Monsoon Waterlogging',
+                causes: 'Heavy rains and poor drainage',
+                solution: 'Use raised beds, improve soil drainage, pause extra watering'
+            },
+            {
+                problem: 'Fungal Leaf Spot',
+                causes: 'High humidity and wet foliage',
+                solution: 'Increase airflow, avoid overhead watering, remove infected leaves'
+            },
+            {
+                problem: 'Heat Stress',
+                causes: 'High summer temperatures',
+                solution: 'Mulch soil, water early morning, provide light shade'
+            },
+            {
+                problem: 'Pest Infestation',
+                causes: 'Warm, humid conditions',
+                solution: 'Inspect weekly, use neem spray, clean plant debris'
+            },
+            {
+                problem: 'Nutrient Leaching',
+                causes: 'Frequent heavy rain',
+                solution: 'Top-dress with compost, use slow-release fertilizer'
+            }
+        ],
+        careGuide: [
+            'MONSOON READY: Ensure drainage before monsoon (June-September).',
+            'WATERING: Reduce watering during rainy weeks; soil should not stay soggy.',
+            'HUMIDITY: High humidity promotes fungus—space plants for airflow.',
+            'SUMMER CARE: Use mulch to retain moisture and cool roots.',
+            'SOIL: Mix compost and sand for better drainage and nutrition.',
+            'PEST CONTROL: Neem-based sprays are effective and widely available.',
+            'SUNLIGHT: Most tropical plants need 6+ hours of sun; protect from midday scorch.',
+            'PLANTING TIME: Post-monsoon (October–November) is ideal for new plantings.'
+        ]
+    },
     'Japan': {
         climate: 'Temperate with Four Seasons',
         commonPlants: [
