@@ -7,6 +7,7 @@
 // Important: Replace with your actual API key from https://openweathermap.org/api
 const OPENWEATHER_API_KEY = 'YOUR_API_KEY_HERE'; // Get free key from openweathermap.org
 const OPENWEATHER_BASE_URL = 'https://api.openweathermap.org/data/2.5';
+const OPEN_METEO_BASE_URL = 'https://api.open-meteo.com/v1/forecast';
 
 // Initialize weather on page load
 document.addEventListener('DOMContentLoaded', function() {
@@ -73,27 +74,20 @@ async function loadWeather(location) {
         // Show loading state
         weatherInfo.innerHTML = '<p class="loading">Fetching weather data...</p>';
         
-        // Check if API key is set
+        // Use Open-Meteo if OpenWeather key isn't configured
         if (OPENWEATHER_API_KEY === 'YOUR_API_KEY_HERE') {
-            weatherInfo.innerHTML = `
-                <div class="error">
-                    <p>⚠️ OpenWeather API key not configured</p>
-                    <p class="error-details">Please set your API key in js/weather.js to enable real weather data. Get a free key at <a href="https://openweathermap.org/api" target="_blank">openweathermap.org/api</a></p>
-                </div>
-            `;
-            // Use demo weather instead
-            displayDemoWeather();
+            const meteoData = await fetchOpenMeteoWeather(location);
+            displayWeather(meteoData);
+            displayWeatherImpact(meteoData);
+            displayCareRecommendations(meteoData);
+            showOpenMeteoNotice();
             return;
         }
-        
-        // Fetch current weather
+
+        // Fetch current weather from OpenWeather
         const weatherUrl = `${OPENWEATHER_BASE_URL}/weather?lat=${location.latitude}&lon=${location.longitude}&appid=${OPENWEATHER_API_KEY}&units=metric`;
         const weatherData = await fetchAPI(weatherUrl);
-        
-        // Fetch forecast (optional, for additional data)
-        const forecastUrl = `${OPENWEATHER_BASE_URL}/forecast?lat=${location.latitude}&lon=${location.longitude}&appid=${OPENWEATHER_API_KEY}&units=metric`;
-        const forecastData = await fetchAPI(forecastUrl);
-        
+
         // Display weather information
         displayWeather(weatherData);
         displayWeatherImpact(weatherData);
@@ -102,19 +96,74 @@ async function loadWeather(location) {
     } catch (error) {
         console.error('Weather loading error:', error);
         
-        // If API fails, show demo data
-        if (error.message.includes('API error')) {
-            weatherInfo.innerHTML = `
-                <div class="error">
-                    <p>⚠️ Could not fetch real weather data</p>
-                    <p class="error-details">Showing demo data instead. Make sure your API key is valid.</p>
-                </div>
-            `;
-            displayDemoWeather();
-        } else {
-            showError(weatherInfo, error.message);
+        try {
+            const meteoData = await fetchOpenMeteoWeather(location);
+            displayWeather(meteoData);
+            displayWeatherImpact(meteoData);
+            displayCareRecommendations(meteoData);
+            showOpenMeteoNotice();
+        } catch (fallbackError) {
+            showError(weatherInfo, fallbackError.message);
         }
     }
+}
+
+async function fetchOpenMeteoWeather(location) {
+    const url = `${OPEN_METEO_BASE_URL}?latitude=${location.latitude}&longitude=${location.longitude}&current=temperature_2m,relative_humidity_2m,apparent_temperature,pressure_msl,wind_speed_10m,cloud_cover,weather_code&timezone=auto`;
+    const response = await fetch(url);
+    if (!response.ok) {
+        throw new Error('Open-Meteo failed to load weather');
+    }
+    const data = await response.json();
+    const current = data.current || {};
+    return {
+        main: {
+            temp: current.temperature_2m,
+            feels_like: current.apparent_temperature ?? current.temperature_2m,
+            humidity: current.relative_humidity_2m,
+            pressure: current.pressure_msl
+        },
+        wind: {
+            speed: current.wind_speed_10m
+        },
+        clouds: {
+            all: current.cloud_cover
+        },
+        weather: [mapOpenMeteoWeather(current.weather_code)]
+    };
+}
+
+function mapOpenMeteoWeather(code) {
+    const mappings = {
+        0: { main: 'Clear', description: 'clear sky' },
+        1: { main: 'Mainly Clear', description: 'mostly clear' },
+        2: { main: 'Partly Cloudy', description: 'partly cloudy' },
+        3: { main: 'Cloudy', description: 'overcast' },
+        45: { main: 'Fog', description: 'fog' },
+        48: { main: 'Fog', description: 'depositing rime fog' },
+        51: { main: 'Drizzle', description: 'light drizzle' },
+        53: { main: 'Drizzle', description: 'moderate drizzle' },
+        55: { main: 'Drizzle', description: 'dense drizzle' },
+        61: { main: 'Rain', description: 'light rain' },
+        63: { main: 'Rain', description: 'moderate rain' },
+        65: { main: 'Rain', description: 'heavy rain' },
+        71: { main: 'Snow', description: 'light snow' },
+        73: { main: 'Snow', description: 'moderate snow' },
+        75: { main: 'Snow', description: 'heavy snow' },
+        80: { main: 'Rain', description: 'rain showers' },
+        81: { main: 'Rain', description: 'heavy rain showers' },
+        95: { main: 'Thunderstorm', description: 'thunderstorm' }
+    };
+    return mappings[code] || { main: 'Weather', description: 'unavailable' };
+}
+
+function showOpenMeteoNotice() {
+    const weatherInfo = document.getElementById('weather-info');
+    const notice = document.createElement('div');
+    notice.className = 'success';
+    notice.style.marginTop = '1rem';
+    notice.innerHTML = '<p>📌 Showing live weather from Open-Meteo (no API key required).</p>';
+    weatherInfo.parentElement.insertBefore(notice, weatherInfo);
 }
 
 /**

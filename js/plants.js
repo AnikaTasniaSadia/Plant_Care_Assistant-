@@ -196,16 +196,38 @@ function displayCommonPlants(plants) {
         return;
     }
     
-    container.innerHTML = plants.map(plant => `
-        <div class="plant-card">
-            ${plant.image ? `<img class="plant-image" src="${sanitizeHTML(plant.image)}" alt="${sanitizeHTML(plant.name)}">` : ''}
-            <h4>🌿 ${sanitizeHTML(plant.name)}</h4>
-            <p class="plant-type"><strong>Type:</strong> ${sanitizeHTML(plant.type)}</p>
-            <p><strong>Care:</strong> ${sanitizeHTML(plant.care)}</p>
-            <p><strong>💧 Watering:</strong> ${sanitizeHTML(plant.waterFreq)}</p>
-            <p><strong>☀️ Light:</strong> ${sanitizeHTML(plant.light)}</p>
+    container.innerHTML = plants.map((plant, index) => {
+        const fallbackQuery = encodeURIComponent(`${plant.name} plant`);
+        const fallbackUrl = `https://source.unsplash.com/600x400/?${fallbackQuery}`;
+        return `
+        <div class="plant-card" data-plant-index="${index}" aria-expanded="false">
+            ${plant.image ? `<img class="plant-image" src="${sanitizeHTML(plant.image)}" alt="${sanitizeHTML(plant.name)}" loading="lazy" data-fallback="${fallbackUrl}">` : ''}
+            <h4 class="plant-title">🌿 ${sanitizeHTML(plant.name)}</h4>
+            <div class="plant-details">
+                <p class="plant-type"><strong>Type:</strong> ${sanitizeHTML(plant.type)}</p>
+                <p><strong>Care:</strong> ${sanitizeHTML(plant.care)}</p>
+                <p><strong>💧 Watering:</strong> ${sanitizeHTML(plant.waterFreq)}</p>
+                <p><strong>☀️ Light:</strong> ${sanitizeHTML(plant.light)}</p>
+            </div>
         </div>
-    `).join('');
+    `;
+    }).join('');
+
+    container.querySelectorAll('.plant-card').forEach(card => {
+        card.addEventListener('click', () => {
+            const isExpanded = card.classList.toggle('expanded');
+            card.setAttribute('aria-expanded', String(isExpanded));
+        });
+    });
+
+    container.querySelectorAll('.plant-image').forEach(img => {
+        img.addEventListener('error', () => {
+            const fallback = img.getAttribute('data-fallback');
+            if (fallback && img.src !== fallback) {
+                img.src = fallback;
+            }
+        }, { once: true });
+    });
 }
 
 /**

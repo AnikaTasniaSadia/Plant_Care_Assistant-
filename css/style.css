@@ -422,6 +422,10 @@ textarea {
     transition: transform 0.3s;
 }
 
+.plant-card {
+    cursor: pointer;
+}
+
 .plant-card .plant-image {
     width: 100%;
     height: 160px;
@@ -430,6 +434,14 @@ textarea {
     margin-bottom: 0.75rem;
     border: 1px solid var(--border-color);
     background: var(--white);
+}
+
+.plant-details {
+    display: none;
+}
+
+.plant-card.expanded .plant-details {
+    display: block;
 }
 
 .stat-card:hover,

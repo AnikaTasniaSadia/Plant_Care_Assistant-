@@ -26,28 +26,129 @@ function storeLocation(location) {
  */
 async function detectUserLocation() {
     try {
-        const response = await fetch('https://ipapi.co/json/');
-        if (!response.ok) {
-            throw new Error('Failed to detect location');
+        const coords = await getBrowserLocation();
+        try {
+            const locationData = await reverseGeocode(coords.latitude, coords.longitude);
+            storeLocation(locationData);
+            return locationData;
+        } catch (error) {
+            const locationData = {
+                country: 'Unknown',
+                country_code: '',
+                city: 'Unknown',
+                region: '',
+                latitude: coords.latitude,
+                longitude: coords.longitude
+            };
+            storeLocation(locationData);
+            return locationData;
         }
-        const data = await response.json();
-        
-        // Store the location data
-        const locationData = {
-            country: data.country_name,
-            country_code: data.country_code,
-            city: data.city,
-            region: data.region,
-            latitude: data.latitude,
-            longitude: data.longitude
-        };
-        
-        storeLocation(locationData);
-        return locationData;
     } catch (error) {
-        console.error('Location detection error:', error);
-        throw error;
+        console.warn('Browser geolocation failed:', error);
     }
+
+    const providers = [
+        async () => {
+            const response = await fetch('https://ipapi.co/json/');
+            if (!response.ok) throw new Error('ipapi.co failed');
+            const data = await response.json();
+            return {
+                country: data.country_name,
+                country_code: data.country_code,
+                city: data.city,
+                region: data.region,
+                latitude: data.latitude,
+                longitude: data.longitude
+            };
+        },
+        async () => {
+            const response = await fetch('https://ipwho.is/');
+            if (!response.ok) throw new Error('ipwho.is failed');
+            const data = await response.json();
+            if (!data.success) throw new Error('ipwho.is error');
+            return {
+                country: data.country,
+                country_code: data.country_code,
+                city: data.city,
+                region: data.region,
+                latitude: data.latitude,
+                longitude: data.longitude
+            };
+        },
+        async () => {
+            const response = await fetch('https://ipinfo.io/json');
+            if (!response.ok) throw new Error('ipinfo.io failed');
+            const data = await response.json();
+            const [lat, lon] = (data.loc || ',').split(',').map(Number);
+            return {
+                country: data.country || '',
+                country_code: data.country || '',
+                city: data.city || '',
+                region: data.region || '',
+                latitude: lat || 0,
+                longitude: lon || 0
+            };
+        }
+    ];
+
+    for (const provider of providers) {
+        try {
+            const locationData = await provider();
+            if (locationData && locationData.country) {
+                storeLocation(locationData);
+                return locationData;
+            }
+        } catch (error) {
+            console.warn('Location provider failed:', error);
+        }
+    }
+
+    const fallback = {
+        country: 'United States',
+        country_code: 'US',
+        city: 'New York',
+        region: 'NY',
+        latitude: 40.7128,
+        longitude: -74.006
+    };
+    storeLocation(fallback);
+    return fallback;
+}
+
+function getBrowserLocation() {
+    return new Promise((resolve, reject) => {
+        if (!navigator.geolocation) {
+            reject(new Error('Geolocation not supported'));
+            return;
+        }
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                resolve({
+                    latitude: position.coords.latitude,
+                    longitude: position.coords.longitude
+                });
+            },
+            (error) => reject(error),
+            { enableHighAccuracy: false, timeout: 10000, maximumAge: 600000 }
+        );
+    });
+}
+
+async function reverseGeocode(latitude, longitude) {
+    const url = `https://geocoding-api.open-meteo.com/v1/reverse?latitude=${latitude}&longitude=${longitude}&count=1&language=en&format=json`;
+    const response = await fetch(url);
+    if (!response.ok) throw new Error('Reverse geocode failed');
+    const data = await response.json();
+    const place = data.results && data.results[0];
+    if (!place) throw new Error('Reverse geocode no results');
+    return {
+        country: place.country,
+        country_code: place.country_code,
+        city: place.city || place.name || '',
+        region: place.admin1 || '',
+        latitude,
+        longitude
+    };
 }
 
 /**
