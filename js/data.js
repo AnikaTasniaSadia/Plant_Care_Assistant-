@@ -252,7 +252,8 @@ const PLANTS_DATABASE = {
                 care: 'Iconic Australian plant. Prefers well-drained soil. Drought tolerant.',
                 waterFreq: 'Every 2-3 weeks',
                 light: 'Full sun to part shade',
-                image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Telopea_speciosissima.jpg?width=600'
+                image: 'Australia/Eucalyptus-tree.webp',
+                diseases: ['Leaf spot', 'Powdery mildew', 'Dieback (Phytophthora)']
             },
             {
                 name: 'Acacia (Wattle)',
@@ -260,7 +261,8 @@ const PLANTS_DATABASE = {
                 care: 'Fast-growing, drought tolerant. Various sizes available.',
                 waterFreq: 'Every 3-4 weeks',
                 light: 'Full sun',
-                image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Eucalyptus_globulus_foliage.jpg?width=600'
+                image: 'Australia/53ceea605eb54af4a5173fa7ab714eab.png',
+                diseases: ['Root rot', 'Gall rust', 'Leaf spot']
             },
             {
                 name: 'Banksia',
@@ -268,7 +270,8 @@ const PLANTS_DATABASE = {
                 care: 'Beautiful flower spikes. Drought tolerant once established.',
                 waterFreq: 'Every 2-3 weeks',
                 light: 'Full sun',
-                image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Banksia_integrifolia.jpg?width=600'
+                image: 'Australia/Banksia-red.jpg',
+                diseases: ['Phytophthora dieback', 'Leaf spot', 'Banksia decline']
             },
             {
                 name: 'Bottlebrush',
@@ -276,7 +279,8 @@ const PLANTS_DATABASE = {
                 care: 'Tropical to subtropical. Edible nuts. Requires protection in cool areas.',
                 waterFreq: 'Every 1-2 weeks',
                 light: 'Full sun to part shade',
-                image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Macadamia_integrifolia_01.jpg?width=600'
+                image: 'Australia/banksiacf.jpg',
+                diseases: ['Sooty mold', 'Powdery mildew', 'Leaf spot']
             },
             {
                 name: 'Kangaroo Paw',
@@ -284,7 +288,8 @@ const PLANTS_DATABASE = {
                 care: 'Colorful bracts. Loves heat and sun. Drought tolerant.',
                 waterFreq: 'Every 2-3 weeks',
                 light: 'Full sun',
-                image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Bougainvillea_glabra.jpg?width=600'
+                image: 'Australia/IMG-6497.jpg',
+                diseases: ['Ink disease (Phytophthora)', 'Leaf spot', 'Rust']
             },
             {
                 name: 'Tea Tree',
@@ -292,7 +297,8 @@ const PLANTS_DATABASE = {
                 care: 'Vibrant flowers. Prefers well-drained soil and sun.',
                 waterFreq: 'Every 1-2 weeks',
                 light: 'Full sun',
-                image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Anigozanthos_manglesii.jpg?width=600'
+                image: 'Australia/Cx85iNYt6Q7FuTHFTqCojF.jpg',
+                diseases: ['Root rot', 'Leaf blight', 'Sooty mold']
             },
             {
                 name: 'Waratah',
@@ -300,7 +306,8 @@ const PLANTS_DATABASE = {
                 care: 'Red brush-like flowers. Drought tolerant once established.',
                 waterFreq: 'Every 2-3 weeks',
                 light: 'Full sun',
-                image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Callistemon_viminalis.jpg?width=600'
+                image: 'Australia/Banksia_in_the_Blue_Mountains.jpg',
+                diseases: ['Botrytis blight', 'Root rot', 'Leaf spot']
             },
             {
                 name: 'Grevillea',
@@ -308,7 +315,8 @@ const PLANTS_DATABASE = {
                 care: 'Attracts birds. Hardy and drought tolerant.',
                 waterFreq: 'Every 2-3 weeks',
                 light: 'Full sun',
-                image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Grevillea_robusta_flowers.jpg?width=600'
+                image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Grevillea_robusta_flowers.jpg?width=600',
+                diseases: ['Phytophthora root rot', 'Anthracnose', 'Leaf spot']
             },
             {
                 name: 'Spinifex Grass',
@@ -316,7 +324,8 @@ const PLANTS_DATABASE = {
                 care: 'National floral emblem. Tolerates poor soils.',
                 waterFreq: 'Every 2-3 weeks',
                 light: 'Full sun',
-                image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Acacia_pycnantha.jpg?width=600'
+                image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Spinifex_sericeus_flowers.jpg?width=600',
+                diseases: ['Leaf rust', 'Root rot', 'Fungal leaf spot']
             },
             {
                 name: 'Lemon Myrtle',
@@ -324,7 +333,8 @@ const PLANTS_DATABASE = {
                 care: 'Fragrant flowers. Likes warm climates and sun.',
                 waterFreq: 'Every 1-2 weeks',
                 light: 'Full sun',
-                image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Plumeria_rubra_flower.jpg?width=600'
+                image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Backhousia_citriodora_leaves.jpg?width=600',
+                diseases: ['Powdery mildew', 'Anthracnose', 'Sooty mold']
             }
         ],
         commonProblems: [
@@ -374,7 +384,8 @@ const PLANTS_DATABASE = {
                 care: 'Most popular. Thrives in hot, humid climate. Brings good luck.',
                 waterFreq: 'Every 3-4 days',
                 light: 'Low to moderate',
-                image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Epipremnum_aureum_plant.jpg?width=600'
+                image: 'INDIA/shutterstock-571223365.jpeg',
+                diseases: ['Leaf spot', 'Root rot', 'Powdery mildew']
             },
             {
                 name: 'Neem',
@@ -382,7 +393,8 @@ const PLANTS_DATABASE = {
                 care: 'Sacred plant. Medicinal uses. Loves sunlight and warmth.',
                 waterFreq: 'Every 1-2 days',
                 light: 'Full sun',
-                image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Ocimum_tenuiflorum2.jpg?width=600'
+                image: 'INDIA/154033543209549843.jpeg',
+                diseases: ['Powdery mildew', 'Leaf spot', 'Sooty mold']
             },
             {
                 name: 'Tulsi (Holy Basil)',
@@ -390,7 +402,8 @@ const PLANTS_DATABASE = {
                 care: 'Medicinal properties. Heat tolerant. Uses for pest control.',
                 waterFreq: 'Every 3-4 days',
                 light: 'Full sun',
-                image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Azadirachta_indica_2014.jpg?width=600'
+                image: 'INDIA/ajwain-plant-india.jpeg',
+                diseases: ['Downy mildew', 'Leaf spot', 'Root rot']
             },
             {
                 name: 'Mango',
@@ -398,7 +411,8 @@ const PLANTS_DATABASE = {
                 care: 'Fragrant flowers. Heat loving. Attracts butterflies.',
                 waterFreq: 'Every 2-3 days',
                 light: 'Full sun to part shade',
-                image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Jasminum_officinale.jpg?width=600'
+                image: 'INDIA/122390427.jpeg',
+                diseases: ['Anthracnose', 'Powdery mildew', 'Sooty mold']
             },
             {
                 name: 'Peepal Tree',
@@ -406,7 +420,8 @@ const PLANTS_DATABASE = {
                 care: 'Colorful blooms year-round. Thrives in heat. Regular pruning needed.',
                 waterFreq: 'Every 1-2 days',
                 light: 'Full sun',
-                image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Hibiscus_rosa-sinensis_flower.jpg?width=600'
+                image: 'INDIA/153459190117957659.jpeg',
+                diseases: ['Leaf spot', 'Fungal blight', 'Root rot']
             },
             {
                 name: 'Banana',
@@ -414,7 +429,8 @@ const PLANTS_DATABASE = {
                 care: 'Drought tolerant. Allow soil to dry between watering.',
                 waterFreq: 'Every 2-3 weeks',
                 light: 'Bright light',
-                image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Aloe_vera_flower.jpg?width=600'
+                image: 'INDIA/202656794913538048.jpeg',
+                diseases: ['Panama disease', 'Sigatoka leaf spot', 'Root rot']
             },
             {
                 name: 'Coconut',
@@ -422,7 +438,8 @@ const PLANTS_DATABASE = {
                 care: 'Tolerates heat and low light. Minimal watering.',
                 waterFreq: 'Every 3-4 weeks',
                 light: 'Low to bright',
-                image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Sansevieria_trifasciata_%28Snake_Plant%29.jpg?width=600'
+                image: 'INDIA/nonik-bela-q4eth8W-7l8-unsplash-1-1024x769.jpeg',
+                diseases: ['Bud rot', 'Leaf blight', 'Root wilt']
             },
             {
                 name: 'Sandalwood',
@@ -430,7 +447,8 @@ const PLANTS_DATABASE = {
                 care: 'Air-purifying. Likes humidity and bright, indirect light.',
                 waterFreq: 'Every 5-7 days',
                 light: 'Bright, indirect light',
-                image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Dypsis_lutescens_02.jpg?width=600'
+                image: 'INDIA/perennialherbs-1200x800-253492_60222ebd-baf0-4ec6-939a-b60aa532c6b9-410529_1024x1024.jpeg',
+                diseases: ['Spike disease', 'Leaf spot', 'Root rot']
             },
             {
                 name: 'Tea Plant',
@@ -438,7 +456,8 @@ const PLANTS_DATABASE = {
                 care: 'Aromatic leaves. Keep in sun and well-drained soil.',
                 waterFreq: 'Every 3-4 days',
                 light: 'Full sun',
-                image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Murraya_koenigii.jpg?width=600'
+                image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Camellia_sinensis_leaves.jpg?width=600',
+                diseases: ['Blister blight', 'Root rot', 'Leaf spot']
             },
             {
                 name: 'Rice',
@@ -446,7 +465,8 @@ const PLANTS_DATABASE = {
                 care: 'Easy annual. Thrives in warm climates and full sun.',
                 waterFreq: 'Every 2-3 days',
                 light: 'Full sun',
-                image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Tagetes_erecta_2011.jpg?width=600'
+                image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Rice_plants_in_field.jpg?width=600',
+                diseases: ['Bacterial blight', 'Blast disease', 'Sheath blight']
             }
         ],
         commonProblems: [
@@ -618,7 +638,8 @@ const PLANTS_DATABASE = {
                 care: 'Iconic plant. Various species. Excellent for privacy and decoration.',
                 waterFreq: 'Every 2-3 days',
                 light: 'Bright indirect to full sun',
-                image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Bamboo_in_Japan.jpg?width=600'
+                image: 'JAPAN/japanese-flowers-sakura.jpeg',
+                diseases: ['Leaf spot', 'Powdery mildew', 'Canker']
             },
             {
                 name: 'Japanese Maple',
@@ -626,7 +647,8 @@ const PLANTS_DATABASE = {
                 care: 'Iconic Japanese flower. Blooms spring. Needs winter chill.',
                 waterFreq: 'Every 2-3 days',
                 light: 'Full sun',
-                image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Cherry_blossoms_in_Japan.jpg?width=600'
+                image: 'JAPAN/pexels-photo-2778192.jpeg',
+                diseases: ['Verticillium wilt', 'Leaf scorch', 'Anthracnose']
             },
             {
                 name: 'Bamboo',
@@ -634,7 +656,8 @@ const PLANTS_DATABASE = {
                 care: 'Delicate leaves, fall colors. Prefers partial shade and protected spot.',
                 waterFreq: 'Every 1-2 days',
                 light: 'Partial shade',
-                image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Acer_palmatum_001.jpg?width=600'
+                image: 'JAPAN/2048x1365-Plants-for-a-Japanese-garden-LI2832263-b4db692.jpeg',
+                diseases: ['Bamboo mosaic virus', 'Leaf spot', 'Root rot']
             },
             {
                 name: 'Camellia',
@@ -642,7 +665,8 @@ const PLANTS_DATABASE = {
                 care: 'Require skill and patience. Popular hobby in Japan.',
                 waterFreq: 'Every 1-2 days',
                 light: 'Bright light',
-                image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Bonsai_IMG_6426.jpg?width=600'
+                image: 'JAPAN/CJFcC9CeBPh7uVShJcdga7.jpeg',
+                diseases: ['Camellia blight', 'Leaf gall', 'Sooty mold']
             },
             {
                 name: 'Pine Tree',
@@ -650,7 +674,8 @@ const PLANTS_DATABASE = {
                 care: 'Essential in Japanese gardens. Loves moisture and shade.',
                 waterFreq: 'Keep consistently moist',
                 light: 'Shade to partial shade',
-                image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Moss_garden.jpg?width=600'
+                image: 'JAPAN/SF4oQX7XCSJF54u6QsTaYV.jpeg',
+                diseases: ['Needle blight', 'Pine wilt', 'Rust']
             },
             {
                 name: 'Plum Blossom (Ume)',
@@ -658,7 +683,8 @@ const PLANTS_DATABASE = {
                 care: 'Glossy leaves and winter blooms. Likes acidic soil.',
                 waterFreq: 'Every 2-3 days',
                 light: 'Partial shade',
-                image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Camellia_japonica_2.jpg?width=600'
+                image: 'JAPAN/2048x1365-Plants-for-a-Japanese-garden-LI3877192-6ebdde8.jpeg',
+                diseases: ['Brown rot', 'Leaf curl', 'Shot hole']
             },
             {
                 name: 'Chrysanthemum',
@@ -666,7 +692,8 @@ const PLANTS_DATABASE = {
                 care: 'Spring blooms. Keep soil moist and well-drained.',
                 waterFreq: 'Every 2-3 days',
                 light: 'Partial shade',
-                image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Rhododendron_indicum.jpg?width=600'
+                image: 'JAPAN/japanese-flowers-kinmokusei.jpeg',
+                diseases: ['Leaf spot', 'Powdery mildew', 'Botrytis blight']
             },
             {
                 name: 'Ginkgo',
@@ -674,7 +701,8 @@ const PLANTS_DATABASE = {
                 care: 'Enjoys moist soil and full sun. Summer blooms.',
                 waterFreq: 'Every 2-3 days',
                 light: 'Full sun',
-                image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Iris_ensata_02.jpg?width=600'
+                image: 'JAPAN/plantas_peligrosas_03.jpeg',
+                diseases: ['Leaf spot', 'Canker', 'Root rot']
             },
             {
                 name: 'Azalea',
@@ -682,7 +710,8 @@ const PLANTS_DATABASE = {
                 care: 'Spectacular spring blooms. Needs strong support.',
                 waterFreq: 'Every 2-3 days',
                 light: 'Full sun',
-                image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Wisteria_floribunda_3.jpg?width=600'
+                image: 'JAPAN/k5jkEBTfWSqAEW8yeyJakX.jpeg',
+                diseases: ['Petal blight', 'Root rot', 'Leaf spot']
             },
             {
                 name: 'Lotus',
@@ -690,7 +719,8 @@ const PLANTS_DATABASE = {
                 care: 'Autumn blooms. Pinch back for bushy growth.',
                 waterFreq: 'Every 2-3 days',
                 light: 'Full sun',
-                image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Chrysanthemum_morifolium2.jpg?width=600'
+                image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Nelumbo_nucifera_1.jpg?width=600',
+                diseases: ['Rhizome rot', 'Leaf spot', 'Aphid-borne viruses']
             }
         ],
         commonProblems: [
@@ -735,7 +765,8 @@ const PLANTS_DATABASE = {
                 care: 'National flower. Thousands of species. Require humidity and airflow.',
                 waterFreq: 'Every 2-3 days',
                 light: 'Bright, indirect light',
-                image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Phalaenopsis_amabilis_orchid.jpg?width=600'
+                image: 'BRAZIL/il_fullxfull.2986917063_r14w.jpeg',
+                diseases: ['Leaf spot', 'Root rot', 'Scale insects']
             },
             {
                 name: 'Brazil Nut Tree',
@@ -743,7 +774,8 @@ const PLANTS_DATABASE = {
                 care: 'Beautiful intricate flowers. Heat loving. Attracts butterflies.',
                 waterFreq: 'Every 1-2 days',
                 light: 'Full sun to part shade',
-                image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Passiflora_caerulea_1.jpg?width=600'
+                image: 'BRAZIL/Brazilian-Dutchmans-Pipe-1024x683.jpeg',
+                diseases: ['Leaf spot', 'Root rot', 'Anthracnose']
             },
             {
                 name: 'Coffee Plant',
@@ -751,7 +783,8 @@ const PLANTS_DATABASE = {
                 care: 'Colorful leaves. Tank-type holds water. Easy care.',
                 waterFreq: 'Keep tank filled',
                 light: 'Bright, indirect light',
-                image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Bromeliad_plant.jpg?width=600'
+                image: 'BRAZIL/shutterstock-563990374.jpeg',
+                diseases: ['Coffee leaf rust', 'Leaf spot', 'Root rot']
             },
             {
                 name: 'Cacao',
@@ -759,7 +792,8 @@ const PLANTS_DATABASE = {
                 care: 'Exotic red/orange flowers. Large plant. Needs space.',
                 waterFreq: 'Every 1-2 days',
                 light: 'Full sun to bright shade',
-                image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Heliconia_rostrata.jpg?width=600'
+                image: 'BRAZIL/154176350872141850.jpeg',
+                diseases: ['Black pod', 'Frosty pod rot', 'Stem canker']
             },
             {
                 name: 'Sugarcane',
@@ -767,7 +801,8 @@ const PLANTS_DATABASE = {
                 care: 'Can be grown from seed. Tropical climate essential. Takes years to fruit.',
                 waterFreq: 'Every 2-3 days',
                 light: 'Full sun',
-                image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Persea_americana_fruit.jpg?width=600'
+                image: 'BRAZIL/153807877037883398.jpeg',
+                diseases: ['Red rot', 'Smutt', 'Leaf scald']
             },
             {
                 name: 'Pineapple',
@@ -775,7 +810,8 @@ const PLANTS_DATABASE = {
                 care: 'Large canopy tree. Thrives in humid tropical climate.',
                 waterFreq: 'Every 2-3 days',
                 light: 'Full sun',
-                image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Bertholletia_excelsa_fruits.jpg?width=600'
+                image: 'BRAZIL/bromeliad-bromeliaceae-the-bromeliads-family-600nw-2488739421.jpeg',
+                diseases: ['Heart rot', 'Fungal leaf spot', 'Mealybugs']
             },
             {
                 name: 'Açaí Palm',
@@ -783,7 +819,8 @@ const PLANTS_DATABASE = {
                 care: 'Glossy leaves and bright spathes. Likes humidity.',
                 waterFreq: 'Every 3-4 days',
                 light: 'Bright, indirect light',
-                image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Anthurium_andraeanum_02.jpg?width=600'
+                image: 'BRAZIL/12-5-9a-brazil-palm-1100x788.jpeg',
+                diseases: ['Bud rot', 'Leaf spot', 'Root rot']
             },
             {
                 name: 'Orchid',
@@ -791,7 +828,8 @@ const PLANTS_DATABASE = {
                 care: 'Lush tropical foliage. Easy indoor plant.',
                 waterFreq: 'Every 1-2 weeks',
                 light: 'Low to moderate',
-                image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Philodendron_hederaceum_04.jpg?width=600'
+                image: 'BRAZIL/85610353-7465-4725-B8A8-B5ACD27A6DCF.jpeg',
+                diseases: ['Crown rot', 'Root rot', 'Fungal leaf spot']
             },
             {
                 name: 'Pau-Brasil (Brazilwood)',
@@ -799,7 +837,8 @@ const PLANTS_DATABASE = {
                 care: 'Fast-growing tropical fruit. Needs warmth and sun.',
                 waterFreq: 'Every 2-3 days',
                 light: 'Full sun',
-                image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Carica_papaya_fruits.jpg?width=600'
+                image: 'BRAZIL/Brazilwood-1024x683.jpeg',
+                diseases: ['Root rot', 'Leaf blight', 'Canker']
             },
             {
                 name: 'Cassava',
@@ -807,7 +846,8 @@ const PLANTS_DATABASE = {
                 care: 'Large leaves, tropical look. Needs regular watering.',
                 waterFreq: 'Every 2-3 days',
                 light: 'Full sun',
-                image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Musa_acuminata.jpg?width=600'
+                image: 'BRAZIL/28e670386fec55ac4602a969e9afac73.jpeg',
+                diseases: ['Cassava mosaic disease', 'Bacterial blight', 'Root rot']
             }
         ],
         commonProblems: [

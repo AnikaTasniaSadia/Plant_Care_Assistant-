@@ -6,7 +6,7 @@
     <title>Plant Care Assistant - Smart Plant Care Guide</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body class="home-page">
     <!-- Auth Modal -->
     <div id="auth-overlay" class="auth-overlay" aria-hidden="true">
         <div class="auth-modal" role="dialog" aria-modal="true" aria-labelledby="auth-title">
@@ -62,9 +62,12 @@
                 <li><a href="index.html" class="nav-link active">Home</a></li>
                 <li><a href="plants.html" class="nav-link">Plants</a></li>
                 <li><a href="weather.html" class="nav-link">Weather</a></li>
-                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="#footer" class="nav-link">About</a></li>
             </ul>
             <div class="nav-actions">
+                <button class="theme-toggle" id="theme-toggle" type="button" aria-pressed="false" aria-label="Toggle dark mode">
+                    <span class="theme-icon" aria-hidden="true">💡</span>
+                </button>
                 <button class="profile-button" id="profile-toggle" type="button" aria-haspopup="true" aria-expanded="false">
                     <span class="profile-badge" id="profile-badge">P</span>
                     <span class="profile-text" id="profile-text">Welcome, Guest</span>
@@ -99,6 +102,7 @@
             <div id="location-info" class="location-info">
                 <p class="loading">Detecting your location...</p>
             </div>
+            <div id="location-map" class="location-map" aria-label="Map showing your location"></div>
         </section>
 
         <!-- Quick Stats -->
@@ -142,8 +146,10 @@
     </main>
 
     <!-- Footer -->
-    <footer class="footer">
-        <p>&copy; 2024 Plant Care Assistant. An academic project for educational purposes.</p>
+    <footer class="footer" id="footer">
+        <p><strong>Plant Care Assistant</strong> — smart, local plant guidance.</p>
+        <p>Contact: support@plantcareassistant.com | +880 1XXX-XXXXXX</p>
+        <p>&copy; 2024 Plant Care Assistant. All rights reserved.</p>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -154,8 +160,11 @@
             detectLocation();
         });
 
+        let pendingMapCoords = null;
+
         async function detectLocation() {
             const locationInfo = document.getElementById('location-info');
+            const mapContainer = document.getElementById('location-map');
             try {
                 const response = await fetch('https://ipapi.co/json/');
                 const data = await response.json();
@@ -165,9 +174,12 @@
                         <p><strong>Country:</strong> ${data.country_name}</p>
                         <p><strong>City:</strong> ${data.city}</p>
                         <p><strong>Region:</strong> ${data.region}</p>
-                        <p><strong>Coordinates:</strong> ${data.latitude.toFixed(2)}°, ${data.longitude.toFixed(2)}°</p>
+                        pendingMapCoords = { lat: data.latitude, lng: data.longitude };
+                        renderLocationMap(data.latitude, data.longitude, mapContainer);
                     </div>
                 `;
+
+                renderLocationMap(data.latitude, data.longitude, mapContainer);
                 
                 // Store location in sessionStorage for other pages
                 sessionStorage.setItem('userLocation', JSON.stringify({
@@ -188,6 +200,52 @@
                 console.error('Location detection error:', error);
             }
         }
+
+        function renderLocationMap(lat, lng, container) {
+            if (!container) return;
+            if (!window.google || !window.google.maps) {
+                pendingMapCoords = { lat, lng };
+                container.innerHTML = '<p class="loading">Map is loading...</p>';
+                return;
+            }
+            const map = new google.maps.Map(container, {
+                center: { lat, lng },
+                zoom: 10,
+                disableDefaultUI: true,
+                zoomControl: true,
+                gestureHandling: 'cooperative'
+            });
+            new google.maps.Marker({
+                position: { lat, lng },
+                window.initMap = initMap;
+                map,
+                function renderStaticMap(lat, lng, container) {
+                    if (!container) return;
+                    const zoom = 12;
+                    const size = '640x300';
+                    const key = 'AIzaSyDZ4r9oIDutO1J88-e9cPZ-eVsQMvAlbvU';
+                    const url = `https://maps.googleapis.com/maps/api/staticmap?center=${lat},${lng}&zoom=${zoom}&size=${size}&markers=color:green|${lat},${lng}&key=${key}`;
+                    container.innerHTML = `<img src="${url}" alt="Map showing your location" />`;
+                }
+                title: 'Your Location'
+                setTimeout(() => {
+                    if (!window.google || !window.google.maps) {
+                        const mapContainer = document.getElementById('location-map');
+                        if (pendingMapCoords) {
+                            renderStaticMap(pendingMapCoords.lat, pendingMapCoords.lng, mapContainer);
+                        }
+                    }
+                }, 3000);
+            });
+        }
+
+        function initMap() {
+            if (!pendingMapCoords) return;
+            const mapContainer = document.getElementById('location-map');
+            renderLocationMap(pendingMapCoords.lat, pendingMapCoords.lng, mapContainer);
+            pendingMapCoords = null;
+        }
     </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZ4r9oIDutO1J88-e9cPZ-eVsQMvAlbvU&callback=initMap" async defer></script>
 </body>
 </html>

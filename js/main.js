@@ -265,6 +265,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initAuthModal();
     initProfileMenu();
     initChatWidget();
+    initThemeToggle();
 });
 
 /* ========================================
@@ -607,6 +608,25 @@ async function fetchAPI(url, options = {}) {
         console.error('API call failed:', error);
         throw error;
     }
+}
+
+function initThemeToggle() {
+    const toggle = document.getElementById('theme-toggle');
+    if (!toggle) return;
+
+    const stored = localStorage.getItem('pcaTheme');
+    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const shouldEnable = stored ? stored === 'dark' : prefersDark;
+    document.body.classList.toggle('dark-mode', shouldEnable);
+    toggle.classList.toggle('is-dark', shouldEnable);
+    toggle.setAttribute('aria-pressed', String(shouldEnable));
+
+    toggle.addEventListener('click', () => {
+        const isDark = document.body.classList.toggle('dark-mode');
+        toggle.classList.toggle('is-dark', isDark);
+        toggle.setAttribute('aria-pressed', String(isDark));
+        localStorage.setItem('pcaTheme', isDark ? 'dark' : 'light');
+    });
 }
 
 function initChatWidget() {

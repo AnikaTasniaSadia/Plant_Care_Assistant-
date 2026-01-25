@@ -16,7 +16,7 @@ async function sendMessage() {
   addMessage(message, "user");
   input.value = "";
 
-  addMessage("Thinking...", "bot");
+  addMessage("Writing...", "bot");
 
   try {
     const response = await fetch("http://localhost:3000/chat", {

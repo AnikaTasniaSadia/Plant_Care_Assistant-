@@ -58,10 +58,17 @@ async function initializePlantsPage() {
  */
 function populateCountrySelector() {
     const select = document.getElementById('country-select');
+    const dropdownMenu = document.getElementById('country-dropdown-menu');
+    const dropdownToggle = document.getElementById('country-dropdown-toggle');
+    const dropdownLabel = document.getElementById('country-dropdown-label');
+    const dropdownWrapper = document.getElementById('country-dropdown');
     const countries = getAllCountries();
     
     // Clear existing options
     select.innerHTML = '<option value="">Select a country...</option>';
+    if (dropdownMenu) {
+        dropdownMenu.innerHTML = '';
+    }
     
     // Add countries
     countries.forEach(country => {
@@ -69,10 +76,72 @@ function populateCountrySelector() {
         option.value = country;
         option.textContent = country;
         select.appendChild(option);
+
+        if (dropdownMenu) {
+            const item = document.createElement('button');
+            item.type = 'button';
+            item.className = 'country-dropdown-item';
+            item.role = 'option';
+            item.dataset.value = country;
+            item.textContent = country;
+            dropdownMenu.appendChild(item);
+        }
     });
-    
-    // Add change event listener
+
+    const closeMenu = () => {
+        if (!dropdownMenu || !dropdownToggle) return;
+        dropdownMenu.classList.remove('show');
+        dropdownMenu.setAttribute('aria-hidden', 'true');
+        dropdownToggle.setAttribute('aria-expanded', 'false');
+    };
+
+    const openMenu = () => {
+        if (!dropdownMenu || !dropdownToggle) return;
+        dropdownMenu.classList.add('show');
+        dropdownMenu.setAttribute('aria-hidden', 'false');
+        dropdownToggle.setAttribute('aria-expanded', 'true');
+    };
+
+    if (dropdownToggle && dropdownMenu) {
+        dropdownToggle.addEventListener('click', () => {
+            if (dropdownMenu.classList.contains('show')) {
+                closeMenu();
+            } else {
+                openMenu();
+            }
+        });
+
+        dropdownMenu.addEventListener('click', (event) => {
+            const target = event.target.closest('.country-dropdown-item');
+            if (!target) return;
+            const value = target.dataset.value;
+            select.value = value;
+            if (dropdownLabel) {
+                dropdownLabel.textContent = value;
+            }
+            closeMenu();
+            if (value) {
+                loadPlantData(value);
+            }
+        });
+
+        document.addEventListener('click', (event) => {
+            if (!dropdownWrapper || dropdownWrapper.contains(event.target)) return;
+            closeMenu();
+        });
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                closeMenu();
+            }
+        });
+    }
+
+    // Sync when select changes programmatically
     select.addEventListener('change', function() {
+        if (dropdownLabel) {
+            dropdownLabel.textContent = this.value || 'Select a country...';
+        }
         if (this.value) {
             loadPlantData(this.value);
         }
@@ -207,6 +276,7 @@ function displayCommonPlants(plants, country) {
                 <p><strong>Care:</strong> ${sanitizeHTML(plant.care)}</p>
                 <p><strong>💧 Watering:</strong> ${sanitizeHTML(plant.waterFreq)}</p>
                 <p><strong>☀️ Light:</strong> ${sanitizeHTML(plant.light)}</p>
+                ${plant.diseases && plant.diseases.length ? `<p class="plant-diseases"><strong>🩺 Diseases:</strong> ${plant.diseases.map(item => sanitizeHTML(item)).join(', ')}</p>` : ''}
             </div>
         </div>
     `;

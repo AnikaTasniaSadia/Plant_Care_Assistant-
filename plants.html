@@ -61,9 +61,12 @@
                 <li><a href="index.html" class="nav-link">Home</a></li>
                 <li><a href="plants.html" class="nav-link active">Plants</a></li>
                 <li><a href="weather.html" class="nav-link">Weather</a></li>
-                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="#footer" class="nav-link">About</a></li>
             </ul>
             <div class="nav-actions">
+                <button class="theme-toggle" id="theme-toggle" type="button" aria-pressed="false" aria-label="Toggle dark mode">
+                    <span class="theme-icon" aria-hidden="true">💡</span>
+                </button>
                 <button class="profile-button" id="profile-toggle" type="button" aria-haspopup="true" aria-expanded="false">
                     <span class="profile-badge" id="profile-badge">P</span>
                     <span class="profile-text" id="profile-text">Welcome, Guest</span>
@@ -95,9 +98,16 @@
         <section class="card">
             <h3>Select Your Country</h3>
             <div class="country-selector">
-                <select id="country-select">
-                    <option value="">Loading countries...</option>
-                </select>
+                <div class="country-dropdown" id="country-dropdown">
+                    <button class="country-dropdown-toggle" id="country-dropdown-toggle" type="button" aria-haspopup="listbox" aria-expanded="false">
+                        <span class="country-dropdown-label" id="country-dropdown-label">Select a country...</span>
+                        <span class="country-dropdown-caret">▾</span>
+                    </button>
+                    <div class="country-dropdown-menu" id="country-dropdown-menu" role="listbox" aria-hidden="true"></div>
+                    <select id="country-select" class="country-select-hidden" aria-hidden="true" tabindex="-1">
+                        <option value="">Loading countries...</option>
+                    </select>
+                </div>
                 <p id="detected-country" class="detected-info"></p>
             </div>
         </section>
@@ -136,8 +146,10 @@
     </main>
 
     <!-- Footer -->
-    <footer class="footer">
-        <p>&copy; 2024 Plant Care Assistant. An academic project for educational purposes.</p>
+    <footer class="footer" id="footer">
+        <p><strong>Plant Care Assistant</strong> — smart, local plant guidance.</p>
+        <p>Contact: support@plantcareassistant.com | +880 1XXX-XXXXXX</p>
+        <p>&copy; 2024 Plant Care Assistant. All rights reserved.</p>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
