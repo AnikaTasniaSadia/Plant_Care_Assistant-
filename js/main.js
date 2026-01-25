@@ -264,6 +264,7 @@ document.addEventListener('DOMContentLoaded', function() {
     updateActiveNav(getCurrentPage());
     initAuthModal();
     initProfileMenu();
+    initChatWidget();
 });
 
 /* ========================================
@@ -606,4 +607,105 @@ async function fetchAPI(url, options = {}) {
         console.error('API call failed:', error);
         throw error;
     }
+}
+
+function initChatWidget() {
+    if (document.getElementById('chat-widget')) return;
+
+    const widget = document.createElement('div');
+    widget.id = 'chat-widget';
+    widget.className = 'chat-widget';
+    widget.innerHTML = `
+        <button class="chat-toggle" id="chat-toggle" type="button" aria-expanded="false">
+            <span class="chat-icon">🌿</span>
+            <span class="chat-label">Plant Assistant</span>
+        </button>
+        <div class="chat-panel" id="chat-panel" aria-hidden="true">
+            <div class="chat-panel-header">
+                <div>
+                    <h4>Plant AI Assistant</h4>
+                    <p>TinyLlama • Local AI</p>
+                </div>
+                <button class="chat-close" id="chat-close" type="button" aria-label="Close chat">×</button>
+            </div>
+            <div class="chat-panel-body" id="chat-messages">
+                <div class="chat-bubble bot">Hi! Ask me about plant care, weather tips, or pests.</div>
+            </div>
+            <div class="chat-panel-input">
+                <input id="chat-input" type="text" placeholder="Type your message..." />
+                <button class="btn btn-primary" id="chat-send" type="button">Send</button>
+            </div>
+        </div>
+    `;
+
+    document.body.appendChild(widget);
+
+    const toggleBtn = document.getElementById('chat-toggle');
+    const panel = document.getElementById('chat-panel');
+    const closeBtn = document.getElementById('chat-close');
+    const sendBtn = document.getElementById('chat-send');
+    const input = document.getElementById('chat-input');
+    const messages = document.getElementById('chat-messages');
+
+    const openPanel = () => {
+        panel.classList.add('show');
+        panel.setAttribute('aria-hidden', 'false');
+        toggleBtn.setAttribute('aria-expanded', 'true');
+        input.focus();
+    };
+
+    const closePanel = () => {
+        panel.classList.remove('show');
+        panel.setAttribute('aria-hidden', 'true');
+        toggleBtn.setAttribute('aria-expanded', 'false');
+    };
+
+    toggleBtn.addEventListener('click', () => {
+        if (panel.classList.contains('show')) {
+            closePanel();
+        } else {
+            openPanel();
+        }
+    });
+
+    closeBtn.addEventListener('click', closePanel);
+
+    const addMessage = (text, role) => {
+        const bubble = document.createElement('div');
+        bubble.className = `chat-bubble ${role}`;
+        bubble.textContent = text;
+        messages.appendChild(bubble);
+        messages.scrollTop = messages.scrollHeight;
+        return bubble;
+    };
+
+    const sendMessage = async () => {
+        const message = input.value.trim();
+        if (!message) return;
+
+        addMessage(message, 'user');
+        input.value = '';
+        const loadingBubble = addMessage('Thinking...', 'bot');
+
+        try {
+            const response = await fetch('http://localhost:3000/chat', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ message })
+            });
+
+            const data = await response.json();
+            loadingBubble.remove();
+            addMessage(data.reply || 'No response yet. Try again.', 'bot');
+        } catch (error) {
+            loadingBubble.remove();
+            addMessage('Local AI backend not responding. Start the server to chat.', 'bot');
+            console.error(error);
+        }
+    };
+
+    sendBtn.addEventListener('click', sendMessage);
+    input.addEventListener('keypress', (event) => {
+        if (event.key === 'Enter') sendMessage();
+    });
 }

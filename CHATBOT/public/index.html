@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>TinyLlama Chat</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div class="chat-container">
+  <div class="chat-header">TinyLlama • Ollama</div>
+
+  <div id="chat" class="chat-messages">
+    <div class="message bot">Hello! Ask me anything.</div>
+  </div>
+
+  <div class="chat-input">
+    <input id="userInput" placeholder="Type your message..." />
+    <button onclick="sendMessage()">Send</button>
+  </div>
+</div>
+
+<script src="chat.js"></script>
+</body>
+</html>
