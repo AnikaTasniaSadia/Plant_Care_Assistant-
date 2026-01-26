@@ -51,16 +51,50 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
-    form.addEventListener('submit', (event) => {
+    form.addEventListener('submit', async (event) => {
         event.preventDefault();
 
         const email = (emailInput?.value || '').trim().toLowerCase();
         const password = passwordInput?.value || '';
 
+        // Prefer real authentication via Supabase (recommended), fallback to local-only demo gate.
+        const canUseSupabase = typeof window.getSupabaseClient === 'function' && !!window.getSupabaseClient();
+        if (canUseSupabase) {
+            try {
+                const supabase = window.getSupabaseClient();
+                const { error } = await supabase.auth.signInWithPassword({ email, password });
+                if (error) {
+                    if (messageEl) {
+                        messageEl.textContent = `Login failed: ${error.message}`;
+                        messageEl.classList.remove('success');
+                        messageEl.classList.add('error');
+                    }
+                    return;
+                }
+
+                setAdminGateActive();
+                if (messageEl) {
+                    messageEl.textContent = 'Login successful. Redirecting to dashboard...';
+                    messageEl.classList.remove('error');
+                    messageEl.classList.add('success');
+                }
+                window.location.href = next;
+                return;
+            } catch (err) {
+                if (messageEl) {
+                    messageEl.textContent = 'Login failed due to an unexpected error. Check DevTools Console.';
+                    messageEl.classList.remove('success');
+                    messageEl.classList.add('error');
+                }
+                console.error('[Admin Gate] Unexpected login error:', err);
+                return;
+            }
+        }
+
         if (email === 'admin@gmail.com' && password === 'admin123') {
             setAdminGateActive();
             if (messageEl) {
-                messageEl.textContent = 'Login successful. Redirecting to dashboard...';
+                messageEl.textContent = 'Login successful (demo mode). Redirecting to dashboard...';
                 messageEl.classList.remove('error');
                 messageEl.classList.add('success');
             }

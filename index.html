@@ -177,11 +177,10 @@
                         <p><strong>Country:</strong> ${data.country_name}</p>
                         <p><strong>City:</strong> ${data.city}</p>
                         <p><strong>Region:</strong> ${data.region}</p>
-                        pendingMapCoords = { lat: data.latitude, lng: data.longitude };
-                        renderLocationMap(data.latitude, data.longitude, mapContainer);
                     </div>
                 `;
 
+                pendingMapCoords = { lat: data.latitude, lng: data.longitude };
                 renderLocationMap(data.latitude, data.longitude, mapContainer);
                 
                 // Store location in sessionStorage for other pages
@@ -204,6 +203,15 @@
             }
         }
 
+        function renderStaticMap(lat, lng, container) {
+            if (!container) return;
+            const zoom = 12;
+            const size = '640x300';
+            const key = 'AIzaSyDZ4r9oIDutO1J88-e9cPZ-eVsQMvAlbvU';
+            const url = `https://maps.googleapis.com/maps/api/staticmap?center=${lat},${lng}&zoom=${zoom}&size=${size}&markers=color:green|${lat},${lng}&key=${key}`;
+            container.innerHTML = `<img src="${url}" alt="Map showing your location" />`;
+        }
+
         function renderLocationMap(lat, lng, container) {
             if (!container) return;
             if (!window.google || !window.google.maps) {
@@ -220,25 +228,8 @@
             });
             new google.maps.Marker({
                 position: { lat, lng },
-                window.initMap = initMap;
                 map,
-                function renderStaticMap(lat, lng, container) {
-                    if (!container) return;
-                    const zoom = 12;
-                    const size = '640x300';
-                    const key = 'AIzaSyDZ4r9oIDutO1J88-e9cPZ-eVsQMvAlbvU';
-                    const url = `https://maps.googleapis.com/maps/api/staticmap?center=${lat},${lng}&zoom=${zoom}&size=${size}&markers=color:green|${lat},${lng}&key=${key}`;
-                    container.innerHTML = `<img src="${url}" alt="Map showing your location" />`;
-                }
                 title: 'Your Location'
-                setTimeout(() => {
-                    if (!window.google || !window.google.maps) {
-                        const mapContainer = document.getElementById('location-map');
-                        if (pendingMapCoords) {
-                            renderStaticMap(pendingMapCoords.lat, pendingMapCoords.lng, mapContainer);
-                        }
-                    }
-                }, 3000);
             });
         }
 

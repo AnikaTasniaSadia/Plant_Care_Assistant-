@@ -571,6 +571,9 @@ function initProfileMenu() {
         logoutBtn.addEventListener('click', async () => {
             closeMenu();
             await supabase.auth.signOut();
+            if (typeof window.clearAdminGate === 'function') {
+                window.clearAdminGate();
+            }
             if (typeof window.openAuthOverlay === 'function') {
                 window.openAuthOverlay('login');
             }

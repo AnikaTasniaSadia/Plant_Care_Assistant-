@@ -37,6 +37,11 @@ window.addEventListener('unhandledrejection', (event) => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
+    if (typeof window.requireAdminGate === 'function') {
+        const ok = window.requireAdminGate({ redirectTo: 'admin-login.html' });
+        if (!ok) return;
+    }
+
     if (typeof window.getSupabaseClient !== 'function') {
         setAdminStatus('Supabase auth helper is missing. Ensure js/main.js is loaded before js/admin.js.', { isError: true });
         return;
