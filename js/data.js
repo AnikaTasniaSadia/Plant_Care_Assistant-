@@ -511,84 +511,82 @@ const PLANTS_DATABASE = {
         climate: 'Tropical Monsoon',
         commonPlants: [
             {
-                name: 'Rice (Dhan)',
-                type: 'Tree',
-                care: 'National fruit tree. Needs full sun and well-drained soil.',
+                name: 'Cassava',
+                type: 'Grain crop',
+                care: 'Staple crop. Needs standing water during growth and full sun.',
+                waterFreq: 'Keep soil consistently wet',
+                light: 'Full sun',
+                image: 'BANGLADESH/153408986245234705.jpeg',
+                diseases: ['Blast disease', 'Bacterial blight', 'Sheath blight']
+            },
+            {
+                name: 'Jasmine',
+                type: 'Flowering plant / Ornamental plant',
+                care: 'Jasmine plants need regular sunlight, well-drained soil, and moderate watering. Pruning helps promote healthy growth and more flowers. They grow best in warm climates and need support if climbing varieties are used.',
+                waterFreq: 'Water 2–3 times per week.',
+                light: 'Full sunlight to partial shade',
+                image: 'BANGLADESH/347101574493274112.jpeg',
+                diseases: ['Powdery mildew',
+  'Leaf spot',
+  'Root rot',
+  'Aphid infestation',
+  'Whiteflies']
+            },
+            
+            
+            {
+                name: 'Lal Kadam (Burflower)',
+                type: 'Flowering tree',
+                care: 'Seasonal fragrant blooms. Needs sun and moderate watering.',
                 waterFreq: 'Every 3-4 days',
                 light: 'Full sun',
-                image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Mango_tree.jpg?width=600'
+                image: 'BANGLADESH/1751899812-lal-kodom.jpeg',
+                diseases: ['Leaf spot', 'Canker', 'Powdery mildew']
             },
             {
-                name: 'Jute',
-                type: 'Tree',
-                care: 'Large tropical tree. Thrives in warm, humid climate.',
+                name: 'Akondo (Calotropis)',
+                type: 'Shrub',
+                care: 'Hardy native shrub. Tolerates heat and dry spells.',
+                waterFreq: 'Every 5-7 days',
+                light: 'Full sun',
+                image: 'BANGLADESH/akondo-500x539-1.jpeg',
+                diseases: ['Leaf spot', 'Stem rot', 'Powdery mildew']
+            },
+            {
+                name: 'Cassia Javanica (Lal Sonalu)',
+                type: 'Flowering tree',
+                care: 'Showy pink blooms. Prefers warm climate and full sun.',
                 waterFreq: 'Every 3-4 days',
                 light: 'Full sun',
-                image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Jackfruit_tree.jpg?width=600'
+                image: 'BANGLADESH/Cassia-Javanica-লাল-সোনাইল-Agri-Aqua-Bd-02-430x488.jpeg',
+                diseases: ['Leaf spot', 'Root rot', 'Canker']
             },
             {
-                name: 'Mango',
-                type: 'Tree',
-                care: 'Medicinal and pest-resistant. Tolerates heat well.',
-                waterFreq: 'Every 4-5 days',
-                light: 'Full sun',
-                image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Azadirachta_indica_2014.jpg?width=600'
-            },
-            {
-                name: 'Jackfruit',
+                name: 'Rangoon Creeper (Madhabilata)',
                 type: 'Climbing vine',
-                care: 'Needs humidity and filtered light. Keep soil evenly moist.',
-                waterFreq: 'Every 2-3 days',
-                light: 'Bright, indirect light',
-                image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Piper_betle_leaves.jpg?width=600'
-            },
-            {
-                name: 'Banana',
-                type: 'Flowering shrub',
-                care: 'Blooms abundantly in warm weather. Regular pruning helps.',
-                waterFreq: 'Every 1-2 days',
-                light: 'Full sun',
-                image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Hibiscus_rosa-sinensis_flower.jpg?width=600'
-            },
-            {
-                name: 'Coconut',
-                type: 'Flowering vine',
-                care: 'Fragrant flowers. Likes sun with some afternoon shade.',
+                care: 'Fragrant blooms. Needs trellis support and full sun.',
                 waterFreq: 'Every 2-3 days',
                 light: 'Full sun to part shade',
-                image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Jasminum_officinale.jpg?width=600'
+                image: 'BANGLADESH/Double-Flower-Rangoon-Creeper-Agri-Aqua-Bd-430x469.jpeg',
+                diseases: ['Powdery mildew', 'Leaf spot', 'Rust']
             },
             {
-                name: 'Neem',
-                type: 'Grass',
-                care: 'Fast-growing. Prefers moist soil and full sun.',
-                waterFreq: 'Every 2-3 days',
-                light: 'Full sun',
-                image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Bamboo_in_Japan.jpg?width=600'
-            },
-            {
-                name: 'Bamboo',
-                type: 'Palm',
-                care: 'Air-purifying. Likes humidity and bright, indirect light.',
-                waterFreq: 'Every 5-7 days',
+                name: 'Syngonium (Arrowhead Vine)',
+                type: 'Indoor vine',
+                care: 'Popular indoor plant. Likes humidity and bright, indirect light.',
+                waterFreq: 'Every 3-4 days',
                 light: 'Bright, indirect light',
-                image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Dypsis_lutescens_02.jpg?width=600'
+                image: 'BANGLADESH/Syngonium-Angustatum-Arrowhead-Vine-Araceae.jpeg',
+                diseases: ['Root rot', 'Leaf spot', 'Spider mites']
             },
             {
-                name: 'Tea Plant',
-                type: 'Herb',
-                care: 'Sacred plant. Needs sun and regular watering.',
-                waterFreq: 'Every 1-2 days',
+                name: 'Water Hyacinth (Kochuripana)',
+                type: 'Aquatic plant',
+                care: 'Floats on water bodies. Requires full sun and clean water.',
+                waterFreq: 'Aquatic',
                 light: 'Full sun',
-                image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Ocimum_tenuiflorum2.jpg?width=600'
-            },
-            {
-                name: 'Water Hyacinth',
-                type: 'Climbing vine',
-                care: 'Very hardy. Thrives indoors with moderate light.',
-                waterFreq: 'Every 4-5 days',
-                light: 'Low to moderate',
-                image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Epipremnum_aureum_plant.jpg?width=600'
+                image: 'BANGLADESH/kochuripana.jpg',
+                diseases: ['Crown rot', 'Leaf spot', 'Bacterial wilt']
             }
         ],
         commonProblems: [
@@ -881,6 +879,168 @@ const PLANTS_DATABASE = {
             'PEST MANAGEMENT: Monitor constantly. Use organic methods (neem, etc).',
             'FERTILIZING: Heavy rains leach nutrients. Feed regularly, especially during rainy season.',
             'SEASONAL: Some dry-season plants need different care. Research your region.'
+        ],
+        gallery: [
+            {
+                title: 'Brazilian Palm',
+                description: 'Tropical palm variety commonly found in Brazilian landscapes.',
+                image: 'BRAZIL/12-5-9a-brazil-palm-1100x788.jpeg'
+            },
+            {
+                title: 'Philodendron Brasil',
+                description: 'Vibrant variegated philodendron, popular houseplant from Brazil.',
+                image: 'BRAZIL/Philodendron-Brasil-Main-1-819x1024.jpeg'
+            },
+            {
+                title: 'Philodendron Closeup',
+                description: 'Close-up view of Philodendron Brasil foliage.',
+                image: 'BRAZIL/Philodendron-Brasil-Closeup-800x1000.jpeg'
+            },
+            {
+                title: 'Philodendron Hanging Basket',
+                description: 'Trailing philodendron, ideal for indoor hanging baskets.',
+                image: 'BRAZIL/8-inch-philodendron-brazil-hanging-basket.jpeg'
+            },
+            {
+                title: 'Brazilwood Tree',
+                description: 'Pau-Brasil, a famous native tree with valuable timber.',
+                image: 'BRAZIL/Brazilwood-1024x683.jpeg'
+            },
+            {
+                title: 'Brazilian Dutchman’s Pipe',
+                description: 'Distinctive vine with large pipe-shaped flowers.',
+                image: 'BRAZIL/Brazilian-Dutchmans-Pipe-1024x683.jpeg'
+            },
+            {
+                title: 'Flame Vine',
+                description: 'Bright orange-red flowering vine common in warm climates.',
+                image: 'BRAZIL/Flame-Vine-1024x683.jpeg'
+            },
+            {
+                title: 'Bromeliad (Bromeliaceae)',
+                description: 'Tank-forming bromeliad suited to humid tropical air.',
+                image: 'BRAZIL/bromeliad-bromeliaceae-the-bromeliads-family-600nw-2488739421.jpeg'
+            },
+            {
+                title: 'Cerrado Plants',
+                description: 'Native savanna flora from Brazil’s Cerrado biome.',
+                image: 'BRAZIL/cerrado-plants-1.jpeg'
+            },
+            {
+                title: 'Paepalanthus',
+                description: 'Unique Brazilian wildflower from highland regions.',
+                image: 'BRAZIL/Paepalanthus-1024x683.jpeg'
+            },
+            {
+                title: 'Brazilian Palm Detail',
+                description: 'Lush tropical palm leaves in bright light.',
+                image: 'BRAZIL/03e3f08db0c9ad3a6b8d5d0a688c416d.jpeg'
+            },
+            {
+                title: 'Tropical Canopy',
+                description: 'Dense, layered foliage representative of Brazilian jungles.',
+                image: 'BRAZIL/28e670386fec55ac4602a969e9afac73.jpeg'
+            },
+            {
+                title: 'Exotic Orchid',
+                description: 'Orchid blooms adapted to warm, humid environments.',
+                image: 'BRAZIL/85610353-7465-4725-B8A8-B5ACD27A6DCF.jpeg'
+            },
+            {
+                title: 'Tropical Bloom',
+                description: 'Vibrant Brazilian flower suited to subtropical climates.',
+                image: 'BRAZIL/153807877037883398.jpeg'
+            },
+            {
+                title: 'Rainforest Foliage',
+                description: 'Broad-leaf tropical plant structure typical of Brazil.',
+                image: 'BRAZIL/154077016868519947.jpeg'
+            },
+            {
+                title: 'Scarlet Tropical Plant',
+                description: 'Color-rich tropical foliage with dramatic textures.',
+                image: 'BRAZIL/154176350872141850.jpeg'
+            },
+            {
+                title: 'Tropical Greens',
+                description: 'Mixed foliage composition for Brazilian garden inspiration.',
+                image: 'BRAZIL/347107359814221824.jpeg'
+            },
+            {
+                title: 'Leaf Pattern Study',
+                description: 'Close-up of leaf texture and color contrast.',
+                image: 'BRAZIL/348113451608342528.jpeg'
+            },
+            {
+                title: 'Brazilian Garden Mix',
+                description: 'Multiple species arranged for lush, layered planting.',
+                image: 'BRAZIL/4_637d8fcf-29f3-4a44-bbf3-c0b96ff8b686.jpeg'
+            },
+            {
+                title: 'Houseplant Colors & Patterns',
+                description: 'Indoor tropical plants with striking leaf patterns.',
+                image: 'BRAZIL/Houseplant-ColorsPatterns-Post.jpeg'
+            },
+            {
+                title: 'Brazilian Succulent',
+                description: 'Hardy succulent suited for bright light conditions.',
+                image: 'BRAZIL/The_ZEN_Succulent_ZENAroundtheWorldBrazil.jpeg'
+            },
+            {
+                title: 'Brazilian Succulent (Variety)',
+                description: 'Another succulent variety from Brazilian collections.',
+                image: 'BRAZIL/The_ZEN_Succulent_ZENAroundtheWorldBrazil%20(1).jpeg'
+            },
+            {
+                title: 'Brazilian Succulent (Set)',
+                description: 'Multiple succulent species in a curated arrangement.',
+                image: 'BRAZIL/The_ZEN_Succulent_ZENAroundtheWorldBrazil%20(2).jpeg'
+            },
+            {
+                title: 'Philodendron Care',
+                description: 'Philodendron foliage displayed with care guidance.',
+                image: 'BRAZIL/brasil-philodendron-care.jpeg'
+            },
+            {
+                title: 'Brazil Endemic Flora',
+                description: 'Endemic plant species native to Brazil.',
+                image: 'BRAZIL/brazilendemi.jpeg'
+            },
+            {
+                title: 'Brazilian Flowering Plant',
+                description: 'Ornamental flowering plant for tropical gardens.',
+                image: 'BRAZIL/il_fullxfull.4162242690_kqd8.jpeg'
+            },
+            {
+                title: 'Exotic Foliage Accent',
+                description: 'Decorative foliage used in tropical landscape design.',
+                image: 'BRAZIL/il_fullxfull.5875919653_i6zc.jpeg'
+            },
+            {
+                title: 'Tropical Leaf Display',
+                description: 'Showcase of bold leaf shapes and rich green tones.',
+                image: 'BRAZIL/il_fullxfull.7308398077_ablv.jpeg'
+            },
+            {
+                title: 'Brazilian Nursery Plant',
+                description: 'Healthy nursery plant ready for tropical gardens.',
+                image: 'BRAZIL/il_fullxfull.2986917063_r14w.jpeg'
+            },
+            {
+                title: 'Tropical Bloom Study',
+                description: 'Macro view of petals and floral textures.',
+                image: 'BRAZIL/3-tr.jpeg'
+            },
+            {
+                title: 'Mixed Tropical Leaves',
+                description: 'A blend of tropical foliage with varied textures.',
+                image: 'BRAZIL/202656794913538048.jpeg'
+            },
+            {
+                title: 'Brazilian Plant Collection',
+                description: 'Curated grouping of popular Brazilian houseplants.',
+                image: 'BRAZIL/347107359814221824.jpeg'
+            }
         ]
     }
 };

@@ -175,6 +175,34 @@ function loadPlantData(country) {
     
     // Display care guide
     displayCareGuide(data.careGuide);
+
+    // Display Brazil gallery if available
+    displayBrazilGallery(data.gallery, country);
+}
+
+/**
+ * Display Brazil gallery when Brazil is selected
+ * @param {Array} galleryItems - Array of gallery objects
+ * @param {string} country - Selected country
+ */
+function displayBrazilGallery(galleryItems, country) {
+    const section = document.getElementById('brazil-gallery-section');
+    const container = document.getElementById('brazil-gallery');
+    if (!section || !container) return;
+
+    if (country !== 'Brazil' || !galleryItems || galleryItems.length === 0) {
+        section.style.display = 'none';
+        return;
+    }
+
+    section.style.display = 'block';
+    container.innerHTML = galleryItems.map(item => `
+        <div class="gallery-card">
+            <img class="gallery-image" src="${sanitizeHTML(item.image)}" alt="${sanitizeHTML(item.title)}" loading="lazy">
+            <h4>${sanitizeHTML(item.title)}</h4>
+            <p>${sanitizeHTML(item.description)}</p>
+        </div>
+    `).join('');
 }
 
 /**
