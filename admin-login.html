@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - Plant Care Assistant</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <h1> Plant Care Assistant</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="plants.html" class="nav-link">Plants</a></li>
+                <li><a href="weather.html" class="nav-link">Weather</a></li>
+                <li><a href="#footer" class="nav-link">About</a></li>
+                <li><a href="admin-login.html" class="nav-link active">Admin</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button class="theme-toggle" id="theme-toggle" type="button" aria-pressed="false" aria-label="Toggle dark mode">
+                    <span class="theme-icon" aria-hidden="true">💡</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <section class="hero admin-hero">
+            <h2>Admin Login</h2>
+            <p>Sign in to access the admin dashboard.</p>
+        </section>
+
+        <section class="card" style="max-width: 520px; margin: 0 auto;">
+            <h3>Enter admin credentials</h3>
+            <form id="admin-login-form" class="admin-form" autocomplete="on">
+                <input id="admin-email" type="email" placeholder="admin@gmail.com" required>
+                <input id="admin-password" type="password" placeholder="Password" required>
+                <button class="btn btn-primary" type="submit">Login</button>
+            </form>
+            <p id="admin-login-message" class="auth-message" role="status" aria-live="polite"></p>
+            <p class="muted" style="margin-top: 10px;">Note: this is a simple front-end gate for your project demo. The Supabase admin role is still required inside the dashboard.</p>
+        </section>
+    </main>
+
+    <footer class="footer" id="footer">
+        <p><strong>Plant Care Assistant</strong> — smart, local plant guidance.</p>
+        <p>Created by: Sowrav Dey (ID: 223071102) & Anika Tasnia Sadia (ID: 223071119)</p>
+        <p>Presented to Tahsin Alam</p>
+        <p>Contact: support@plantcareassistant.com | +880 1XXX-XXXXXX</p>
+        <p>&copy; 2024 Plant Care Assistant. All rights reserved.</p>
+    </footer>
+
+    <script src="js/main.js?v=20260126"></script>
+    <script src="js/admin-gate.js?v=20260126"></script>
+</body>
+</html>

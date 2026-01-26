@@ -643,8 +643,8 @@ function initChatWidget() {
         <div class="chat-panel" id="chat-panel" aria-hidden="true">
             <div class="chat-panel-header">
                 <div>
-                    <h4>Plant AI Assistant</h4>
-                    <p>TinyLlama • Local AI</p>
+                    <h4>Flora</h4>
+                    <p>Your AI Assistant</p>
                 </div>
                 <button class="chat-close" id="chat-close" type="button" aria-label="Close chat">×</button>
             </div>
