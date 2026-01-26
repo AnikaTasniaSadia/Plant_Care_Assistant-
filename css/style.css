@@ -9,10 +9,10 @@
 }
 
 :root {
-    --primary-color: #1f4d2e;
-    --secondary-color: #2f7a4f;
-    --accent-color: #7cc58c;
-    --light-bg: #eef6f0;
+    --primary-color: #1c4f3b;
+    --secondary-color: #2a8f67;
+    --accent-color: #8fe3b1;
+    --light-bg: #f2fbf6;
     --white: #ffffff;
     --text-dark: #1f2d26;
     --text-light: #5b6b63;
@@ -23,6 +23,12 @@
     --leaf-glow: rgba(124, 197, 140, 0.35);
     --glass-bg: rgba(255, 255, 255, 0.86);
     --shadow-strong: 0 24px 70px rgba(15, 35, 24, 0.25);
+    --accent-blue: #3b82f6;
+    --accent-purple: #8b5cf6;
+    --accent-pink: #ec4899;
+    --accent-orange: #f59e0b;
+    --accent-yellow: #fbbf24;
+    --gradient-rainbow: linear-gradient(120deg, #34d399 0%, #22d3ee 35%, #818cf8 70%, #f472b6 100%);
 }
 
 body {
@@ -31,9 +37,11 @@ body {
     color: var(--text-dark);
     background-color: var(--light-bg);
     background-image:
-        radial-gradient(circle at top left, rgba(124, 197, 140, 0.25), transparent 45%),
-        radial-gradient(circle at bottom right, rgba(47, 122, 79, 0.2), transparent 50%),
-        linear-gradient(180deg, rgba(255, 255, 255, 0.8), rgba(238, 246, 240, 0.95));
+        radial-gradient(circle at top left, rgba(59, 130, 246, 0.18), transparent 40%),
+        radial-gradient(circle at top right, rgba(236, 72, 153, 0.2), transparent 45%),
+        radial-gradient(circle at bottom left, rgba(34, 197, 94, 0.18), transparent 45%),
+        radial-gradient(circle at bottom right, rgba(245, 158, 11, 0.2), transparent 50%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(242, 251, 246, 0.96));
     background-attachment: fixed;
 }
 
@@ -124,7 +132,7 @@ body.dark-mode .footer {
    ======================================== */
 
 .navbar {
-    background: linear-gradient(120deg, #1f4d2e 0%, #2f7a4f 55%, #3f9d6c 100%);
+    background: linear-gradient(120deg, #1f4d2e 0%, #2f7a4f 45%, #22c55e 70%, #38bdf8 100%);
     color: var(--white);
     padding: 1rem 0;
     box-shadow: 0 8px 24px rgba(17, 45, 30, 0.25);
@@ -456,13 +464,13 @@ body.dark-mode .footer {
    ======================================== */
 
 .hero {
-    background: linear-gradient(135deg, #1f4d2e 0%, #2f7a4f 60%, #7cc58c 100%);
+    background: linear-gradient(135deg, #14532d 0%, #22c55e 45%, #38bdf8 85%, #a855f7 110%);
     color: var(--white);
     padding: 3rem 2rem;
     border-radius: 12px;
     margin-bottom: 2rem;
     text-align: center;
-    box-shadow: 0 18px 40px rgba(20, 55, 36, 0.28);
+    box-shadow: 0 20px 45px rgba(20, 55, 36, 0.28);
 }
 
 .hero h2 {
@@ -483,25 +491,25 @@ body.dark-mode .footer {
    ======================================== */
 
 .card {
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(238, 246, 240, 0.9));
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(238, 246, 240, 0.92));
     border-radius: 12px;
     padding: 2rem;
     margin-bottom: 2rem;
-    box-shadow: 0 10px 30px rgba(17, 45, 30, 0.12);
+    box-shadow: 0 16px 35px rgba(17, 45, 30, 0.12);
     border: 1px solid rgba(47, 122, 79, 0.12);
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .card:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
 }
 
 .card h3 {
     color: var(--primary-color);
     font-size: 1.5rem;
     margin-bottom: 1.5rem;
-    border-bottom: 2px solid var(--accent-color);
+    border-bottom: 2px solid rgba(34, 197, 94, 0.55);
     padding-bottom: 0.5rem;
 }
 
@@ -532,7 +540,7 @@ select:focus,
 textarea:focus {
     outline: none;
     border-color: var(--secondary-color);
-    box-shadow: 0 0 0 3px rgba(56, 142, 60, 0.1);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.18);
 }
 
 select {
@@ -779,15 +787,15 @@ textarea {
 }
 
 .btn-primary {
-    background-color: var(--secondary-color);
+    background: linear-gradient(135deg, #22c55e 0%, #38bdf8 55%, #a855f7 100%);
     color: var(--white);
-    box-shadow: 0 10px 20px rgba(47, 122, 79, 0.25);
+    box-shadow: 0 14px 28px rgba(34, 197, 94, 0.25);
 }
 
 .btn-primary:hover {
-    background-color: var(--primary-color);
+    background: linear-gradient(135deg, #16a34a 0%, #0ea5e9 55%, #8b5cf6 100%);
     transform: translateY(-2px);
-    box-shadow: 0 14px 30px rgba(31, 77, 46, 0.3);
+    box-shadow: 0 18px 35px rgba(14, 165, 233, 0.28);
 }
 
 .btn-primary:active {
@@ -796,13 +804,13 @@ textarea {
 }
 
 .btn-secondary {
-    background-color: var(--light-bg);
-    color: var(--primary-color);
-    border: 2px solid var(--secondary-color);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(236, 246, 255, 0.9));
+    color: #14532d;
+    border: 2px solid rgba(59, 130, 246, 0.35);
 }
 
 .btn-secondary:hover {
-    background-color: var(--accent-color);
+    background: var(--gradient-rainbow);
     color: var(--white);
 }
 
