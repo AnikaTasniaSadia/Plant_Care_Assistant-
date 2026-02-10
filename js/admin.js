@@ -1,8 +1,55 @@
 let supabase;
+let adminMode = 'supabase';
 const adminState = {
     countriesById: new Map(),
     plantsById: new Map()
 };
+
+function getLocalPlantDb() {
+    if (typeof window.getLocalPlantDatabase === 'function') {
+        return window.getLocalPlantDatabase();
+    }
+    return null;
+}
+
+function ensureLocalPlantDb() {
+    if (typeof window.initLocalPlantDatabase === 'function') {
+        window.initLocalPlantDatabase();
+    }
+    let db = getLocalPlantDb();
+    if (!db) {
+        db = {};
+        if (typeof window.saveLocalPlantDatabase === 'function') {
+            window.saveLocalPlantDatabase(db);
+        }
+    }
+    return db;
+}
+
+function saveLocalPlantDb(db) {
+    if (typeof window.saveLocalPlantDatabase === 'function') {
+        window.saveLocalPlantDatabase(db);
+    }
+}
+
+function normalizeName(value) {
+    return (value || '').trim();
+}
+
+function findPlantIndex(plants, name) {
+    const needle = (name || '').trim().toLowerCase();
+    return (plants || []).findIndex(item => (item.name || '').trim().toLowerCase() === needle);
+}
+
+function parsePlantKey(value) {
+    const sep = '::';
+    const index = (value || '').indexOf(sep);
+    if (index === -1) return null;
+    return {
+        countryName: value.slice(0, index),
+        plantName: value.slice(index + sep.length)
+    };
+}
 
 function setAdminStatus(message, { isError = false } = {}) {
     const statusCard = document.getElementById('admin-status');
@@ -51,6 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setAdminStatus('Supabase client failed to load. Check your internet connection and refresh.', { isError: true });
         return;
     }
+    adminMode = 'supabase';
     initAdmin();
 });
 
@@ -74,8 +122,9 @@ async function initAdmin() {
         if (!session) {
             const offlineAdminActive = typeof window.isOfflineAdminActive === 'function' && window.isOfflineAdminActive();
             if (offlineAdminActive) {
-                setAdminStatus('Offline admin mode enabled. Supabase session not detected; admin actions are disabled.', { isError: true });
-                lockAdminForms();
+                adminMode = 'local';
+                setAdminStatus('Offline admin mode enabled. Changes are saved locally in this browser.', { isError: false });
+                await initLocalAdmin();
                 return;
             }
 
@@ -118,6 +167,20 @@ async function initAdmin() {
         setAdminStatus('Unexpected error while loading admin dashboard. Check DevTools Console.', { isError: true });
         lockAdminForms();
     }
+}
+
+async function initLocalAdmin() {
+    const seedBtn = document.getElementById('seed-data-btn');
+    if (seedBtn) {
+        seedBtn.style.display = 'none';
+    }
+    const modeInfo = document.getElementById('admin-mode-info');
+    if (modeInfo) {
+        modeInfo.style.display = 'block';
+    }
+    ensureLocalPlantDb();
+    await refreshAll();
+    bindForms();
 }
 
 async function ensureSeedButton(seedBtn) {
@@ -300,6 +363,119 @@ function bindForms() {
     const imageForm = document.getElementById('image-form');
     const diseaseForm = document.getElementById('disease-form');
 
+    if (adminMode === 'local') {
+        countryForm?.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const name = normalizeName(document.getElementById('country-name').value);
+            const climate = normalizeName(document.getElementById('country-climate').value);
+            if (!name) return;
+            const db = ensureLocalPlantDb();
+            const existing = db[name] || {};
+            db[name] = {
+                climate: climate || existing.climate || '',
+                commonPlants: existing.commonPlants || [],
+                commonProblems: existing.commonProblems || [],
+                careGuide: existing.careGuide || [],
+                gallery: existing.gallery || []
+            };
+            saveLocalPlantDb(db);
+            countryForm.reset();
+            await refreshAll();
+        });
+
+        plantForm?.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const countryName = normalizeName(document.getElementById('plant-country').value);
+            const name = normalizeName(document.getElementById('plant-name').value);
+            const type = normalizeName(document.getElementById('plant-type').value);
+            const light = normalizeName(document.getElementById('plant-light').value);
+            const waterFreq = normalizeName(document.getElementById('plant-water').value);
+            const care = normalizeName(document.getElementById('plant-care').value);
+            if (!countryName || !name) return;
+            const db = ensureLocalPlantDb();
+            const country = db[countryName] || {
+                climate: '',
+                commonPlants: [],
+                commonProblems: [],
+                careGuide: [],
+                gallery: []
+            };
+
+            const plants = country.commonPlants || [];
+            const index = findPlantIndex(plants, name);
+            const existing = index >= 0 ? plants[index] : {};
+            const nextPlant = {
+                name,
+                type,
+                light,
+                waterFreq,
+                care,
+                image: existing.image || '',
+                imageCaption: existing.imageCaption || '',
+                diseases: Array.isArray(existing.diseases) ? existing.diseases : []
+            };
+
+            if (index >= 0) {
+                plants[index] = nextPlant;
+            } else {
+                plants.push(nextPlant);
+            }
+
+            country.commonPlants = plants;
+            db[countryName] = country;
+            saveLocalPlantDb(db);
+            plantForm.reset();
+            await refreshAll();
+        });
+
+        imageForm?.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const value = document.getElementById('image-plant').value;
+            const url = normalizeName(document.getElementById('image-url').value);
+            const caption = normalizeName(document.getElementById('image-caption').value);
+            if (!value || !url) return;
+            const parsed = parsePlantKey(value);
+            if (!parsed) return;
+            const db = ensureLocalPlantDb();
+            const country = db[parsed.countryName];
+            if (!country || !country.commonPlants) return;
+            const index = findPlantIndex(country.commonPlants, parsed.plantName);
+            if (index < 0) return;
+            const plant = country.commonPlants[index];
+            plant.image = url;
+            plant.imageCaption = caption;
+            saveLocalPlantDb(db);
+            imageForm.reset();
+            await refreshAll();
+        });
+
+        diseaseForm?.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const value = document.getElementById('disease-plant').value;
+            const name = normalizeName(document.getElementById('disease-name').value);
+            if (!value || !name) return;
+            const parsed = parsePlantKey(value);
+            if (!parsed) return;
+            const db = ensureLocalPlantDb();
+            const country = db[parsed.countryName];
+            if (!country || !country.commonPlants) return;
+            const index = findPlantIndex(country.commonPlants, parsed.plantName);
+            if (index < 0) return;
+            const plant = country.commonPlants[index];
+            const diseases = Array.isArray(plant.diseases) ? plant.diseases : [];
+            const exists = diseases.some(item => item.toLowerCase() === name.toLowerCase());
+            if (!exists) {
+                diseases.push(name);
+            }
+            plant.diseases = diseases;
+            saveLocalPlantDb(db);
+            diseaseForm.reset();
+            await refreshAll();
+        });
+
+        return;
+    }
+
     countryForm?.addEventListener('submit', async (event) => {
         event.preventDefault();
         const name = document.getElementById('country-name').value.trim();
@@ -385,6 +561,51 @@ async function loadCountries() {
     const select = document.getElementById('plant-country');
     if (!list || !select) return;
 
+    if (adminMode === 'local') {
+        const db = ensureLocalPlantDb();
+        const countries = Object.keys(db).sort();
+
+        adminState.countriesById.clear();
+        countries.forEach(name => {
+            adminState.countriesById.set(name, { id: name, name, climate: db[name]?.climate || '' });
+        });
+
+        select.innerHTML = '<option value="">Select country</option>';
+        countries.forEach(name => {
+            const option = document.createElement('option');
+            option.value = name;
+            option.textContent = name;
+            select.appendChild(option);
+        });
+
+        if (!countries.length) {
+            list.innerHTML = '<p class="muted">No countries yet.</p>';
+            return;
+        }
+
+        list.innerHTML = countries.map(name => `
+            <div class="admin-item">
+                <div>
+                    <strong>${name}</strong>
+                    <p>${db[name]?.climate || 'No climate info'}</p>
+                </div>
+                <button class="btn btn-secondary" data-delete-country="${name}">Delete</button>
+            </div>
+        `).join('');
+
+        list.querySelectorAll('[data-delete-country]').forEach(btn => {
+            btn.addEventListener('click', async () => {
+                const name = btn.dataset.deleteCountry;
+                const nextDb = ensureLocalPlantDb();
+                delete nextDb[name];
+                saveLocalPlantDb(nextDb);
+                await refreshAll();
+            });
+        });
+
+        return;
+    }
+
     const { data, error } = await supabase.from('countries').select('id,name,climate').order('name');
     if (error) {
         logSupabaseError('countries select failed', error);
@@ -437,6 +658,64 @@ async function loadPlants() {
     const selectImage = document.getElementById('image-plant');
     const selectDisease = document.getElementById('disease-plant');
     if (!list || !selectImage || !selectDisease) return;
+
+    if (adminMode === 'local') {
+        const db = ensureLocalPlantDb();
+        const plantRows = [];
+
+        adminState.plantsById.clear();
+        selectImage.innerHTML = '<option value="">Select plant</option>';
+        selectDisease.innerHTML = '<option value="">Select plant</option>';
+
+        Object.keys(db).sort().forEach(countryName => {
+            const plants = db[countryName]?.commonPlants || [];
+            plants.forEach(plant => {
+                const plantKey = `${countryName}::${plant.name}`;
+                adminState.plantsById.set(plantKey, { ...plant, countryName });
+                plantRows.push({ key: plantKey, plant, countryName });
+
+                const option = document.createElement('option');
+                option.value = plantKey;
+                option.textContent = `${plant.name} (${countryName})`;
+                selectImage.appendChild(option.cloneNode(true));
+                selectDisease.appendChild(option);
+            });
+        });
+
+        if (!plantRows.length) {
+            list.innerHTML = '<p class="muted">No plants yet.</p>';
+            return;
+        }
+
+        list.innerHTML = plantRows.map(({ key, plant, countryName }) => `
+            <div class="admin-item">
+                <div>
+                    <strong>${plant.name}</strong>
+                    <p>${countryName} • ${plant.type || 'Type'} • ${plant.light || 'Light'} • ${plant.waterFreq || 'Watering'}</p>
+                </div>
+                <button class="btn btn-secondary" data-delete-plant="${key}">Delete</button>
+            </div>
+        `).join('');
+
+        list.querySelectorAll('[data-delete-plant]').forEach(btn => {
+            btn.addEventListener('click', async () => {
+                const value = btn.dataset.deletePlant;
+                const parsed = parsePlantKey(value);
+                if (!parsed) return;
+                const nextDb = ensureLocalPlantDb();
+                const country = nextDb[parsed.countryName];
+                if (!country || !country.commonPlants) return;
+                const index = findPlantIndex(country.commonPlants, parsed.plantName);
+                if (index >= 0) {
+                    country.commonPlants.splice(index, 1);
+                    saveLocalPlantDb(nextDb);
+                    await refreshAll();
+                }
+            });
+        });
+
+        return;
+    }
 
     const { data, error } = await supabase
         .from('plants')
@@ -495,6 +774,53 @@ async function loadPlants() {
 async function loadImages() {
     const list = document.getElementById('image-list');
     if (!list) return;
+
+    if (adminMode === 'local') {
+        const items = [];
+        adminState.plantsById.forEach((plant, key) => {
+            if (plant.image) {
+                items.push({
+                    key,
+                    name: plant.name,
+                    caption: plant.imageCaption || plant.image
+                });
+            }
+        });
+
+        if (!items.length) {
+            list.innerHTML = '<p class="muted">No images yet.</p>';
+            return;
+        }
+
+        list.innerHTML = items.map(item => `
+            <div class="admin-item">
+                <div>
+                    <strong>${item.name}</strong>
+                    <p>${item.caption}</p>
+                </div>
+                <button class="btn btn-secondary" data-delete-image="${item.key}">Delete</button>
+            </div>
+        `).join('');
+
+        list.querySelectorAll('[data-delete-image]').forEach(btn => {
+            btn.addEventListener('click', async () => {
+                const value = btn.dataset.deleteImage;
+                const parsed = parsePlantKey(value);
+                if (!parsed) return;
+                const nextDb = ensureLocalPlantDb();
+                const country = nextDb[parsed.countryName];
+                if (!country || !country.commonPlants) return;
+                const index = findPlantIndex(country.commonPlants, parsed.plantName);
+                if (index < 0) return;
+                country.commonPlants[index].image = '';
+                country.commonPlants[index].imageCaption = '';
+                saveLocalPlantDb(nextDb);
+                await refreshAll();
+            });
+        });
+
+        return;
+    }
     const { data, error } = await supabase
         .from('plant_images')
         .select('id,url,caption,plant_id')
@@ -537,6 +863,57 @@ async function loadImages() {
 async function loadDiseases() {
     const list = document.getElementById('disease-list');
     if (!list) return;
+
+    if (adminMode === 'local') {
+        const items = [];
+        adminState.plantsById.forEach((plant, key) => {
+            const diseases = Array.isArray(plant.diseases) ? plant.diseases : [];
+            diseases.forEach(disease => {
+                items.push({
+                    key,
+                    countryName: plant.countryName,
+                    disease,
+                    plantName: plant.name
+                });
+            });
+        });
+
+        if (!items.length) {
+            list.innerHTML = '<p class="muted">No diseases yet.</p>';
+            return;
+        }
+
+        list.innerHTML = items.map(item => `
+            <div class="admin-item">
+                <div>
+                    <strong>${item.disease}</strong>
+                    <p>${item.plantName}</p>
+                </div>
+                <button class="btn btn-secondary" data-disease-country="${item.countryName}" data-disease-plant="${item.plantName}" data-disease-name="${item.disease}">Delete</button>
+            </div>
+        `).join('');
+
+        list.querySelectorAll('[data-disease-country]').forEach(btn => {
+            btn.addEventListener('click', async () => {
+                const countryName = btn.dataset.diseaseCountry || '';
+                const plantName = btn.dataset.diseasePlant || '';
+                const diseaseName = btn.dataset.diseaseName || '';
+                if (!countryName || !plantName || !diseaseName) return;
+                const nextDb = ensureLocalPlantDb();
+                const country = nextDb[countryName];
+                if (!country || !country.commonPlants) return;
+                const index = findPlantIndex(country.commonPlants, plantName);
+                if (index < 0) return;
+                const plant = country.commonPlants[index];
+                const diseases = Array.isArray(plant.diseases) ? plant.diseases : [];
+                plant.diseases = diseases.filter(item => item.toLowerCase() !== diseaseName.toLowerCase());
+                saveLocalPlantDb(nextDb);
+                await refreshAll();
+            });
+        });
+
+        return;
+    }
     const { data, error } = await supabase
         .from('plant_diseases')
         .select('id,name,plant_id')
