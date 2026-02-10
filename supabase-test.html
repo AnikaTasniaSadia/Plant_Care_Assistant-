@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supabase Connection Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .status {
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+            border-left: 4px solid;
+        }
+        .status.pending {
+            background: #fff3cd;
+            border-color: #ffc107;
+            color: #856404;
+        }
+        .status.success {
+            background: #d4edda;
+            border-color: #28a745;
+            color: #155724;
+        }
+        .status.error {
+            background: #f8d7da;
+            border-color: #dc3545;
+            color: #721c24;
+        }
+        .config-info {
+            background: #e9ecef;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 20px 0;
+            font-family: monospace;
+            font-size: 12px;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .test-result {
+            margin: 10px 0;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🔍 Supabase Connection Test</h1>
+        
+        <div class="config-info">
+            <strong>Current Configuration:</strong><br>
+            URL: <span id="config-url">Loading...</span><br>
+            Anon Key: <span id="config-key">Loading...</span>
+        </div>
+
+        <div id="status" class="status pending">
+            ⏳ Initializing tests...
+        </div>
+
+        <div id="results"></div>
+
+        <div style="margin-top: 20px;">
+            <button onclick="runTests()">🔄 Run Tests Again</button>
+            <button onclick="testAuth()">🔐 Test Authentication</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/main.js"></script>
+    <script>
+        const SUPABASE_URL = 'https://anmfapmftqxnbdhjefrt.supabase.co';
+        const SUPABASE_ANON_KEY = 'sb_publishable_8YmzFwOnHKcvOJlsgcGJ6A_lHLg1ZG9';
+
+        document.getElementById('config-url').textContent = SUPABASE_URL;
+        document.getElementById('config-key').textContent = SUPABASE_ANON_KEY.substring(0, 30) + '...';
+
+        function addResult(test, status, message) {
+            const results = document.getElementById('results');
+            const div = document.createElement('div');
+            div.className = 'test-result';
+            const icon = status === 'success' ? '✅' : status === 'error' ? '❌' : '⚠️';
+            div.innerHTML = `<strong>${icon} ${test}:</strong> ${message}`;
+            results.appendChild(div);
+        }
+
+        function setStatus(message, type = 'pending') {
+            const status = document.getElementById('status');
+            status.className = `status ${type}`;
+            status.textContent = message;
+        }
+
+        async function runTests() {
+            document.getElementById('results').innerHTML = '';
+            setStatus('⏳ Running tests...', 'pending');
+
+            // Test 1: Supabase library loaded
+            if (typeof window.supabase === 'undefined') {
+                addResult('Supabase Library', 'error', 'Supabase JS library not loaded');
+                setStatus('❌ Tests failed - Supabase library not found', 'error');
+                return;
+            }
+            addResult('Supabase Library', 'success', 'Supabase JS library loaded successfully');
+
+            // Test 2: Create client
+            let client;
+            try {
+                client = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+                addResult('Client Creation', 'success', 'Supabase client created successfully');
+            } catch (error) {
+                addResult('Client Creation', 'error', error.message);
+                setStatus('❌ Tests failed - Cannot create client', 'error');
+                return;
+            }
+
+            // Test 3: Test URL reachability
+            try {
+                const response = await fetch(SUPABASE_URL + '/rest/v1/', {
+                    method: 'HEAD',
+                    headers: {
+                        'apikey': SUPABASE_ANON_KEY
+                    }
+                });
+                if (response.ok || response.status === 404) {
+                    addResult('URL Reachability', 'success', `Supabase endpoint reachable (Status: ${response.status})`);
+                } else {
+                    addResult('URL Reachability', 'warning', `Unexpected status: ${response.status}`);
+                }
+            } catch (error) {
+                addResult('URL Reachability', 'error', `Cannot reach Supabase: ${error.message}`);
+                setStatus('❌ Supabase URL is not reachable - Check your internet connection or URL', 'error');
+                return;
+            }
+
+            // Test 4: Check session
+            try {
+                const { data, error } = await client.auth.getSession();
+                if (error) {
+                    addResult('Session Check', 'warning', `Error: ${error.message}`);
+                } else if (data.session) {
+                    addResult('Session Check', 'success', `Active session found for: ${data.session.user.email}`);
+                } else {
+                    addResult('Session Check', 'success', 'No active session (not logged in)');
+                }
+            } catch (error) {
+                addResult('Session Check', 'error', error.message);
+            }
+
+            // Test 5: Check profiles table access
+            try {
+                const { data, error } = await client.from('profiles').select('id').limit(1);
+                if (error) {
+                    if (error.code === '42P01') {
+                        addResult('Database Tables', 'error', 'profiles table does not exist');
+                    } else {
+                        addResult('Database Tables', 'warning', `Database error: ${error.message}`);
+                    }
+                } else {
+                    addResult('Database Tables', 'success', 'profiles table accessible');
+                }
+            } catch (error) {
+                addResult('Database Tables', 'error', error.message);
+            }
+
+            setStatus('✅ All tests completed - Check results below', 'success');
+        }
+
+        async function testAuth() {
+            const client = window.supabase?.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+            if (!client) {
+                alert('Cannot create Supabase client');
+                return;
+            }
+
+            const email = prompt('Enter test email:');
+            const password = prompt('Enter test password:');
+
+            if (!email || !password) return;
+
+            try {
+                const { data, error } = await client.auth.signInWithPassword({ email, password });
+                if (error) {
+                    alert('Login failed: ' + error.message);
+                } else {
+                    alert('Login successful! User: ' + data.user.email);
+                }
+            } catch (error) {
+                alert('Error: ' + error.message);
+            }
+        }
+
+        // Run tests on load
+        window.addEventListener('load', runTests);
+    </script>
+</body>
+</html>

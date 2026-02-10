@@ -25,7 +25,10 @@
                 </div>
                 <div class="auth-field">
                     <label for="login-password">Password</label>
-                    <input id="login-password" type="password" name="password" placeholder="Enter your password" required>
+                    <div class="password-wrap">
+                        <input id="login-password" type="password" name="password" placeholder="Enter your password" required>
+                        <button class="password-toggle" type="button" data-toggle-password="login-password" aria-pressed="false" aria-label="Show password">Show</button>
+                    </div>
                 </div>
                 <div class="auth-actions">
                     <button class="btn btn-primary" type="submit">Login</button>
@@ -42,7 +45,10 @@
                 </div>
                 <div class="auth-field">
                     <label for="register-password">Create Password</label>
-                    <input id="register-password" type="password" name="password" placeholder="Create a password" required>
+                    <div class="password-wrap">
+                        <input id="register-password" type="password" name="password" placeholder="Create a password" required>
+                        <button class="password-toggle" type="button" data-toggle-password="register-password" aria-pressed="false" aria-label="Show password">Show</button>
+                    </div>
                 </div>
                 <div class="auth-actions">
                     <button class="btn btn-primary" type="submit">Create Account</button>
