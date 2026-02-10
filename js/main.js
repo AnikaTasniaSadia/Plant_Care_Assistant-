@@ -266,6 +266,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initProfileMenu();
     initChatWidget();
     initThemeToggle();
+    initPasswordToggles();
 });
 
 /* ========================================
@@ -274,12 +275,62 @@ document.addEventListener('DOMContentLoaded', function() {
 
 const SUPABASE_URL = 'https://anmfapmftqxnbdhjefrt.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_8YmzFwOnHKcvOJlsgcGJ6A_lHLg1ZG9';
+const OFFLINE_ADMIN_EMAIL = 'admin@gmail.com';
+const OFFLINE_ADMIN_PASSWORD = 'admin123';
+const OFFLINE_ADMIN_STORAGE_KEY = 'pcaOfflineAdmin';
+const ADMIN_GATE_STORAGE_KEY = 'pcaAdminGate';
+
+function isOfflineAdminActive() {
+    try {
+        const raw = localStorage.getItem(OFFLINE_ADMIN_STORAGE_KEY);
+        if (!raw) return false;
+        const parsed = JSON.parse(raw);
+        return !!parsed && parsed.email === OFFLINE_ADMIN_EMAIL;
+    } catch {
+        return false;
+    }
+}
+
+function setOfflineAdminActive() {
+    localStorage.setItem(
+        OFFLINE_ADMIN_STORAGE_KEY,
+        JSON.stringify({ email: OFFLINE_ADMIN_EMAIL, ts: Date.now(), persistent: true })
+    );
+}
+
+function clearOfflineAdminActive() {
+    localStorage.removeItem(OFFLINE_ADMIN_STORAGE_KEY);
+}
+
+function setAdminGateStorage({ persistent = true } = {}) {
+    localStorage.setItem(
+        ADMIN_GATE_STORAGE_KEY,
+        JSON.stringify({ email: OFFLINE_ADMIN_EMAIL, ts: Date.now(), persistent })
+    );
+}
 
 function getSupabaseClient() {
     if (!window.supabase || typeof window.supabase.createClient !== 'function') {
         return null;
     }
     return window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+}
+
+function initPasswordToggles() {
+    document.querySelectorAll('[data-toggle-password]').forEach((btn) => {
+        const targetId = btn.getAttribute('data-toggle-password');
+        if (!targetId) return;
+        const input = document.getElementById(targetId);
+        if (!input) return;
+
+        btn.addEventListener('click', () => {
+            const isText = input.type === 'text';
+            input.type = isText ? 'password' : 'text';
+            btn.textContent = isText ? 'Show' : 'Hide';
+            btn.setAttribute('aria-pressed', String(!isText));
+            btn.setAttribute('aria-label', isText ? 'Show password' : 'Hide password');
+        });
+    });
 }
 
 async function upsertUserProfile(supabase, userId, profile) {
@@ -321,12 +372,7 @@ async function initAuthModal() {
     const overlay = document.getElementById('auth-overlay');
     if (!overlay) return;
     const supabase = getSupabaseClient();
-    if (!supabase) {
-        const messageEl = overlay.querySelector('#auth-message');
-        setAuthMessage(messageEl, 'Auth service unavailable. Please reload the page.', 'error');
-        showAuthOverlay(overlay);
-        return;
-    }
+    const hasSupabase = !!supabase;
 
     const tabs = overlay.querySelectorAll('.auth-tab');
     const loginForm = overlay.querySelector('#login-form');
@@ -355,16 +401,33 @@ async function initAuthModal() {
         tab.addEventListener('click', () => activateTab(tab.dataset.authTab));
     });
 
-    try {
-        const { data, error } = await supabase.auth.getSession();
-        if (error || !data.session) {
-            showAuthOverlay(overlay);
-        } else {
+    if (!hasSupabase) {
+        if (isOfflineAdminActive()) {
             hideAuthOverlay(overlay);
+        } else {
+            setAuthMessage(messageEl, 'Auth service unavailable. You can use offline admin login.', 'error');
+            showAuthOverlay(overlay);
         }
-    } catch (error) {
-        console.warn('Session check failed:', error);
-        showAuthOverlay(overlay);
+    } else {
+        try {
+            const { data, error } = await supabase.auth.getSession();
+            if (error || !data.session) {
+                if (isOfflineAdminActive()) {
+                    hideAuthOverlay(overlay);
+                } else {
+                    showAuthOverlay(overlay);
+                }
+            } else {
+                hideAuthOverlay(overlay);
+            }
+        } catch (error) {
+            console.warn('Session check failed:', error);
+            if (isOfflineAdminActive()) {
+                hideAuthOverlay(overlay);
+            } else {
+                showAuthOverlay(overlay);
+            }
+        }
     }
 
     if (loginForm) {
@@ -378,22 +441,43 @@ async function initAuthModal() {
                 return;
             }
 
+            const isOfflineAdmin = email === OFFLINE_ADMIN_EMAIL && password === OFFLINE_ADMIN_PASSWORD;
+            if (!hasSupabase) {
+                if (isOfflineAdmin) {
+                    setOfflineAdminActive();
+                    setAdminGateStorage({ persistent: true });
+                    setAuthMessage(messageEl, 'Offline admin login enabled. Redirecting...', 'success');
+                    setTimeout(() => hideAuthOverlay(overlay), 300);
+                    return;
+                }
+                setAuthMessage(messageEl, 'Auth service unavailable. Try again later.', 'error');
+                return;
+            }
+
             const { error } = await supabase.auth.signInWithPassword({
                 email,
                 password
             });
 
             if (error) {
+                if (isOfflineAdmin) {
+                    setOfflineAdminActive();
+                    setAdminGateStorage({ persistent: true });
+                    setAuthMessage(messageEl, 'Offline admin login enabled. Redirecting...', 'success');
+                    setTimeout(() => hideAuthOverlay(overlay), 300);
+                    return;
+                }
                 setAuthMessage(messageEl, error.message || 'Login failed. Try again.', 'error');
                 return;
             }
 
+            clearOfflineAdminActive();
             setAuthMessage(messageEl, 'Login successful. Welcome back!', 'success');
             setTimeout(() => hideAuthOverlay(overlay), 400);
         });
     }
 
-    if (registerForm) {
+    if (registerForm && hasSupabase) {
         registerForm.addEventListener('submit', async (event) => {
             event.preventDefault();
             const fullName = registerForm.querySelector('input[name="fullName"]').value.trim();
@@ -438,13 +522,18 @@ async function initAuthModal() {
         });
     }
 
-    supabase.auth.onAuthStateChange((_event, session) => {
-        if (session) {
-            hideAuthOverlay(overlay);
-        } else {
-            showAuthOverlay(overlay);
-        }
-    });
+    if (hasSupabase) {
+        supabase.auth.onAuthStateChange((_event, session) => {
+            if (session) {
+                clearOfflineAdminActive();
+                hideAuthOverlay(overlay);
+            } else if (isOfflineAdminActive()) {
+                hideAuthOverlay(overlay);
+            } else {
+                showAuthOverlay(overlay);
+            }
+        });
+    }
 }
 
 function getInitials(name = '') {
@@ -492,6 +581,18 @@ async function updateProfileUI(supabase) {
     const session = data?.session;
 
     if (!session) {
+        if (isOfflineAdminActive()) {
+            profileText.textContent = 'Welcome, Admin (Offline)';
+            profileName.textContent = 'Admin';
+            profileEmail.textContent = OFFLINE_ADMIN_EMAIL;
+            const initials = 'A';
+            profileBadge.textContent = initials;
+            profileAvatar.textContent = initials;
+            if (loginBtn) loginBtn.style.display = 'none';
+            if (logoutBtn) logoutBtn.style.display = 'inline-flex';
+            return;
+        }
+
         profileText.textContent = 'Welcome, Guest';
         profileName.textContent = 'Guest';
         profileEmail.textContent = 'Sign in to personalize';
@@ -571,6 +672,7 @@ function initProfileMenu() {
         logoutBtn.addEventListener('click', async () => {
             closeMenu();
             await supabase.auth.signOut();
+            clearOfflineAdminActive();
             if (typeof window.clearAdminGate === 'function') {
                 window.clearAdminGate();
             }
@@ -585,6 +687,8 @@ function initProfileMenu() {
         updateProfileUI(supabase);
     });
 }
+
+window.isOfflineAdminActive = isOfflineAdminActive;
 
 /**
  * Make API call with error handling
@@ -619,7 +723,8 @@ function initThemeToggle() {
 
     const stored = localStorage.getItem('pcaTheme');
     const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const shouldEnable = stored ? stored === 'dark' : prefersDark;
+    // Default to Neon (dark) theme if no preference is stored
+    const shouldEnable = stored ? stored === 'dark' : true;
     document.body.classList.toggle('dark-mode', shouldEnable);
     toggle.classList.toggle('is-dark', shouldEnable);
     toggle.setAttribute('aria-pressed', String(shouldEnable));

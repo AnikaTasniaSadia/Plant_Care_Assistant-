@@ -72,6 +72,13 @@ async function initAdmin() {
         const session = sessionData?.session;
 
         if (!session) {
+            const offlineAdminActive = typeof window.isOfflineAdminActive === 'function' && window.isOfflineAdminActive();
+            if (offlineAdminActive) {
+                setAdminStatus('Offline admin mode enabled. Supabase session not detected; admin actions are disabled.', { isError: true });
+                lockAdminForms();
+                return;
+            }
+
             setAdminStatus('Please sign in to access admin features.');
             if (typeof window.openAuthOverlay === 'function') {
                 window.openAuthOverlay('login');

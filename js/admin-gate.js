@@ -7,6 +7,8 @@ function isAdminGateActive() {
         const parsed = JSON.parse(raw);
         if (!parsed || parsed.email !== 'admin@gmail.com') return false;
 
+        if (parsed.persistent) return true;
+
         // Optional expiry: 24h
         const ts = Number(parsed.ts || 0);
         if (!ts) return false;
@@ -17,10 +19,10 @@ function isAdminGateActive() {
     }
 }
 
-function setAdminGateActive() {
+function setAdminGateActive({ persistent = false } = {}) {
     localStorage.setItem(
         ADMIN_GATE_STORAGE_KEY,
-        JSON.stringify({ email: 'admin@gmail.com', ts: Date.now() })
+        JSON.stringify({ email: 'admin@gmail.com', ts: Date.now(), persistent })
     );
 }
 
@@ -64,6 +66,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 const supabase = window.getSupabaseClient();
                 const { error } = await supabase.auth.signInWithPassword({ email, password });
                 if (error) {
+                    // If Supabase fails, allow the offline admin gate credentials.
+                    if (email === 'admin@gmail.com' && password === 'admin123') {
+                        setAdminGateActive({ persistent: true });
+                        if (messageEl) {
+                            messageEl.textContent = 'Login successful (offline admin mode). Redirecting to dashboard...';
+                            messageEl.classList.remove('error');
+                            messageEl.classList.add('success');
+                        }
+                        window.location.href = next;
+                        return;
+                    }
+
                     if (messageEl) {
                         messageEl.textContent = `Login failed: ${error.message}`;
                         messageEl.classList.remove('success');
@@ -72,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     return;
                 }
 
-                setAdminGateActive();
+                setAdminGateActive({ persistent: false });
                 if (messageEl) {
                     messageEl.textContent = 'Login successful. Redirecting to dashboard...';
                     messageEl.classList.remove('error');
@@ -92,9 +106,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (email === 'admin@gmail.com' && password === 'admin123') {
-            setAdminGateActive();
+            setAdminGateActive({ persistent: true });
             if (messageEl) {
-                messageEl.textContent = 'Login successful (demo mode). Redirecting to dashboard...';
+                messageEl.textContent = 'Login successful (offline admin mode). Redirecting to dashboard...';
                 messageEl.classList.remove('error');
                 messageEl.classList.add('success');
             }
