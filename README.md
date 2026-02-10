@@ -7,15 +7,15 @@ A comprehensive, frontend-only web application that helps users discover plants 
 **Plant Care Assistant** is an educational project demonstrating modern frontend web development using vanilla HTML, CSS, and JavaScript. The application automatically detects the user's country using IP-based geolocation, fetches real-time weather data, and provides personalized plant care recommendations.
 
 ### Key Features
-- ✅ **Auto Location Detection** - Uses IP-API to detect user's country
-- ✅ **Real-Time Weather** - Fetches current weather from OpenWeather API
-- ✅ **Country-Wise Plant Database** - Plant recommendations specific to your region
-- ✅ **Comprehensive Care Guides** - Detailed plant care instructions by country
-- ✅ **Problem Solutions** - Common plant issues and solutions
-- ✅ **Responsive Design** - Works on desktop, tablet, and mobile
-- ✅ **No Backend Required** - Pure frontend application
-- ✅ **No Database** - All data stored in JavaScript
-- ✅ **No npm Packages** - Vanilla technologies only
+- **Auto Location Detection** - Uses IP-API to detect user's country
+- **Real-Time Weather** - Fetches current weather from OpenWeather API
+- **Country-Wise Plant Database** - Plant recommendations specific to your region
+- **Comprehensive Care Guides** - Detailed plant care instructions by country
+- **Problem Solutions** - Common plant issues and solutions
+- **Responsive Design** - Works on desktop, tablet, and mobile
+- **No Backend Required** - Pure frontend application
+- **No Database** - All data stored in JavaScript
+- **No npm Packages** - Vanilla technologies only
 
 ## Technology Stack
 
@@ -354,32 +354,6 @@ To improve the project:
 - **VS Code** - https://code.visualstudio.com
 - **Live Server** - https://github.com/ritwickdey/vscode-live-server
 
-##  FAQ
-
-**Q: Can I use this in production?**
-A: It's designed for learning. For production, add a backend database and proper API management.
-
-**Q: What if IP-API is blocked in my country?**
-A: Use a different geolocation API like ip-api.com or ipinfo.io.
-
-**Q: How do I add more countries?**
-A: Edit `js/data.js` and add new entries to the `PLANTS_DATABASE` object.
-
-**Q: Can I use a different weather API?**
-A: Yes! Modify `js/weather.js` to use any weather API (Weather.com, Weatherbit, etc.).
-
-**Q: Is this mobile friendly?**
-A: Yes! Fully responsive design supports all device sizes.
-
-##  Support
-
-For issues or questions:
-1. Check the Troubleshooting section above
-2. Review browser console for error messages (F12)
-3. Ensure all files are present and in correct folders
-4. Verify API keys are correctly configured
-
-##  Change Log
 
 ### Version 1.0 (Initial Release)
 - ✅ Complete frontend application

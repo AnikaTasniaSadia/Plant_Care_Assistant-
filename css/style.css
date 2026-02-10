@@ -45,6 +45,21 @@ body {
     background-attachment: fixed;
 }
 
+body::before {
+    content: '';
+    position: fixed;
+    inset: -20% -10% -10% -20%;
+    background:
+        radial-gradient(circle at 15% 20%, rgba(34, 197, 94, 0.28), transparent 35%),
+        radial-gradient(circle at 80% 15%, rgba(59, 130, 246, 0.25), transparent 40%),
+        radial-gradient(circle at 85% 80%, rgba(236, 72, 153, 0.22), transparent 45%),
+        radial-gradient(circle at 10% 85%, rgba(245, 158, 11, 0.2), transparent 45%);
+    filter: blur(70px);
+    opacity: 0.7;
+    z-index: -2;
+    pointer-events: none;
+}
+
 .home-page {
     background-image:
         linear-gradient(180deg, rgba(12, 25, 18, 0.55), rgba(12, 25, 18, 0.35)),
@@ -65,6 +80,15 @@ body.dark-mode {
         radial-gradient(circle at top left, rgba(31, 77, 46, 0.5), transparent 45%),
         radial-gradient(circle at bottom right, rgba(47, 122, 79, 0.35), transparent 50%),
         linear-gradient(180deg, rgba(10, 18, 13, 0.95), rgba(15, 27, 20, 0.98));
+}
+
+body.dark-mode::before {
+    background:
+        radial-gradient(circle at 15% 20%, rgba(34, 197, 94, 0.18), transparent 40%),
+        radial-gradient(circle at 80% 15%, rgba(59, 130, 246, 0.18), transparent 45%),
+        radial-gradient(circle at 85% 80%, rgba(236, 72, 153, 0.16), transparent 50%),
+        radial-gradient(circle at 10% 85%, rgba(245, 158, 11, 0.15), transparent 50%);
+    opacity: 0.55;
 }
 
 body.dark-mode.home-page {
@@ -491,13 +515,15 @@ body.dark-mode .footer {
    ======================================== */
 
 .card {
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(238, 246, 240, 0.92));
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.82), rgba(238, 246, 240, 0.78));
     border-radius: 12px;
     padding: 2rem;
     margin-bottom: 2rem;
     box-shadow: 0 16px 35px rgba(17, 45, 30, 0.12);
     border: 1px solid rgba(47, 122, 79, 0.12);
     transition: transform 0.3s, box-shadow 0.3s;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
 }
 
 .card:hover {
@@ -915,12 +941,14 @@ textarea {
 }
 
 .gallery-card {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.96) 0%, rgba(208, 231, 216, 0.9) 100%);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.88) 0%, rgba(208, 231, 216, 0.8) 100%);
     padding: 1.2rem;
     border-radius: 12px;
     border-left: 4px solid var(--secondary-color);
     box-shadow: 0 10px 24px rgba(17, 45, 30, 0.12);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
 .gallery-card:hover {
@@ -936,6 +964,22 @@ textarea {
     margin-bottom: 0.75rem;
     border: 1px solid var(--border-color);
     background: var(--white);
+}
+
+.gallery-title {
+    font-size: 1.05rem;
+    margin-bottom: 0.35rem;
+    color: var(--primary-color);
+}
+
+.gallery-caption {
+    color: var(--text-light);
+    font-size: 0.92rem;
+}
+
+.section-intro {
+    color: var(--text-light);
+    margin-bottom: 0.9rem;
 }
 
 /* ========================================

@@ -42,6 +42,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!ok) return;
     }
 
+    bindAdminLogout();
+
     if (typeof window.getSupabaseClient !== 'function') {
         setAdminStatus('Supabase auth helper is missing. Ensure js/main.js is loaded before js/admin.js.', { isError: true });
         return;
@@ -53,6 +55,31 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     initAdmin();
 });
+
+function bindAdminLogout() {
+    const logoutBtn = document.getElementById('admin-logout-btn');
+    if (!logoutBtn) return;
+
+    logoutBtn.addEventListener('click', async () => {
+        logoutBtn.disabled = true;
+        const originalText = logoutBtn.textContent;
+        logoutBtn.textContent = 'Logging out...';
+
+        try {
+            const client = supabase || (typeof window.getSupabaseClient === 'function' ? window.getSupabaseClient() : null);
+            if (client) {
+                await client.auth.signOut();
+            }
+        } catch (error) {
+            console.warn('[Admin] Logout failed:', error);
+        } finally {
+            if (typeof window.clearAdminGate === 'function') {
+                window.clearAdminGate();
+            }
+            window.location.href = 'admin-login.html';
+        }
+    });
+}
 
 async function initAdmin() {
     const seedBtn = document.getElementById('seed-data-btn');

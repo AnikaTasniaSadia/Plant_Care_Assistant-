@@ -3,159 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plant Care Assistant - Smart Plant Care Guide</title>
+    <title>Plant Care Assistant</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="home-page">
-    <!-- Auth Modal -->
-    <div id="auth-overlay" class="auth-overlay" aria-hidden="true">
-        <div class="auth-modal" role="dialog" aria-modal="true" aria-labelledby="auth-title">
-            <div class="auth-header">
-                <h2 id="auth-title">Welcome Back</h2>
-                <p>Login or create an account to continue.</p>
-            </div>
-            <div class="auth-tabs" role="tablist">
-                <button class="auth-tab active" type="button" data-auth-tab="login" role="tab" aria-selected="true">Login</button>
-                <button class="auth-tab" type="button" data-auth-tab="register" role="tab" aria-selected="false">Register</button>
-            </div>
-            <form id="login-form" class="auth-form active" autocomplete="on">
-                <div class="auth-field">
-                    <label for="login-email">Email Address</label>
-                    <input id="login-email" type="email" name="email" placeholder="you@example.com" required>
-                </div>
-                <div class="auth-field">
-                    <label for="login-password">Password</label>
-                    <input id="login-password" type="password" name="password" placeholder="Enter your password" required>
-                </div>
-                <div class="auth-actions">
-                    <button class="btn btn-primary" type="submit">Login</button>
-                </div>
-            </form>
-            <form id="register-form" class="auth-form" autocomplete="on">
-                <div class="auth-field">
-                    <label for="register-name">Full Name</label>
-                    <input id="register-name" type="text" name="fullName" placeholder="Your full name" required>
-                </div>
-                <div class="auth-field">
-                    <label for="register-email">Email Address</label>
-                    <input id="register-email" type="email" name="email" placeholder="you@example.com" required>
-                </div>
-                <div class="auth-field">
-                    <label for="register-password">Create Password</label>
-                    <input id="register-password" type="password" name="password" placeholder="Create a password" required>
-                </div>
-                <div class="auth-actions">
-                    <button class="btn btn-primary" type="submit">Create Account</button>
-                </div>
-            </form>
-            <p id="auth-message" class="auth-message" role="status" aria-live="polite"></p>
-        </div>
-    </div>
-
+<body>
     <!-- Navigation Bar -->
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-brand">
-                <h1> Plant Care Assistant</h1>
+                <h1>Plant Care Assistant</h1>
             </div>
             <ul class="nav-menu">
                 <li><a href="index.html" class="nav-link active">Home</a></li>
                 <li><a href="plants.html" class="nav-link">Plants</a></li>
                 <li><a href="weather.html" class="nav-link">Weather</a></li>
-                <li><a href="#footer" class="nav-link">About</a></li>
-                <li><a href="admin-login.html" class="nav-link">Admin</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
             </ul>
-            <div class="nav-actions">
-                <button class="theme-toggle" id="theme-toggle" type="button" aria-pressed="false" aria-label="Toggle dark mode">
-                    <span class="theme-icon" aria-hidden="true">💡</span>
-                </button>
-                <button class="profile-button" id="profile-toggle" type="button" aria-haspopup="true" aria-expanded="false">
-                    <span class="profile-badge" id="profile-badge">P</span>
-                    <span class="profile-text" id="profile-text">Welcome, Guest</span>
-                    <span class="profile-caret">▾</span>
-                </button>
-                <div class="profile-menu" id="profile-menu" aria-hidden="true">
-                    <div class="profile-header">
-                        <div class="profile-avatar" id="profile-avatar">P</div>
-                        <div class="profile-meta">
-                            <p class="profile-name" id="profile-name">Guest</p>
-                            <p class="profile-email" id="profile-email">Sign in to personalize</p>
-                        </div>
-                    </div>
-                    <button class="btn btn-secondary profile-login-btn" id="profile-login-btn" type="button">Sign in</button>
-                    <button class="btn btn-primary profile-logout-btn" id="profile-logout-btn" type="button">Logout</button>
-                </div>
-            </div>
         </div>
     </nav>
 
     <!-- Main Content -->
     <main class="container">
-        <!-- Hero Section -->
         <section class="hero">
-            <h2>Welcome to Plant Care Assistant</h2>
-            <p>Discover plants perfect for your climate and get expert care tips tailored to your location</p>
+            <h2>Your Smart Plant Care Companion</h2>
+            <p>Discover plants suited to your climate, get real-time weather insights, and keep your plants thriving.</p>
         </section>
 
-        <!-- Location Section -->
+        <!-- Location Info -->
         <section class="card">
-            <h3> Your Location</h3>
+            <h3>Your Location</h3>
             <div id="location-info" class="location-info">
-                <p class="loading">Detecting your location...</p>
-            </div>
-            <div id="location-map" class="location-map" aria-label="Map showing your location"></div>
-        </section>
-
-        <!-- Quick Stats -->
-        <section class="stats-grid">
-            <div class="stat-card">
-                <h4> Weather</h4>
-                <p><a href="weather.html">Check local weather</a></p>
-            </div>
-            <div class="stat-card">
-                <h4> Plants</h4>
-                <p><a href="plants.html">Browse country plants</a></p>
-            </div>
-            <div class="stat-card">
-                <h4> Care Tips</h4>
-                <p><a href="plants.html">Learn plant care</a></p>
+                <p class="loading">Detecting location...</p>
             </div>
         </section>
 
-        <!-- Features Section -->
-        <section class="card features">
-            <h3> Key Features</h3>
+        <!-- Feature Overview -->
+        <section class="card">
+            <h3>What You Can Do</h3>
             <ul class="features-list">
-                <li>✓ Auto-detect your country based on IP location</li>
-                <li>✓ Real-time weather data for your region</li>
-                <li>✓ Discover plants suitable for your climate</li>
-                <li>✓ Get expert plant care advice</li>
-                <li>✓ Learn common plant problems & solutions</li>
-                <li>✓ Responsive design for all devices</li>
+                <li>Auto-detect your country and region</li>
+                <li>View real-time weather data and plant care impact</li>
+                <li>Explore plants recommended for your climate</li>
+                <li>Learn common plant problems and solutions</li>
+                <li>Follow complete care guides tailored to your region</li>
             </ul>
         </section>
 
-        <!-- CTA Section -->
+        <!-- Featured Plant Gallery -->
+        <section class="card">
+            <h3>ured Plants</h3>
+            <p class="section-intro">Curated picks with care highlights to inspire your next plant choice.</p>
+            <div class="gallery-grid">
+                <article class="gallery-card">
+                    <img class="gallery-image" src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=900&q=80" alt="Monstera deliciosa leaf" loading="lazy">
+                    <h4 class="gallery-title">Monstera Deliciosa</h4>
+                    <p class="gallery-caption">Bright, indirect light • Water weekly</p>
+                </article>
+                <article class="gallery-card">
+                    <img class="gallery-image" src="https://images.unsplash.com/photo-1463320726281-696a485928c7?auto=format&fit=crop&w=900&q=80" alt="Fiddle leaf fig" loading="lazy">
+                    <h4 class="gallery-title">Fiddle Leaf Fig</h4>
+                    <p class="gallery-caption">Filtered light • Keep soil lightly moist</p>
+                </article>
+                <article class="gallery-card">
+                    <img class="gallery-image" src="https://images.unsplash.com/photo-1459411552884-841db9b3cc2a?auto=format&fit=crop&w=900&q=80" alt="Peace lily in pot" loading="lazy">
+                    <h4 class="gallery-title">Peace Lily</h4>
+                    <p class="gallery-caption">Low to medium light • Weekly watering</p>
+                </article>
+                <article class="gallery-card">
+                    <img class="gallery-image" src="https://images.unsplash.com/photo-1485955900006-10f4d324d411?auto=format&fit=crop&w=900&q=80" alt="Snake plant in living room" loading="lazy">
+                    <h4 class="gallery-title">Snake Plant</h4>
+                    <p class="gallery-caption">Hardy & drought-tolerant • Water biweekly</p>
+                </article>
+            </div>
+        </section>
+
+        <!-- Call to Action -->
         <section class="card cta">
-            <h3>Get Started Now!</h3>
-            <p>Check the weather in your area and discover the perfect plants for your home.</p>
+            <h3>Explore the Tools</h3>
+            <p>Jump into weather insights or browse plants that love your climate.</p>
             <div class="cta-buttons">
-                <a href="weather.html" class="btn btn-primary">View Weather →</a>
-                <a href="plants.html" class="btn btn-secondary">Browse Plants →</a>
+                <a href="weather.html" class="btn btn-primary">Check Weather</a>
+                <a href="plants.html" class="btn btn-secondary">Browse Plants</a>
             </div>
         </section>
     </main>
 
     <!-- Footer -->
-    <footer class="footer" id="footer">
-        <p><strong>Plant Care Assistant</strong> — smart, local plant guidance.</p>
-        <p>Created by: Sowrav Dey (ID: 223071102) & Anika Tasnia Sadia (ID: 223071119)</p>
-        <p>Presented to Tahsin Alam</p>
-        <p>Contact: support@plantcareassistant.com | +880 1678-000064</p>
-        <p>&copy; 2024 Plant Care Assistant. All rights reserved.</p>
+    <footer class="footer">
+        <p>&copy; 2024 Plant Care Assistant. An academic project for educational purposes.</p>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="js/main.js"></script>
     <script>
         // Load location on home page
@@ -163,83 +100,29 @@
             detectLocation();
         });
 
-        let pendingMapCoords = null;
-
         async function detectLocation() {
             const locationInfo = document.getElementById('location-info');
-            const mapContainer = document.getElementById('location-map');
             try {
-                const response = await fetch('https://ipapi.co/json/');
-                const data = await response.json();
-                
+                const location = await detectUserLocation();
+
                 locationInfo.innerHTML = `
                     <div class="location-card">
-                        <p><strong>Country:</strong> ${data.country_name}</p>
-                        <p><strong>City:</strong> ${data.city}</p>
-                        <p><strong>Region:</strong> ${data.region}</p>
+                        <p><strong>Country:</strong> ${sanitizeHTML(location.country)}</p>
+                        <p><strong>City:</strong> ${sanitizeHTML(location.city)}</p>
+                        <p><strong>Region:</strong> ${sanitizeHTML(location.region)}</p>
+                        <p><strong>Coordinates:</strong> ${location.latitude.toFixed(2)}°, ${location.longitude.toFixed(2)}°</p>
                     </div>
                 `;
-
-                pendingMapCoords = { lat: data.latitude, lng: data.longitude };
-                renderLocationMap(data.latitude, data.longitude, mapContainer);
-                
-                // Store location in sessionStorage for other pages
-                sessionStorage.setItem('userLocation', JSON.stringify({
-                    country: data.country_name,
-                    country_code: data.country_code,
-                    city: data.city,
-                    region: data.region,
-                    latitude: data.latitude,
-                    longitude: data.longitude
-                }));
             } catch (error) {
                 locationInfo.innerHTML = `
                     <div class="error">
-                        <p> Could not detect location. Please enable location services or try again.</p>
-                        <p class="error-details">${error.message}</p>
+                        <p>Could not detect location automatically. Please refresh the page or check your connection.</p>
+                        <p class="error-details">${sanitizeHTML(error.message)}</p>
                     </div>
                 `;
                 console.error('Location detection error:', error);
             }
         }
-
-        function renderStaticMap(lat, lng, container) {
-            if (!container) return;
-            const zoom = 12;
-            const size = '640x300';
-            const key = 'AIzaSyDZ4r9oIDutO1J88-e9cPZ-eVsQMvAlbvU';
-            const url = `https://maps.googleapis.com/maps/api/staticmap?center=${lat},${lng}&zoom=${zoom}&size=${size}&markers=color:green|${lat},${lng}&key=${key}`;
-            container.innerHTML = `<img src="${url}" alt="Map showing your location" />`;
-        }
-
-        function renderLocationMap(lat, lng, container) {
-            if (!container) return;
-            if (!window.google || !window.google.maps) {
-                pendingMapCoords = { lat, lng };
-                container.innerHTML = '<p class="loading">Map is loading...</p>';
-                return;
-            }
-            const map = new google.maps.Map(container, {
-                center: { lat, lng },
-                zoom: 10,
-                disableDefaultUI: true,
-                zoomControl: true,
-                gestureHandling: 'cooperative'
-            });
-            new google.maps.Marker({
-                position: { lat, lng },
-                map,
-                title: 'Your Location'
-            });
-        }
-
-        function initMap() {
-            if (!pendingMapCoords) return;
-            const mapContainer = document.getElementById('location-map');
-            renderLocationMap(pendingMapCoords.lat, pendingMapCoords.lng, mapContainer);
-            pendingMapCoords = null;
-        }
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZ4r9oIDutO1J88-e9cPZ-eVsQMvAlbvU&callback=initMap" async defer></script>
 </body>
 </html>

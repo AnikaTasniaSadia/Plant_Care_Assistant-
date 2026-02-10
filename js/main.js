@@ -261,10 +261,13 @@ function getCurrentPage() {
 
 // Update navigation on page load
 document.addEventListener('DOMContentLoaded', function() {
-    updateActiveNav(getCurrentPage());
+    const page = getCurrentPage();
+    updateActiveNav(page);
     initAuthModal();
     initProfileMenu();
-    initChatWidget();
+    if (page !== 'admin-login') {
+        initChatWidget();
+    }
     initThemeToggle();
 });
 
