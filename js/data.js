@@ -1045,19 +1045,53 @@ const PLANTS_DATABASE = {
     }
 };
 
+const LOCAL_PLANT_DB_KEY = 'pcaLocalPlantDb';
+
+function getLocalPlantDatabase() {
+    try {
+        const raw = localStorage.getItem(LOCAL_PLANT_DB_KEY);
+        if (!raw) return null;
+        const parsed = JSON.parse(raw);
+        return parsed && typeof parsed === 'object' ? parsed : null;
+    } catch (error) {
+        console.warn('Local plant DB read failed:', error);
+        return null;
+    }
+}
+
+function saveLocalPlantDatabase(data) {
+    if (!data || typeof data !== 'object') return;
+    try {
+        localStorage.setItem(LOCAL_PLANT_DB_KEY, JSON.stringify(data));
+    } catch (error) {
+        console.warn('Local plant DB save failed:', error);
+    }
+}
+
+function initLocalPlantDatabase() {
+    if (getLocalPlantDatabase()) return;
+    const seed = JSON.parse(JSON.stringify(PLANTS_DATABASE));
+    saveLocalPlantDatabase(seed);
+}
+
+function getPlantDatabase() {
+    return getLocalPlantDatabase() || PLANTS_DATABASE;
+}
+
 /**
  * Get plant data for a specific country
  * @param {string} country - Country name
  * @returns {Object} Plant data or default data
  */
 function getCountryPlantData(country) {
+    const database = getPlantDatabase();
     // Try exact match first
-    if (PLANTS_DATABASE[country]) {
-        return PLANTS_DATABASE[country];
+    if (database[country]) {
+        return database[country];
     }
     
     // Return default if country not found
-    return PLANTS_DATABASE['United States'];
+    return database['United States'] || PLANTS_DATABASE['United States'];
 }
 
 /**
@@ -1065,7 +1099,7 @@ function getCountryPlantData(country) {
  * @returns {Array} List of country names
  */
 function getAllCountries() {
-    return Object.keys(PLANTS_DATABASE).sort();
+    return Object.keys(getPlantDatabase()).sort();
 }
 
 /**
@@ -1076,8 +1110,8 @@ function getAllCountries() {
 function searchPlants(searchTerm) {
     const results = [];
     const term = searchTerm.toLowerCase();
-    
-    Object.entries(PLANTS_DATABASE).forEach(([country, data]) => {
+
+    Object.entries(getPlantDatabase()).forEach(([country, data]) => {
         data.commonPlants.forEach(plant => {
             if (plant.name.toLowerCase().includes(term) || plant.type.toLowerCase().includes(term)) {
                 results.push({
@@ -1089,4 +1123,11 @@ function searchPlants(searchTerm) {
     });
     
     return results;
+}
+
+if (typeof window !== 'undefined') {
+    window.getLocalPlantDatabase = getLocalPlantDatabase;
+    window.saveLocalPlantDatabase = saveLocalPlantDatabase;
+    window.initLocalPlantDatabase = initLocalPlantDatabase;
+    window.getPlantDatabase = getPlantDatabase;
 }

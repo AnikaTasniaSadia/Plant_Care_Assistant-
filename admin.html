@@ -102,60 +102,79 @@
         </section>
 
         <section class="card admin-status" id="admin-status">
-            <h3>Status</h3>
+            <h3>🔧 Admin Dashboard Status</h3>
             <p>Loading admin dashboard...</p>
             <button class="btn btn-secondary" id="seed-data-btn" type="button" style="display: none;">Import local data</button>
+<<<<<<< HEAD
             <button class="btn btn-secondary" id="admin-logout-btn" type="button" style="margin-top: 0.75rem;">Logout</button>
+=======
+            <p class="admin-mode-info" id="admin-mode-info" style="margin-top: 1rem; padding: 0.75rem; background: rgba(0,255,157,0.1); border-left: 4px solid #00ff9d; border-radius: 6px; display: none;">
+                <strong>📱 Offline Mode:</strong> Your changes are saved locally in this browser.
+            </p>
+>>>>>>> 60679f2015ad57f1aebf005ecf88418dda9a26c6
         </section>
 
         <section class="admin-grid">
             <div class="card admin-card">
-                <h3>Countries</h3>
+                <h3>🌍 Countries</h3>
                 <form id="country-form" class="admin-form">
-                    <input type="text" id="country-name" placeholder="Country name" required>
-                    <input type="text" id="country-climate" placeholder="Climate (e.g., Tropical Monsoon)">
-                    <button class="btn btn-primary" type="submit">Add Country</button>
+                    <label for="country-name">Country Name *</label>
+                    <input type="text" id="country-name" placeholder="e.g., Brazil, India, Japan" required>
+                    <label for="country-climate">Climate Type</label>
+                    <input type="text" id="country-climate" placeholder="e.g., Tropical Monsoon, Temperate">
+                    <button class="btn btn-primary" type="submit">➕ Add Country</button>
                 </form>
                 <div id="country-list" class="admin-list"></div>
             </div>
 
             <div class="card admin-card">
-                <h3>Plants</h3>
+                <h3>🌿 Plants</h3>
                 <form id="plant-form" class="admin-form">
+                    <label for="plant-country">Country *</label>
                     <select id="plant-country" required>
                         <option value="">Select country</option>
                     </select>
-                    <input type="text" id="plant-name" placeholder="Plant name" required>
-                    <input type="text" id="plant-type" placeholder="Type (e.g., Shrub)">
-                    <input type="text" id="plant-light" placeholder="Light (e.g., Full sun)">
-                    <input type="text" id="plant-water" placeholder="Watering (e.g., Every 2-3 days)">
-                    <textarea id="plant-care" placeholder="Care tips"></textarea>
-                    <button class="btn btn-primary" type="submit">Add Plant</button>
+                    <label for="plant-name">Plant Name *</label>
+                    <input type="text" id="plant-name" placeholder="e.g., Mango Tree, Rose" required>
+                    <label for="plant-type">Type</label>
+                    <input type="text" id="plant-type" placeholder="e.g., Tree, Shrub, Flower">
+                    <label for="plant-light">Light Requirements</label>
+                    <input type="text" id="plant-light" placeholder="e.g., Full sun, Partial shade">
+                    <label for="plant-water">Watering Frequency</label>
+                    <input type="text" id="plant-water" placeholder="e.g., Every 2-3 days, Once a week">
+                    <label for="plant-care">Care Instructions</label>
+                    <textarea id="plant-care" placeholder="Detailed care tips and instructions..." rows="3"></textarea>
+                    <button class="btn btn-primary" type="submit">➕ Add Plant</button>
                 </form>
                 <div id="plant-list" class="admin-list"></div>
             </div>
 
             <div class="card admin-card">
-                <h3>Plant Images</h3>
+                <h3>🖼️ Plant Images</h3>
                 <form id="image-form" class="admin-form">
+                    <label for="image-plant">Select Plant *</label>
                     <select id="image-plant" required>
                         <option value="">Select plant</option>
                     </select>
-                    <input type="url" id="image-url" placeholder="Image URL" required>
-                    <input type="text" id="image-caption" placeholder="Caption (optional)">
-                    <button class="btn btn-primary" type="submit">Add Image</button>
+                    <label for="image-url">Image URL *</label>
+                    <input type="url" id="image-url" placeholder="https://example.com/image.jpg" required>
+                    <label for="image-caption">Caption (optional)</label>
+                    <input type="text" id="image-caption" placeholder="Brief description of the image">
+                    <button class="btn btn-primary" type="submit">➕ Add Image</button>
                 </form>
                 <div id="image-list" class="admin-list"></div>
             </div>
 
             <div class="card admin-card">
-                <h3>Plant Diseases</h3>
+                <h3>🩺 Plant Diseases</h3>
                 <form id="disease-form" class="admin-form">
+                    <label for="disease-plant">Select Plant *</label>
                     <select id="disease-plant" required>
                         <option value="">Select plant</option>
                     </select>
-                    <input type="text" id="disease-name" placeholder="Disease name" required>
-                    <button class="btn btn-primary" type="submit">Add Disease</button>
+                    <label for="disease-name">Disease Name *</label>
+                    <input type="text" id="disease-name" placeholder="e.g., Leaf Spot, Root Rot" required>
+                    <button class="btn btn-primary" type="submit">➕ Add Disease</button>
                 </form>
                 <div id="disease-list" class="admin-list"></div>
             </div>
