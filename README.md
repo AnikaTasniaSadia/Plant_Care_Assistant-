@@ -72,18 +72,57 @@ The system is designed to work even without backend dependency using offline fal
 **Architecture Diagram (Mermaid)**
 ```mermaid
 flowchart LR
-  U[User Browser] --> FE[Frontend Layer
-HTML/CSS/JS]
-  FE --> GEO[Geolocation APIs
-Browser + IP Services]
-  FE --> WX[Weather APIs
-OpenWeather / Open-Meteo]
-  FE --> SB[Supabase
-Auth + Database]
-  FE --> LS[Local Storage
-sessionStorage + localStorage]
-  FE --> AI[Optional AI Backend
-Node.js + Ollama]
+title System Architecture
+
+%% Browser
+Browser[Browser]
+
+%% Frontend Layer
+subgraph EXT1[External Services]
+    Frontend[Frontend<br/>• HTML / CSS / JavaScript<br/>• Home, Plants<br/>• Weather, Admin]
+end
+
+%% Backend / BaaS
+subgraph EXT2[External Services]
+    Backend[Backend / BaaS<br/>• Supabase Auth<br/>• Supabase Database]
+end
+
+%% Geolocation APIs
+subgraph EXT3[External Services]
+    GeoAPI[Geolocation APIs<br/>• Browser Geolocation<br/>• IP-based Location]
+end
+
+%% Country / Geolocation Processing
+subgraph GEO[Geolocation APIs]
+    Country[Country<br/>• HTML Geolocation<br/>• Climate]
+end
+
+%% Supabase (Frontend as a Service)
+subgraph BaaS2[Frontend as a Service]
+    SupaService[Supabase Auth<br/>• Supabase Database]
+end
+
+%% Plant Service
+subgraph PS[Plant Service]
+    PlantTable[plant_id (PK)<br/>• name<br/>• water_freq<br/>0..N]
+end
+
+%% Plant Disease
+subgraph PD[Plant Disease]
+    DiseaseTable[plant_id (PK)<br/>• url (0..N)<br/>• caption (0..N)]
+end
+
+%% Connections
+Browser --> Frontend
+Frontend <--> Backend
+Frontend <--> Country
+Browser <--> GeoAPI
+GeoAPI --> Country
+Country --> PlantTable
+PlantTable --> DiseaseTable
+Backend <--> SupaService
+SupaService <--> DiseaseTable
+
 ```
 
 ### 7. ER Diagram (Entity Relationship Diagram)
@@ -371,4 +410,5 @@ A local Node.js server communicates with Ollama to provide plant care assistance
 
 ### 15. Conclusion
 Plant Care Assistant demonstrates how a practical and user-friendly web application can be developed using core frontend technologies. It integrates real-world APIs, authentication systems, and optional AI support while maintaining simplicity and efficiency. The project showcases strong fundamentals in web development, system design, and integration techniques.
+
 
