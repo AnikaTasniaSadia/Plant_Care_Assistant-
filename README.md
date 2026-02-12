@@ -72,7 +72,6 @@ The system is designed to work even without backend dependency using offline fal
 **Architecture Diagram (Mermaid)**
 ```mermaid
 flowchart LR
-title System Architecture
 
 %% Browser
 Browser[Browser]
@@ -410,5 +409,6 @@ A local Node.js server communicates with Ollama to provide plant care assistance
 
 ### 15. Conclusion
 Plant Care Assistant demonstrates how a practical and user-friendly web application can be developed using core frontend technologies. It integrates real-world APIs, authentication systems, and optional AI support while maintaining simplicity and efficiency. The project showcases strong fundamentals in web development, system design, and integration techniques.
+
 
 
