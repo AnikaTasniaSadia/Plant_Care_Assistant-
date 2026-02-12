@@ -179,30 +179,117 @@ erDiagram
 **Class Diagram (Mermaid)**
 ```mermaid
 classDiagram
-  class LocationService {
-    +detectUserLocation()
-  }
-  class WeatherService {
-    +getWeather()
-    +generateCareTips()
-  }
-  class PlantService {
-    +loadPlants()
-    +getPlantDetails()
-  }
-  class AuthService {
-    +login()
-    +register()
-  }
-  class AdminService {
-    +addPlant()
-    +updatePlant()
-    +deletePlant()
-  }
+title Plant Care Assistant - Class Diagram
 
-  LocationService ..> WeatherService : provides location
-  WeatherService ..> PlantService : supports recommendations
-  AuthService ..> AdminService : grants admin access
+class User {
+  -String userId
+  -String email
+  -String role
+  +Boolean login(String email, String password)
+  +void logout()
+}
+
+class Admin {
+  -String accessLevel
+  +Boolean addPlant(Plant plant)
+  +Boolean updatePlant(String plantId)
+  +Boolean deletePlant(String plantId)
+}
+
+class AuthService {
+  -String sessionToken
+  +Boolean authenticate(String email, String password)
+  +Boolean validateSession(String token)
+  +void logoutUser(String userId)
+}
+
+class AdminService {
+  +Boolean manageCountry()
+  +Boolean manageDisease()
+}
+
+class Country {
+  -String countryId
+  -String name
+  -String climate
+  +List~Plant~ getPlants()
+}
+
+class Plant {
+  -String plantId
+  -String name
+  -String type
+  -String light
+  -String waterFrequency
+  -String care
+  +List~PlantDisease~ getDiseases()
+  +List~PlantImage~ getImages()
+}
+
+class PlantDisease {
+  -String diseaseId
+  -String name
+  -String solution
+  +String getSolution()
+}
+
+class PlantImage {
+  -String imageId
+  -String url
+  -String caption
+  +void displayImage()
+}
+
+class PlantService {
+  +List~Plant~ loadPlants(String countryId)
+  +Plant getPlantDetails(String plantId)
+  +List~PlantDisease~ getPlantDiseases(String plantId)
+}
+
+class ChatService {
+  +String sendMessage(String message)
+  +String getResponse()
+}
+
+class LocationService {
+  +String detectUserLocation()
+  +String reverseGeocode(double lat, double lng)
+}
+
+class WeatherService {
+  +Weather getWeather(String location)
+  +String generateCareTips(Weather weather)
+}
+
+class Database {
+  -String databaseName
+  -Boolean connectionStatus
+  +Boolean saveData(Object data)
+  +Object fetchData(String query)
+  +Boolean updateData(Object data)
+  +Boolean deleteData(String id)
+}
+
+%% Inheritance
+User <|-- Admin
+
+%% Associations
+Country "1" --> "0..*" Plant
+Plant "1" --> "0..*" PlantDisease
+Plant "1" --> "0..*" PlantImage
+
+%% Dependencies
+AdminService ..> Country
+AdminService ..> PlantDisease
+PlantService ..> Plant
+PlantService ..> PlantDisease
+PlantService ..> Database
+AuthService ..> Database
+ChatService ..> Database
+WeatherService ..> LocationService
+WeatherService ..> Database
+LocationService ..> Database
+
 ```
 
 ### 9. Workflow Diagram
@@ -284,3 +371,4 @@ A local Node.js server communicates with Ollama to provide plant care assistance
 
 ### 15. Conclusion
 Plant Care Assistant demonstrates how a practical and user-friendly web application can be developed using core frontend technologies. It integrates real-world APIs, authentication systems, and optional AI support while maintaining simplicity and efficiency. The project showcases strong fundamentals in web development, system design, and integration techniques.
+
