@@ -51,6 +51,70 @@ Plant Care Assistant is a frontend-first web application designed to help users 
 **Development Tools**
 - Visual Studio Code
 - Git and GitHub
+  
+##  Folder Structure
+
+
+plant-care-assistant/
+├── index.html              # Home page
+├── weather.html            # Weather information page
+├── plants.html             # Country-wise plants & care page
+├── about.html              # About page
+│
+├── css/
+│   └── style.css           # Main stylesheet (responsive, 800+ lines)
+│
+├── js/
+│   ├── main.js             # Shared utilities and helper functions
+│   ├── weather.js          # Weather page logic and API calls
+│   ├── plants.js           # Plants page logic and data display
+│   └── data.js             # Plant database for different countries
+│
+├── data/
+│   └── (Optional JSON files for large datasets)
+│
+└── README.md               # This file
+
+##  Quick Start Guide
+
+### Prerequisites
+- Any modern web browser (Chrome, Firefox, Safari, Edge)
+- VS Code (recommended)
+- Live Server extension for VS Code
+
+### Installation & Setup
+
+#### Step 1: Download/Extract Project
+1. Extract the plant-care-assistant folder to your desired location
+2. Open the folder in VS Code
+
+#### Step 2: Install Live Server (if not already installed)
+1. Open VS Code
+2. Go to Extensions (Ctrl+Shift+X / Cmd+Shift+X)
+3. Search for "Live Server"
+4. Install the extension by Ritwick Dey
+
+#### Step 3: Configure OpenWeather API (Optional but Recommended)
+1. Visit https://openweathermap.org/api
+2. Create a free account
+3. Go to API keys section
+4. Copy your API key
+5. Open js/weather.js
+6. Replace 'YOUR_API_KEY_HERE' with your actual API key on line 7:
+   javascript
+   const OPENWEATHER_API_KEY = 'your_actual_key_here';
+   
+
+#### Step 4: Run the Application
+1. Right-click on index.html in VS Code
+2. Select "Open with Live Server"
+3. The app will open in your browser at http://localhost:5500
+
+#### Step 5: Explore the Application
+- *Home Page* - See your detected location
+- *Weather Page* - View real-time weather and plant care recommendations
+- *Plants Page* - Browse plants specific to your country and region
+- *About Page* - Learn about the project and technology stack
 
 ### 5. System Overview
 The Plant Care Assistant follows a frontend-first architecture where all primary functionalities are handled using static HTML, CSS, and JavaScript files. The application interacts with:
@@ -416,6 +480,7 @@ A local Node.js server communicates with Ollama to provide plant care assistance
 
 ### 15. Conclusion
 Plant Care Assistant demonstrates how a practical and user-friendly web application can be developed using core frontend technologies. It integrates real-world APIs, authentication systems, and optional AI support while maintaining simplicity and efficiency. The project showcases strong fundamentals in web development, system design, and integration techniques.
+
 
 
 
