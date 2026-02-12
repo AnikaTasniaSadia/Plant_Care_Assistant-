@@ -197,7 +197,7 @@ erDiagram
     string solution
   }
 
-   USER  ||--o{ COUNTRY : user loin and search country based plants
+   USER  ||--o{ COUNTRY : user_loin_and_search_country_based_plants
   COUNTRY ||--o{ PLANT : has
   PLANT ||--o{ PLANT_IMAGE : has
   PLANT ||--o{ PLANT_DISEASE : has
@@ -416,6 +416,7 @@ A local Node.js server communicates with Ollama to provide plant care assistance
 
 ### 15. Conclusion
 Plant Care Assistant demonstrates how a practical and user-friendly web application can be developed using core frontend technologies. It integrates real-world APIs, authentication systems, and optional AI support while maintaining simplicity and efficiency. The project showcases strong fundamentals in web development, system design, and integration techniques.
+
 
 
 
