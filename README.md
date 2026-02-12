@@ -1,4 +1,4 @@
-# PLANT CARE ASSISTANT
+# PLANT CARE ASSISTANT🌱
 
 ## Project Report
 
@@ -501,6 +501,7 @@ A local Node.js server communicates with Ollama to provide plant care assistance
 *Status:* Complete and Ready for Use
 
  *Happy Plant Caring!*
+
 
 
 
